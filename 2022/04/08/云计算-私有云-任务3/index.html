@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="云计算赛项第一场-私有云【任务3】OpenStack运维任务[10分]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云计算-私有云-任务3">
+<meta property="og:url" content="http://example.com/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="云计算赛项第一场-私有云【任务3】OpenStack运维任务[10分]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-08T09:51:25.000Z">
+<meta property="article:modified_time" content="2022-05-26T11:40:17.814Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="私有云">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>云计算-私有云-任务3 | Misswjy'Blog</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0900a1eba37554f3a00292504b753518";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Misswjy'Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Miss">
+      <meta itemprop="description" content="我见青山多妩媚 料青山见我应如是">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misswjy'Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          云计算-私有云-任务3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-08 17:51:25" itemprop="dateCreated datePublished" datetime="2022-04-08T17:51:25+08:00">2022-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-26 19:40:17" itemprop="dateModified" datetime="2022-05-26T19:40:17+08:00">2022-05-26</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>21k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="云计算赛项第一场-私有云"><a href="#云计算赛项第一场-私有云" class="headerlink" title="云计算赛项第一场-私有云"></a>云计算赛项第一场-私有云</h1><h2 id="【任务3】OpenStack运维任务-10分"><a href="#【任务3】OpenStack运维任务-10分" class="headerlink" title="【任务3】OpenStack运维任务[10分]"></a>【任务3】OpenStack运维任务[10分]<span id="more"></span></h2><h3 id="【题目1】heat模板管理"><a href="#【题目1】heat模板管理" class="headerlink" title="【题目1】heat模板管理"></a>【题目1】heat模板管理</h3><p>在openstack私有云平台上，在&#x2F;root目录下编写模板flavor.yaml，创建名为“m1.flavor”、 ID 为 1234、内存为1024MB、硬盘为20GB、vcpu数量为 1的云主机类型。完成后提交控制节点的用户名、密码和IP地址到答题框。（在提交信息前请准备好yaml模板执行的环境）</p>
+<p><code>cd /root</code></p>
+<p><code>vi flavor.yaml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">heat_template_version: 2018-03-02</span><br><span class="line">resources:</span><br><span class="line">  server:</span><br><span class="line">    type: OS::Nova::Flavor</span><br><span class="line">    properties:</span><br><span class="line">      disk: 20</span><br><span class="line">      flavorid: 1234</span><br><span class="line">      name: m1.flavor</span><br><span class="line">      ram: 1024</span><br><span class="line">      vcpus: 1</span><br></pre></td></tr></table></figure>
+
+<p><code>heat stack-create m1.flavor -f flavor.yaml</code> </p>
+<h3 id="【题目2】云主机管理"><a href="#【题目2】云主机管理" class="headerlink" title="【题目2】云主机管理"></a>【题目2】云主机管理</h3><p>在openstack私有云平台上，基于“cirros”镜像、flavor使用“m1.flavor”、extnet的网络，创建一台虚拟机VM1，启动VM1，并使用PC机能远程登录到VM1。提交控制节点的用户名、密码和IP地址到答题框。</p>
+<p><code>openstack server create --image cirros --flavor m1.flavor --network extnet VM1</code></p>
+<h3 id="【题目3】虚拟机调整flavor"><a href="#【题目3】虚拟机调整flavor" class="headerlink" title="【题目3】虚拟机调整flavor"></a>【题目3】虚拟机调整flavor</h3><p>使用OpenStack私有云平台，使用centos7.5镜像，flavor使用1vcpu&#x2F;2G内存&#x2F;40G硬盘，创建云主机cscc_vm，假设在使用过程中，发现该云主机配置太低，需要调整，请修改相应配置，将dashboard界面上的云主机调整实例大小可以使用，将该云主机实例大小调整为2vcpu&#x2F;4G内存&#x2F;40G硬盘。完成后提交所修改配置文件节点的IP地址、用户名和密码到答题框。</p>
+<p><code>sed -i &#39;s/#allow_resize_to_same_host=false/allow_resize_to_same_host=True/g&#39; /etc/nova/nova.conf</code></p>
+<p><code>systemctl restart *nova*</code></p>
+<p><code>vi flavor2.yaml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">heat_template_version: 2018-03-02</span><br><span class="line">resources:</span><br><span class="line">  server:</span><br><span class="line">    type: OS::Nova::Flavor</span><br><span class="line">    properties:</span><br><span class="line">      disk: 40</span><br><span class="line">      flavorid: 1235</span><br><span class="line">      name: m2.flavor</span><br><span class="line">      ram: 4096</span><br><span class="line">      vcpus: 2</span><br></pre></td></tr></table></figure>
+
+<p><code>heat stack-create m2.flavor -f flavor2.yaml</code> </p>
+<p>然后图形化操作</p>
+<h3 id="【题目4】swift后端存储"><a href="#【题目4】swift后端存储" class="headerlink" title="【题目4】swift后端存储"></a>【题目4】swift后端存储</h3><p> <code>vi /etc/glance/glance-api.conf</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[glance_store]</span><br><span class="line">#stores = file,http</span><br><span class="line">#default_store = file</span><br><span class="line">#filesystem_store_datadir = /var/lib/glance/images/</span><br><span class="line">default_store=swift</span><br><span class="line">stores=glance.store.swift.Store</span><br><span class="line">swift_store_auth_address=http://controller:5000/v3.0</span><br><span class="line">swift_store_endpoint_type=internalURL</span><br><span class="line">swift_store_multi_tenant=True</span><br><span class="line">swift_store_admin_tenants=service</span><br><span class="line">swift_store_user=glance</span><br><span class="line">swift_store_key=000000</span><br><span class="line">swift_store_container=glance</span><br><span class="line">swift_store_create_container_on_put=True</span><br></pre></td></tr></table></figure>
+
+<p><code>systemctl restart *glance*</code></p>
+<h3 id="【题目5】RabbitMQ集群"><a href="#【题目5】RabbitMQ集群" class="headerlink" title="【题目5】RabbitMQ集群"></a>【题目5】RabbitMQ集群</h3><p>使用OpenStack私有云平台，创建三个centos7.5系统的云主机，使用附件\私有云附件\RabbitMQ目录下的软件包安装RabbitMQ服务，安装完毕后，搭建RabbitMQ集群，并打开RabbitMQ服务的图形化监控页面插件。集群使用普通集群模式，其中第一台做磁盘节点，另外两台做内存节点。完成后提交磁盘节点的用户名、密码和IP地址到答题框。</p>
+<p><strong>（1）修改主机名</strong></p>
+<p>对这3台虚拟机进行修改主机名的操作，主机名修改为rabbitmq1，rabbitmq2，rabbitmq3。命令如下</p>
+<p><strong>rabbitmaq1</strong></p>
+<p><code>hostnamectl set-hostname rabbitmq1</code></p>
+<p><code>bash</code></p>
+<p><code>exit</code></p>
+<p> <strong>rabbitmaq2</strong></p>
+<p><code>hostnamectl set-hostname rabbitmq2</code></p>
+<p><code>bash</code></p>
+<p><code>exit</code></p>
+<p> <strong>rabbitmaq3</strong></p>
+<p><code>hostnamectl set-hostname rabbitmq3</code></p>
+<p><code>bash</code></p>
+<p><code>exit</code></p>
+<p><strong>（2）修改hosts</strong></p>
+<p>三个节点都配置hosts</p>
+<p><code>vi /etc/hosts</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">192.168.20.121  rabbitmq1</span><br><span class="line">192.168.20.128  rabbitmq2</span><br><span class="line">192.168.20.116  rabbitmq3</span><br></pre></td></tr></table></figure>
+
+<p><strong>（4）配置yum源</strong></p>
+<p>三个节点均使用提供的rabbitmq-repo.tar.gz的压缩包，上传至虚拟机的&#x2F;root目录下，解压并放在&#x2F;opt目录下，进入&#x2F;etc&#x2F;yum.repos.d目录下，将原来的repo文件移除，新建local.repo文件并编辑内容，具体操作命令如下：</p>
+<p><code>curl -O http://172.19.25.11/rabbitmq-repo.tar.gz</code></p>
+<p><code>tar -zxvf rabbitmq-repo.tar.gz -C /opt/</code></p>
+<p><code>mv /etc/yum.repos.d/* /tmp/</code></p>
+<p><code>vi local.repo</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[rabbitmq]</span><br><span class="line">name=rabbitmq</span><br><span class="line">baseurl=file:///opt/rabbitmq-repo</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p><strong>（5）安装RabbitMQ服务并启动</strong></p>
+<p>配置完毕后，三个节点安装RabbitMQ服务，命令如下：</p>
+<p><code>yum install -y rabbitmq-server</code></p>
+<p>rabbitmq1节点启动RabbitMQ服务并查看服务状态，命令如下：</p>
+<p><code>systemctl start rabbitmq-server</code></p>
+<p><code>systemctl status rabbitmq-server</code></p>
+<p><strong>（6）配置界面访问</strong></p>
+<p>RabbitMQ提供了一个非常友好的图形化监控页面插件（rabbitmq_management），让我们可以一目了然看见Rabbit的状态或集群状态。启用图形化页面插件的具体命令如下：</p>
+<p><code>rabbitmq-plugins enable rabbitmq_management</code></p>
+<p><code>service rabbitmq-server restart</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@rabbitmq1 ~]# netstat -ntpl</span><br><span class="line"></span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line"></span><br><span class="line">Proto Recv-Q Send-Q Local Address      Foreign Address     State    PID/Program name  </span><br><span class="line"></span><br><span class="line">tcp    0   0 0.0.0.0:25672      0.0.0.0:*        LISTEN   13685/beam     </span><br><span class="line"></span><br><span class="line">tcp    0   0 0.0.0.0:111       0.0.0.0:*        LISTEN   500/rpcbind     </span><br><span class="line"></span><br><span class="line">tcp    0   0 0.0.0.0:4369      0.0.0.0:*        LISTEN   11320/epmd     </span><br><span class="line"></span><br><span class="line">tcp    0   0 0.0.0.0:22       0.0.0.0:*        LISTEN   1162/sshd      </span><br><span class="line"></span><br><span class="line">tcp    0   0 0.0.0.0:15672      0.0.0.0:*        LISTEN   13685/beam     </span><br><span class="line"></span><br><span class="line">tcp    0   0 127.0.0.1:25      0.0.0.0:*        LISTEN   932/master     </span><br><span class="line"></span><br><span class="line">tcp6    0   0 :::5672         :::*          LISTEN   13685/beam     </span><br><span class="line"></span><br><span class="line">tcp6    0   0 :::111         :::*          LISTEN   500/rpcbind     </span><br><span class="line"></span><br><span class="line">tcp6    0   0 :::4369         :::*          LISTEN   11320/epmd     </span><br><span class="line"></span><br><span class="line">tcp6    0   0 :::22          :::*          LISTEN   1162/sshd      </span><br><span class="line"></span><br><span class="line">tcp6    0   0 ::1:25         :::*          LISTEN   932/master  </span><br></pre></td></tr></table></figure>
+
+<p>可以看到15672端口已开放，打开浏览器，输入rabbitmq1节点的IP+端口15672（<a href="http://172.30.11.12:15672）访问RabbitMQ监控界面，使用默认的用户名和密码登录（用户名和密码都为guest）">http://172.30.11.12:15672）访问RabbitMQ监控界面，使用默认的用户名和密码登录（用户名和密码都为guest）</a></p>
+<p><strong>（7）配置节点间的通信</strong></p>
+<p>RabbitMQ的集群是依附于erlang集群来工作的，所以必须先构建起一个erlang集群。erlang集群中各节点是由magic cookie来实现的，每个节点上要保持相同的.erlang.cookie文件，这个cookie存放在&#x2F;var&#x2F;lib&#x2F;rabbitmq&#x2F;.erlang.cookie中，文件是400的权限。必须保证各节点cookie一致，不然节点之间就无法通信。</p>
+<p>查看rabbitmq1节点的.erlang.cookie文件，并将该文件复制到rabbitmq2和rabbitmq3节点的&#x2F;var&#x2F;lib&#x2F;rabbitmq&#x2F;目录下，命令如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@rabbitmq1 ~]# cat /var/lib/rabbitmq/.erlang.cookie </span><br><span class="line"></span><br><span class="line">EZYGPUJOTSESXPAUFMWO</span><br><span class="line"></span><br><span class="line">[root@rabbitmq1 ~]# scp /var/lib/rabbitmq/.erlang.cookie root@rabbitmq2:/var/lib/rabbitmq/</span><br><span class="line"></span><br><span class="line">[root@rabbitmq1 ~]# scp /var/lib/rabbitmq/.erlang.cookie root@rabbitmq3:/var/lib/rabbitmq/</span><br></pre></td></tr></table></figure>
+
+<p>将.erlang.cookie文件传至rabbitmq2和rabbitmq3节点后，需要修改该文件的用户与用户组，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@rabbitmq1 ~]#cd /var/lib/rabbitmq/</span><br><span class="line">[root@rabbitmq1 rabbitmq]# chown rabbitmq:rabbitmq .erlang.cookie</span><br><span class="line">[root@rabbitmq2 ~]#cd /var/lib/rabbitmq/</span><br><span class="line">[root@rabbitmq2 rabbitmq]# chown rabbitmq:rabbitmq .erlang.cookie</span><br><span class="line">[root@rabbitmq3 ~]#cd /var/lib/rabbitmq/</span><br><span class="line">[root@rabbitmq3 rabbitmq]# chown rabbitmq:rabbitmq .erlang.cookie</span><br></pre></td></tr></table></figure>
+
+<p><strong>（8）配置节点加入集群</strong></p>
+<p>在rabbitmq2、rabbitmq3节点执行如下命令，将这两个节点作为RAM节点加入到RabbitMQ集群中，具体命令如下：</p>
+<p>rabbitmq2节点：</p>
+<p><code>systemctl start rabbitmq-server</code></p>
+<p><code>service rabbitmq-server restart</code></p>
+<p>rabbitmq3节点：</p>
+<p><code>systemctl start rabbitmq-server</code></p>
+<p><code>service rabbitmq-server restart</code></p>
+<p>上面这俩步千万不要忘记打</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq2节点：</span><br><span class="line"></span><br><span class="line">[root@rabbitmq2 rabbitmq]# rabbitmqctl stop_app</span><br><span class="line"></span><br><span class="line">Stopping node rabbit@rabbitmq2 ...</span><br><span class="line"></span><br><span class="line">...done.</span><br><span class="line"></span><br><span class="line">[root@rabbitmq2 rabbitmq]# rabbitmqctl join_cluster --ram rabbit@rabbitmq1</span><br><span class="line"></span><br><span class="line">Clustering node rabbit@rabbitmq2 with rabbit@rabbitmq1 ...</span><br><span class="line"></span><br><span class="line">...done.</span><br><span class="line"></span><br><span class="line">[root@rabbitmq2 rabbitmq]# rabbitmqctl start_app</span><br><span class="line"></span><br><span class="line">Starting node rabbit@rabbitmq2 ...</span><br><span class="line"></span><br><span class="line">...done.</span><br><span class="line"></span><br><span class="line">rabbitmq3节点：</span><br><span class="line"></span><br><span class="line">[root@rabbitmq3 rabbitmq]# rabbitmqctl stop_app</span><br><span class="line"></span><br><span class="line">Stopping node rabbit@rabbitmq3 ...</span><br><span class="line"></span><br><span class="line">...done.</span><br><span class="line"></span><br><span class="line">[root@rabbitmq3 rabbitmq]# rabbitmqctl join_cluster --ram rabbit@rabbitmq1</span><br><span class="line"></span><br><span class="line">Clustering node rabbit@rabbitmq3 with rabbit@rabbitmq1 ...</span><br><span class="line"></span><br><span class="line">...done.</span><br><span class="line"></span><br><span class="line">[root@rabbitmq3 rabbitmq]# rabbitmqctl start_app</span><br><span class="line"></span><br><span class="line">Starting node rabbit@rabbitmq3 ...</span><br><span class="line"></span><br><span class="line">...done.</span><br></pre></td></tr></table></figure>
+
+<p>默认rabbitmq启动后是磁盘节点，在这个cluster命令下，rabbitmq2和rabbitmq3是内存节点，rabbitmq1是磁盘节点。</p>
+<p>如果要使rabbitmq2、rabbitmq3都是磁盘节点，去掉–ram参数即可。</p>
+<p>如果想要更改节点类型，可以使用命令rabbitmqctl change_cluster_node_type disc(ram)，前提是必须停掉Rabbit应用。</p>
+<p><strong>（9）配置RAM节点启用界面</strong></p>
+<p>在rabbitmq2和rabbitmq3节点上启用rabbitmq_management，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq2节点：</span><br><span class="line"></span><br><span class="line">[root@rabbitmq2 rabbitmq]# rabbitmq-plugins enable rabbitmq_management</span><br><span class="line"></span><br><span class="line">The following plugins have been enabled:</span><br><span class="line"></span><br><span class="line"> mochiweb</span><br><span class="line"></span><br><span class="line"> webmachine</span><br><span class="line"></span><br><span class="line"> rabbitmq_web_dispatch</span><br><span class="line"></span><br><span class="line"> amqp_client</span><br><span class="line"></span><br><span class="line"> rabbitmq_management_agent</span><br><span class="line"></span><br><span class="line"> rabbitmq_management</span><br><span class="line"></span><br><span class="line">Plugin configuration has changed. Restart RabbitMQ for changes to take effect.</span><br><span class="line"></span><br><span class="line">[root@rabbitmq2 rabbitmq]# systemctl restart rabbitmq-server</span><br><span class="line"></span><br><span class="line">rabbitmq3节点：</span><br><span class="line"></span><br><span class="line">[root@rabbitmq3 rabbitmq]# rabbitmq-plugins enable rabbitmq_management</span><br><span class="line"></span><br><span class="line">The following plugins have been enabled:</span><br><span class="line"></span><br><span class="line"> mochiweb</span><br><span class="line"></span><br><span class="line"> webmachine</span><br><span class="line"></span><br><span class="line"> rabbitmq_web_dispatch</span><br><span class="line"></span><br><span class="line"> amqp_client</span><br><span class="line"></span><br><span class="line"> rabbitmq_management_agent</span><br><span class="line"></span><br><span class="line"> rabbitmq_management</span><br><span class="line"></span><br><span class="line">Plugin configuration has changed. Restart RabbitMQ for changes to take effect.</span><br><span class="line"></span><br><span class="line">[root@rabbitmq3 rabbitmq]# systemctl restart rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>启用rabbitmq2节点和rabbitmq3节点的监控界面后，登录</p>
+<p><strong>（10）查看集群状态</strong></p>
+<p>在RabbitMQ集群的任一节点上，可以查看RabbitMQ集群的状态，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@rabbitmq1 ~]# rabbitmqctl cluster_status</span><br><span class="line"></span><br><span class="line">Cluster status of node rabbit@rabbitmq1 ...</span><br><span class="line"></span><br><span class="line">[&#123;nodes,[&#123;disc,[rabbit@rabbitmq1]&#125;,&#123;ram,[rabbit@rabbitmq3,rabbit@rabbitmq2]&#125;]&#125;,</span><br><span class="line"></span><br><span class="line"> &#123;running_nodes,[rabbit@rabbitmq3,rabbit@rabbitmq2,rabbit@rabbitmq1]&#125;,</span><br><span class="line"></span><br><span class="line"> &#123;cluster_name,&lt;&lt;&quot;rabbit@rabbitmq1&quot;&gt;&gt;&#125;,</span><br><span class="line"></span><br><span class="line"> &#123;partitions,[]&#125;]</span><br><span class="line"></span><br><span class="line">...done.</span><br></pre></td></tr></table></figure>
+
+<p>可以查看到rabbitmq1节点为disc磁盘节点，rabbitmq2节点和rabbitmq3节点为RAM内存节点。</p>
+<h3 id="【题目6】主从数据库管理"><a href="#【题目6】主从数据库管理" class="headerlink" title="【题目6】主从数据库管理"></a>【题目6】主从数据库管理</h3><p>使用OpenStack私有云平台，使用centos7.5系统，创建两台云主机mysql1和mysql2；在这2台云主机上安装据库（使用附件中提供的MariaDB目录下的mariadb-repo作为安装源）并配置为主从数据库（master为主节点、slave为从节点、数据库密码设置为000000）；</p>
+<p><strong>（1）修改主机名</strong></p>
+<p><strong>mysql1</strong></p>
+<p><code>hostnamectl set-hostname mysql1</code></p>
+<p><code>bash</code></p>
+<p><code>exit</code></p>
+<p><strong>mysql2</strong></p>
+<p><code>hostnamectl set-hostname mysql2</code></p>
+<p><code>bash</code></p>
+<p><code>exit</code></p>
+<p><strong>（2）配置hosts文件</strong></p>
+<p>两个节点配置&#x2F;etc&#x2F;hosts文件，修改为如下</p>
+<p><code>vi /etc/hosts</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">192.168.20.107  mysql1</span><br><span class="line">192.168.20.109  mysql2</span><br><span class="line">192.168.20.137  mycat</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）配置YUM源</strong></p>
+<p>两个节点均使用提供的mariadb–10.3.23-repo.tar.gz的压缩包，解压并放在&#x2F;opt目录下，进入&#x2F;etc&#x2F;yum.repos.d目录下，将原来的repo文件移除，新建local.repo文件并编辑内容，具体操作命令如下：</p>
+<p><code>curl -O http://172.19.25.11/mariadb-10.3.23-repo.tar.gz</code></p>
+<p> <code>tar -zxvf mariadb-10.3.23-repo.tar.gz -C /opt</code></p>
+<p><code>rm -rf /etc/yum.repos.d/*</code></p>
+<p><code>vi /etc/yum.repos.d/local.repo</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name=mariadb</span><br><span class="line">baseurl=file:///opt/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p><strong>（4）安装数据库服务并启动</strong></p>
+<p>配置完毕后，两个节点安装数据库服务，命令如下：</p>
+<p><code>yum install -y mariadb mariadb-server</code></p>
+<p><code>systemctl start mariadb</code></p>
+<p><code>systemctl enable mariadb</code></p>
+<p><strong>(5）初始化数据库</strong></p>
+<p>两个节点初始化数据库，配置数据库root密码为000000，命令如下：</p>
+<p><code>mysql_secure_installation</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/mysql_secure_installation: line 379: find_mysql_client: command not found</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB</span><br><span class="line"></span><br><span class="line">   SERVERS IN PRODUCTION USE! PLEASE READ EACH STEP CAREFULLY!</span><br><span class="line"></span><br><span class="line">In order to log into MariaDB to secure it, we&#x27;ll need the current</span><br><span class="line">password for the root user. If you&#x27;ve just installed MariaDB, and</span><br><span class="line">you haven&#x27;t set the root password yet, the password will be blank,</span><br><span class="line">so you should just press enter here.</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Enter current password for root (enter for none):     #默认按Enter键</span><br><span class="line">OK, successfully used password, moving on...</span><br><span class="line"></span><br><span class="line">Setting the root password ensures that nobody can log into the MariaDB</span><br><span class="line">root user without the proper authorisation.</span><br><span class="line"></span><br><span class="line">Set root password? [Y/n] y</span><br><span class="line"></span><br><span class="line">New password:                 #输入数据库root密码000000</span><br><span class="line">Re-enter new password:             #再次输入密码000000</span><br><span class="line">Password updated successfully!</span><br><span class="line">Reloading privilege tables..</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">By default, a MariaDB installation has an anonymous user, allowing anyone</span><br><span class="line">to log into MariaDB without having to have a user account created for</span><br><span class="line">them. This is intended only for testing, and to make the installation</span><br><span class="line">go a bit smoother. You should remove them before moving into a</span><br><span class="line">production environment.</span><br><span class="line"></span><br><span class="line">Remove anonymous users? [Y/n] y</span><br><span class="line"> ... Success!</span><br><span class="line"> </span><br><span class="line">Normally, root should only be allowed to connect from &#x27;localhost&#x27;. This</span><br><span class="line">ensures that someone cannot guess at the root password from the network.</span><br><span class="line"> </span><br><span class="line">Disallow root login remotely? [Y/n] n</span><br><span class="line"> ... skipping.</span><br><span class="line"></span><br><span class="line">By default, MariaDB comes with a database named &#x27;test&#x27; that anyone can</span><br><span class="line">access. This is also intended only for testing, and should be removed</span><br><span class="line">before moving into a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database and access to it? [Y/n] y</span><br><span class="line"> \- Dropping test database...</span><br><span class="line"> ... Success!</span><br><span class="line"> \- Removing privileges on test database...</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] y</span><br><span class="line"> ... Success!</span><br><span class="line"> </span><br><span class="line">Cleaning up...</span><br><span class="line"></span><br><span class="line">All done! If you&#x27;ve completed all of the above steps, your MariaDB</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks for using MariaDB!</span><br></pre></td></tr></table></figure>
+
+<p><strong>（6）配置mysql1主节点</strong></p>
+<p>修改mysql1节点的数据库配置文件，在配置文件&#x2F;etc&#x2F;my.cnf.d&#x2F;server.cnf中的[mysqld]增添如下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql1 ~]# cat /etc/my.cnf.d/server.cnf</span><br><span class="line">... ...</span><br><span class="line">[mysqld]</span><br><span class="line">log_bin = mysql-bin            #记录操作日志</span><br><span class="line">binlog_ignore_db = mysql         #不同步MySQL系统数据库</span><br><span class="line">server_id = 12              #数据库集群中的每个节点id都要不同，一般使用IP地址的最后段的数字，例如172.30.11.12，server_id就写12</span><br></pre></td></tr></table></figure>
+
+<p>重启数据库服务，并进入数据库，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql1 ~]# systemctl restart mariadb</span><br><span class="line">[root@mysql1 ~]# mysql -uroot -p000000</span><br><span class="line">Welcome to the MariaDB monitor. Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 9</span><br><span class="line">Server version: 10.3.23-MariaDB-log MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt; </span><br></pre></td></tr></table></figure>
+
+<p>在mysql1节点，授权在任何客户端机器上可以以root用户登录到数据库，然后在主节点上创建一个user用户连接节点mysql2，并赋予从节点同步主节点数据库的权限。命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &quot;000000&quot;;</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; grant replication slave on *.* to &#x27;user&#x27;@&#x27;mysql2&#x27; identified by &#x27;000000&#x27;;</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><strong>（7）配置mysql2从节点</strong></p>
+<p>修改mysql2节点的数据库配置文件，在配置文件&#x2F;etc&#x2F;my.cnf.d&#x2F;server.cnf中的[mysqld]增添如下内容。</p>
+<p><code>[root@mysql2 ~]# cat /etc/my.cnf.d/server.cnf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">... ...</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">log_bin = mysql-bin            #记录操作日志</span><br><span class="line">binlog_ignore_db = mysql         #不同步MySQL系统数据库</span><br><span class="line">server_id = 13              #数据库集群中的每个节点id都要不同，一般使用IP地址的最后段的数字，例如172.30.11.13，server_id就写13</span><br><span class="line"></span><br><span class="line">... ...</span><br></pre></td></tr></table></figure>
+
+<p>修改完配置文件后，重启数据库服务，并在从节点mysql2上登录MariaDB数据库，配置从节点连接主节点的连接信息。master_host为主节点主机名mysql1，master_user为上一步中创建的用户user，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql2 ~]# systemctl restart mariadb</span><br><span class="line">[root@mysql2 ~]# mysql -uroot -p000000</span><br><span class="line">Welcome to the MariaDB monitor. Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 9</span><br><span class="line">Server version: 10.3.23-MariaDB-log MariaDB Server</span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; change master to master_host=&#x27;mysql1&#x27;,master_user=&#x27;user&#x27;,master_password=&#x27;000000&#x27;;</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
+
+<p>配置完毕主从数据库之间的连接信息之后，开启从节点服务。使用show slave status\G命令，并查看从节点服务状态，如果Slave_IO_Running和Slave_SQL_Running的状态都为YES，则从节点服务开启成功。命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; start slave;</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; show slave status\G</span><br><span class="line"></span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">        Slave_IO_State: Waiting for master to send event</span><br><span class="line">          Master_Host: mysql1</span><br><span class="line">          Master_User: user</span><br><span class="line">         Master_Port: 3306</span><br><span class="line">         Connect_Retry: 60</span><br><span class="line">........</span><br><span class="line">      Slave_IO_Running: Yes</span><br><span class="line">       Slave_SQL_Running: Yes</span><br><span class="line">.........</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看到Slave_IO_Running和Slave_SQL_Running的状态都是Yes，配置数据库主从集群成功。</p>
+<p><strong>（8）主节点创建数据库</strong></p>
+<p>先在主节点mysql1中创建库test，并在库test中创建表company，插入表数据，创建完成后，查看表company数据，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql1 ~]# mysql -uroot -p000000</span><br><span class="line"></span><br><span class="line">Welcome to the MariaDB monitor. Commands end with ; or \g.</span><br><span class="line"></span><br><span class="line">Your MariaDB connection id is 11</span><br><span class="line"></span><br><span class="line">Server version: 10.3.23-MariaDB-log MariaDB Server</span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt; create database test;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">MariaDB [(none)]&gt; use test;</span><br><span class="line">Database changed</span><br><span class="line">MariaDB [test]&gt; create table company(id int not null primary key,name varchar(50),addr varchar(255));</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"> </span><br><span class="line">MariaDB [test]&gt; insert into company values(1,&quot;alibaba&quot;,&quot;china&quot;);</span><br><span class="line"></span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">MariaDB [test]&gt; select * from company;</span><br><span class="line"></span><br><span class="line">+----+---------+-------+</span><br><span class="line">| id | name  | addr |</span><br><span class="line">+----+---------+-------+</span><br><span class="line">| 1 | alibaba | china |</span><br><span class="line">+----+---------+-------+</span><br><span class="line"></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><strong>（9）从节点验证复制功能</strong></p>
+<p>登录mysql2节点的数据库，查看数据库列表。找到test数据库，查询表，并查询内容验证从数据库的复制功能，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql2 ~]# mysql -uroot -p000000</span><br><span class="line">Welcome to the MariaDB monitor. Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 12</span><br><span class="line">Server version: 10.3.23-MariaDB-log MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"> </span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database      |</span><br><span class="line">+--------------------+</span><br><span class="line"></span><br><span class="line">| information_schema |</span><br><span class="line">| mysql       |</span><br><span class="line">| performance_schema |</span><br><span class="line">| test        |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows in set (0.00 sec) </span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; use test;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line">Database changed</span><br><span class="line">MariaDB [test]&gt; show tables;</span><br><span class="line">+----------------+</span><br><span class="line">| Tables_in_test |</span><br><span class="line">+----------------+</span><br><span class="line">| company    |</span><br><span class="line">+----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line">MariaDB [test]&gt; select * from company;</span><br><span class="line">+----+---------+-------+</span><br><span class="line">| id | name  | addr |</span><br><span class="line">+----+---------+-------+</span><br><span class="line">| 1 | alibaba | china |</span><br><span class="line">+----+---------+-------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>可以查看到主数据库中刚刚创建的库、表、信息，验证从数据库的复制功能成功。</p>
+<h3 id="【题目7】数据库读写分离"><a href="#【题目7】数据库读写分离" class="headerlink" title="【题目7】数据库读写分离"></a>【题目7】数据库读写分离</h3><p>用上个案例安装完成的主从数据库作为基础进行实验，使用OpenStack平台再创建一台云主机作为mycat数据库中间件，逻辑库USERDB对应数据库database为test（在部署主从数据库时已创建）；设置数据库写入节点为主节点mysql1；设置数据库读取节点为从节点mysql2。</p>
+<p><strong>（1）修改主机名</strong></p>
+<p><code>hostnamectl set-hostname mycat</code></p>
+<p><code>bash</code></p>
+<p><code>exit</code></p>
+<p><strong>（2）安装JDK环境</strong></p>
+<p>在mycat节点安装Java JDK环境，具体操作步骤如下：</p>
+<p>使用提供的mariadb-10.3.23-repo.tar.gz包上传至mycat节点的&#x2F;root目录下，解压并配置成本地yum源，命令如下：</p>
+<p><code>curl -O http://172.19.25.11/mariadb-10.3.23-repo.tar.gz</code></p>
+<p><code>tar -zxvf mariadb-10.3.23-repo.tar.gz -C /opt</code></p>
+<p><code>rm -rf /etc/yum.repos.d/*</code></p>
+<p><code>vi /etc/yum.repos.d/local.repo</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mariadb]</span><br><span class="line">name=mariadb</span><br><span class="line">baseurl=file:///opt/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p>配置完yum源之后，进行安装Java JDK环境，命令如下：</p>
+<p><code>yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel</code></p>
+<p>安装完之后，可以使用命令查看Java JDK环境，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mycat ~]# java -version</span><br><span class="line">openjdk version &quot;1.8.0_262&quot;</span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_262-b10)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 25.262-b10, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）安装Mycat服务</strong></p>
+<p>将Mycat服务的二进制软件包Mycat-server-1.6-RELEASE-20161028204710-linux.tar.gz上传到Mycat虚拟机的&#x2F;root目录下，并将软件包解压到&#x2F;use&#x2F;local目录中。赋予解压后的Mycat目录权限。</p>
+<p><code>curl -O http://172.19.25.11/Mycat-server-1.6.6.1-release-20181031195535-linux.tar.gz</code></p>
+<p><code>tar -zxvf Mycat-server-1.6.6.1-release-20181031195535-linux.tar.gz -C /usr/local/</code></p>
+<p><code>chmod -R 777 /usr/local/mycat/</code></p>
+<p><strong>（4）编辑Mycat的逻辑库配置文件</strong></p>
+<p>配置Mycat服务读写分离的schema.xml配置文件在&#x2F;usr&#x2F;local&#x2F;mycat&#x2F;conf&#x2F;目录下，可以在文件中定义一个逻辑库，使用户可以通过Mycat服务管理该逻辑库对应的MariaDB数据库。在这里定义一个逻辑库schema，name为USERDB；该逻辑库USERDB对应数据库database为test（在部署主从数据库时已创建）；设置数据库写入节点为主节点mysql1；设置数据库读取节点为从节点mysql2。（可以直接删除原来schema.xml的内容，替换为如下。）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@mycat ~]# cat /usr/local/mycat/conf/schema.xml </span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE mycat:schema SYSTEM &quot;schema.dtd&quot;&gt;</span><br><span class="line">&lt;mycat:schema xmlns:mycat=&quot;http://io.mycat/&quot;&gt;</span><br><span class="line">        &lt;schema name=&quot;USERDB&quot; checkSQLschema=&quot;true&quot; sqlMaxLimit=&quot;100&quot; dataNode=&quot;dn1&quot;&gt;&lt;/schema&gt;</span><br><span class="line">        &lt;dataNode name=&quot;dn1&quot; dataHost=&quot;localhost1&quot; database=&quot;test&quot; /&gt;</span><br><span class="line">        &lt;dataHost name=&quot;localhost1&quot; maxCon=&quot;1000&quot; minCon=&quot;10&quot; balance=&quot;3&quot; writeType=&quot;0&quot; dbType=&quot;mysql&quot; dbDriver=&quot;native&quot; switchType=&quot;1&quot;  slaveThreshold=&quot;100&quot;&gt;</span><br><span class="line">                &lt;heartbeat&gt;select user()&lt;/heartbeat&gt;</span><br><span class="line">                &lt;writeHost host=&quot;hostM1&quot; url=&quot;192.168.20.107:3306&quot; user=&quot;root&quot; password=&quot;000000&quot;&gt;</span><br><span class="line">                &lt;readHost host=&quot;hostS2&quot; url=&quot;192.168.20.109:3306&quot; user=&quot;root&quot; password=&quot;000000&quot; /&gt;</span><br><span class="line">                &lt;/writeHost&gt;</span><br><span class="line">                &lt;/dataHost&gt; </span><br><span class="line">&lt;/mycat:schema&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（5）修改配置文件权限</strong></p>
+<p>修改schema.xml的用户权限，命令如下：</p>
+<p> <code>chown root:root /usr/local/mycat/conf/schema.xml</code></p>
+<p><strong>（6）编辑mycat的访问用户</strong></p>
+<p>修改&#x2F;usr&#x2F;local&#x2F;mycat&#x2F;conf&#x2F;目录下的server.xml文件，修改root用户的访问密码与数据库，密码设置为000000，访问Mycat的逻辑库为USERDB，命令如下。</p>
+<p><code>cat /usr/local/mycat/conf/server.xml</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">在配置文件的最后部分，</span><br><span class="line"></span><br><span class="line">&lt;user name=&quot;root&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;password&quot;&gt;000000&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;schemas&quot;&gt;USERDB&lt;/property&gt;</span><br><span class="line">&lt;user&gt;    </span><br><span class="line">然后删除如下几行：</span><br><span class="line">&lt;user name=&quot;user&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;password&quot;&gt;user&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;schemas&quot;&gt;TESTDB&lt;/property&gt;</span><br><span class="line">    &lt;property name=&quot;readOnly&quot;&gt;true&lt;/property&gt;</span><br><span class="line">&lt;/user&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（7）启动Mycat服务</strong></p>
+<p>通过命令启动Mycat数据库中间件服务，启动后使用netstat -ntpl命令查看虚拟机端口开放情况，如果有开放8066和9066端口，则表示Mycat服务开启成功。端口查询情况如图2-1所示。</p>
+<p><code>bash /usr/local/mycat/bin/mycat restart</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@mycat ~]# netstat -ntpl</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    </span><br><span class="line">tcp        0      0 127.0.0.1:32000         0.0.0.0:*               LISTEN      11538/java          </span><br><span class="line">tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      503/rpcbind         </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1194/sshd           </span><br><span class="line">tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      964/master          </span><br><span class="line">tcp6       0      0 :::1984                 :::*                    LISTEN      11538/java          </span><br><span class="line">tcp6       0      0 :::8066                 :::*                    LISTEN      11538/java          </span><br><span class="line">tcp6       0      0 :::36199                :::*                    LISTEN      11538/java          </span><br><span class="line">tcp6       0      0 :::9066                 :::*                    LISTEN      11538/java          </span><br><span class="line">tcp6       0      0 :::111                  :::*                    LISTEN      503/rpcbind         </span><br><span class="line">tcp6       0      0 :::38037                :::*                    LISTEN      11538/java          </span><br><span class="line">tcp6       0      0 :::22                   :::*                    LISTEN      1194/sshd           </span><br><span class="line">tcp6       0      0 ::1:25                  :::*                    LISTEN      964/master  </span><br></pre></td></tr></table></figure>
+
+<p><strong>（8）用Mycat服务查询数据库信息</strong></p>
+<p>先在Mycat虚拟机上使用Yum安装mariadb-client服务。</p>
+<p><code>yum install -y MariaDB-client</code></p>
+<p>在Mycat虚拟机上使用mysql命令查看Mycat服务的逻辑库USERDB，因为Mycat的逻辑库USERDB对应数据库test（在部署主从数据库时已安装），所以可以查看库中已经创建的表company。命令如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@mycat ~]# mysql -h127.0.0.1 -P8066 -uroot -p000000</span><br><span class="line">Welcome to the MariaDB monitor. Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2</span><br><span class="line">Server version: 5.6.29-mycat-1.6-RELEASE-20161028204710 MyCat Server (OpenCloundDB)</span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line">MySQL [(none)]&gt; show databases;</span><br><span class="line">+----------+</span><br><span class="line">| DATABASE |</span><br><span class="line">+----------+</span><br><span class="line">| USERDB  |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.001 sec)</span><br><span class="line">MySQL [(none)]&gt; use USERDB</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line">Database changed</span><br><span class="line">MySQL [USERDB]&gt; show tables;</span><br><span class="line">+----------------+</span><br><span class="line">| Tables_in_test |</span><br><span class="line">+----------------+</span><br><span class="line">| company    |</span><br><span class="line">+----------------+</span><br><span class="line">1 row in set (0.003 sec)</span><br><span class="line">MySQL [USERDB]&gt; select * from company;</span><br><span class="line">+----+---------+-------+</span><br><span class="line">| id | name  | addr |</span><br><span class="line">+----+---------+-------+</span><br><span class="line">| 1 | alibaba | china |</span><br><span class="line">+----+---------+-------+</span><br><span class="line">1 row in set (0.005 sec)</span><br></pre></td></tr></table></figure>
+
+<p><strong>（9）用Mycat服务添加表数据</strong></p>
+<p>在Mycat虚拟机上使用mysql命令对表company添加一条数据(2,“basketball”,“usa”)，添加完毕后查看表信息。命令如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MySQL [USERDB]&gt; insert into company values(2,&quot;bastetball&quot;,&quot;usa&quot;);</span><br><span class="line">Query OK, 1 row affected (0.050 sec)</span><br><span class="line">MySQL [USERDB]&gt; select * from company;</span><br><span class="line">+----+------------+-------+</span><br><span class="line">| id | name    | addr |</span><br><span class="line">+----+------------+-------+</span><br><span class="line">| 1 | alibaba  | china |</span><br><span class="line">| 2 | bastetball | usa  |</span><br><span class="line">+----+------------+-------+</span><br><span class="line">2 rows in set (0.003 sec)</span><br></pre></td></tr></table></figure>
+
+<p><strong>(10）验证Mycat服务对数据库读写操作分离</strong></p>
+<p>在Mycat虚拟机节点使用mysql命令，通过9066端口查询对数据库读写操作的分离信息。可以看到所有的写入操作WRITE_LOAD数都在mysql1主数据库节点上，所有的读取操作READ_LOAD数都在mysql2主数据库节点上。由此可见，数据库读写操作已经分离到mysql1和mysql2节点上了。命令如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@mycat ~]# mysql -h127.0.0.1 -P9066 -uroot -p000000 -e  &#x27;show @@datasource;&#x27;</span><br><span class="line">+----------+--------+-------+----------------+------+------+--------+------+------+---------+-----------+------------+</span><br><span class="line">| DATANODE | NAME   | TYPE  | HOST           | PORT | W/R  | ACTIVE | IDLE | SIZE | EXECUTE | READ_LOAD | WRITE_LOAD |</span><br><span class="line">+----------+--------+-------+----------------+------+------+--------+------+------+---------+-----------+------------+</span><br><span class="line">| dn1      | hostM1 | mysql | 192.168.20.107 | 3306 | W    |      0 |   10 | 1000 |      17 |         0 |          0 |</span><br><span class="line">| dn1      | hostS2 | mysql | 192.168.20.109 | 3306 | R    |      0 |    4 | 1000 |      10 |         0 |          0 |</span><br><span class="line">+----------+--------+-------+----------------+------+------+--------+------+------+---------+-----------+------------+</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="【题目9】zun的运维"><a href="#【题目9】zun的运维" class="headerlink" title="【题目9】zun的运维"></a>【题目9】zun的运维</h3><p>使用OpenStack私有云平台，使用脚本完成Zun服务的安装，安装完成后，上传CentOS7_1804.tar镜像到私有云平台，命名为centos7.5-docker。然后使用该镜像启动一个名为chinaskill-container的容器。完成后提交控制节点的用户名、密码和IP地址到答题框。</p>
+<p><strong>compute</strong></p>
+<p> <code>iaas-install-swift-compute.sh</code> </p>
+<p><code>iaas-install-cinder-compute.sh</code></p>
+<p><code>iaas-install-zun-compute.sh</code> </p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-swift-controller.sh</code> </p>
+<p><code>iaas-install-cinder-controller.sh</code> </p>
+<p><code>iaas-install-zun-controller.sh</code></p>
+<p><strong>创建镜像</strong></p>
+<p><code>openstack image create centos7-docker --public --container-format docker --disk-format raw &lt; /opt/iaas/images/CentOS7_1804.tar</code></p>
+<p><strong>创建容器</strong></p>
+<p><code>zun  run -n chinaskill-container --image-driver glance centos7.5-docker</code></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Miss
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/" title="云计算-私有云-任务3">http://example.com/2022/04/08/云计算-私有云-任务3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+ 
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" rel="tag"># 私有云</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/31/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A12/" rel="prev" title="“云计算-容器云-任务2”">
+      <i class="fa fa-chevron-left"></i> “云计算-容器云-任务2”
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/" rel="next" title="云计算-容器云-任务3">
+      云计算-容器云-任务3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97%E8%B5%9B%E9%A1%B9%E7%AC%AC%E4%B8%80%E5%9C%BA-%E7%A7%81%E6%9C%89%E4%BA%91"><span class="nav-number">1.</span> <span class="nav-text">云计算赛项第一场-私有云</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%90%E4%BB%BB%E5%8A%A13%E3%80%91OpenStack%E8%BF%90%E7%BB%B4%E4%BB%BB%E5%8A%A1-10%E5%88%86"><span class="nav-number">1.1.</span> <span class="nav-text">【任务3】OpenStack运维任务[10分]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE1%E3%80%91heat%E6%A8%A1%E6%9D%BF%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">【题目1】heat模板管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE2%E3%80%91%E4%BA%91%E4%B8%BB%E6%9C%BA%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">【题目2】云主机管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE3%E3%80%91%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%B0%83%E6%95%B4flavor"><span class="nav-number">1.1.3.</span> <span class="nav-text">【题目3】虚拟机调整flavor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE4%E3%80%91swift%E5%90%8E%E7%AB%AF%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.4.</span> <span class="nav-text">【题目4】swift后端存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE5%E3%80%91RabbitMQ%E9%9B%86%E7%BE%A4"><span class="nav-number">1.1.5.</span> <span class="nav-text">【题目5】RabbitMQ集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE6%E3%80%91%E4%B8%BB%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.6.</span> <span class="nav-text">【题目6】主从数据库管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE7%E3%80%91%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">1.1.7.</span> <span class="nav-text">【题目7】数据库读写分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE9%E3%80%91zun%E7%9A%84%E8%BF%90%E7%BB%B4"><span class="nav-number">1.1.8.</span> <span class="nav-text">【题目9】zun的运维</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Miss"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Miss</p>
+  <div class="site-description" itemprop="description">我见青山多妩媚 料青山见我应如是</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Misswjy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Misswjy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:3203262851@qq.com" title="E-Mail → mailto:3203262851@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://google.com/" title="Google → https:&#x2F;&#x2F;google.com" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/heaxxx2" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;heaxxx2" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.bilibili.com/" title="http:&#x2F;&#x2F;www.bilibili.com" rel="noopener" target="_blank">BiliBili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.csdn.net/" title="https:&#x2F;&#x2F;www.csdn.net" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Miss</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">214k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.18/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'joDHixALN1yHBorwvx3kJoHc-MdYXbMMI',
+      appKey     : 'PasIb8fn3mPioyIMaAglSEPe',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
