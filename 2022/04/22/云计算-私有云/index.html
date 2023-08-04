@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>云计算-私有云 | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="OpenStack 私有云OpenStack搭建任务当前任务共10道题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云计算-私有云">
+<meta property="og:url" content="http://example.com/2022/04/22/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="OpenStack 私有云OpenStack搭建任务当前任务共10道题目">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-22T02:11:05.000Z">
+<meta property="article:modified_time" content="2022-07-02T12:12:24.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="私有云">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-云计算-私有云" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/04/22/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91/" class="article-date">
+  	<time datetime="2022-04-22T02:11:05.000Z" itemprop="datePublished">2022-04-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      云计算-私有云
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" rel="tag">私有云</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="OpenStack-私有云"><a href="#OpenStack-私有云" class="headerlink" title="OpenStack 私有云"></a>OpenStack 私有云</h1><h2 id="OpenStack搭建任务当前任务共10道题目"><a href="#OpenStack搭建任务当前任务共10道题目" class="headerlink" title="OpenStack搭建任务当前任务共10道题目"></a><strong>OpenStack搭建任务</strong>当前任务共10道题目<span id="more"></span></h2><p><strong>1.基础安装</strong></p>
+<p><strong>controller</strong></p>
+<p><code>yum install -y iaas-xiandian</code></p>
+<p>改脚本</p>
+<p><code>iaas-pre-host.sh</code> </p>
+<p><strong>compute</strong></p>
+<p><code>yum install -y iaas-xiandian</code></p>
+<p>改脚本</p>
+<p><code>iaas-pre-host.sh</code> </p>
+<p><strong>2、【实操题】数据库安装（3分）</strong></p>
+<p>在controller节点上使用iaas-install-mysql.sh 脚本安装Mariadb、Memcached、RabbitMQ等服务。安装服务完毕后，完成下列题目。</p>
+<p>1.登录数据库服务，设置数据库的最大连接数为5000。</p>
+<p>2.登录数据库服务，设置数据库的参数，将最大允许的packet设置为30M。</p>
+<p><code>iaas-install-mysql.sh</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat /etc/my.cnf</span><br><span class="line">#</span><br><span class="line"># This group is read both both by the client and the server</span><br><span class="line"># use it for options that affect everything</span><br><span class="line">#</span><br><span class="line">[client-server]</span><br><span class="line">#</span><br><span class="line"># This group is read by the server</span><br><span class="line">#</span><br><span class="line">[mysqld]</span><br><span class="line"># Disabling symbolic-links is recommended to prevent assorted security risks</span><br><span class="line">symbolic-links=0</span><br><span class="line">default-storage-engine = innodb</span><br><span class="line">innodb_file_per_table</span><br><span class="line">collation-server = utf8_general_ci</span><br><span class="line">init-connect = &#x27;SET NAMES utf8&#x27;</span><br><span class="line">character-set-server = utf8</span><br><span class="line">max_connections=5000 //最大连接数</span><br><span class="line">max_allowed_packet=30M //最大允许的packet设置为30M</span><br><span class="line">#</span><br><span class="line"># include all files from the config directory</span><br><span class="line">#</span><br><span class="line">!includedir /etc/my.cnf.d</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、【实操题】key安装</strong></p>
+<p><code>iaas-install-keystone.sh</code> </p>
+<p><strong>4、【实操题】Glance安装（2分）</strong></p>
+<p>在controller节点上使用iaas-install-glance.sh脚本安装glance 服务。使用命令将提供的cirros-0.3.4-x86_64-disk.img镜像上传至平台，命名为cirros，并设置最小启动需要的硬盘为10G。完成后提交控制节点的用户名、密码和IP地址到答题框。</p>
+<p><code>curl -O http://172.19.25.11/cirros-0.3.4-x86_64-disk.img</code></p>
+<p><code>source /etc/keystone/admin-openrc.sh</code> </p>
+<p><code>glance image-create --name cirros --disk-format qcow2 --container-format bare --min-disk 10 --progress &lt; cirros-0.3.4-x86_64-disk.img</code> </p>
+<p><strong>5、【实操题】Nova安装（2分）</strong></p>
+<p>在controller节点和compute节点上分别使用iaas-install-nova-compute.sh脚本、iaas-install-nova-compute.sh脚本安装Nova 服务。安装完成后，修改相关参数对openstack平台进行调优操作，相应的调优操作有：</p>
+<p>（1）设置cpu超售比例为4倍；</p>
+<p>（2）设置内存超售比例为1.5倍；</p>
+<p>（3）预留2048mb内存，这部分内存不能被虚拟机使用；</p>
+<p>（4）预留10240mb磁盘，这部分磁盘不能被虚拟机使用；</p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-nova-controller.sh</code></p>
+<p><strong>compute</strong></p>
+<p><code>iaas-install-nova-compute.sh</code></p>
+<p><strong>（1）设置cpu超售比例为4倍；</strong></p>
+<p><code>sed -i &#39;s/#cpu_allocation_ratio=0.0/cpu_allocation_ratio=4.0/g&#39; /etc/nova/nova.conf</code></p>
+<p><strong>（2）设置内存超售比例为1.5倍；</strong></p>
+<p><code>sed -i &#39;s/#ram_allocation_ratio=0.0/ram_allocation_ratio=1.5/g&#39; /etc/nova/nova.conf</code></p>
+<p><strong>（3）预留2048mb内存，这部分内存不能被虚拟机使用；</strong></p>
+<p><code>sed -i &#39;s/#reserved_host_memory_mb=512/reserved_host_memory_mb=2048/g&#39; /etc/nova/nova.conf</code></p>
+<p><strong>（4）预留10240mb磁盘，这部分磁盘不能被虚拟机使用；</strong></p>
+<p><code>sed -i &#39;s/#reserved_host_disk_mb=0/reserved_host_disk_mb=10240/g&#39; /etc/nova/nova.conf</code></p>
+<p><strong>重启</strong></p>
+<p><code>systemctl restart *nova*</code></p>
+<p><strong>6、【实操题】Neutron安装（2分）</strong></p>
+<p>在controller节点和compute节点上分别使用iaas-install-neutron-controller.sh 和iaas-install-neutron-compute.sh脚本安装neutron服务并用命令创建一个网络</p>
+<p><strong>compute</strong></p>
+<p><code>iaas-install-neutron-compute.sh</code></p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-neutron-controller.sh</code> </p>
+<p><strong>在controller执行命令</strong></p>
+<p><code>openstack network create --no-share --external --provider-physical-network provider --provider-network-type vlan extnet</code></p>
+<p><code>openstack subnet create --network extnet --subnet-range 10.10.1.0/24 --gateway 10.10.1.1 subextnet</code></p>
+<p><strong>7、【实操题】dashboard安装（1分）</strong></p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-dashboard.sh</code></p>
+<p><strong>8、【实操题】Swift安装（2分）</strong></p>
+<p>在控制节点和计算节点上分别使用iaas-install-swift-controller.sh和iaas-install-swift-compute.sh脚本安装Swift服务。安装完成后，使用命令创建一个名叫examcontainer的容器。完成后提交控制节点的用户名、密码和IP地址到答题框。</p>
+<p><strong>compute</strong></p>
+<p><code>iaas-install-swift-compute.sh</code> </p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-swift-controller.sh</code></p>
+<p><code>swift post examcontainer</code></p>
+<p><strong>9、【实操题】Cinder创建硬盘（2分）</strong></p>
+<p>在控制节点和计算节点分别使用iaas-install-cinder-controller.sh、iaas-install-cinder-compute.sh脚本安装Cinder服务，使用cinder命令创建一个名字叫blockvolume，大小为2G的云硬盘。完成后提交控制节点的用户名、密码和IP地址到答题框。</p>
+<p><strong>compute</strong></p>
+<p><code>iaas-install-cinder-compute.sh</code></p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-cinder-controller.sh</code></p>
+<p><code>cinder create --name blockvolume 2</code></p>
+<p><strong>10、【实操题】Heat安装（1分）</strong></p>
+<p>在控制节点上使用iaas-install-heat.sh脚本安装Heat服务。完成后提交控制节点的用户名、密码和IP地址到答题框。</p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-heat.sh</code></p>
+<h3 id="三、OpenStack运维任务当前任务共8道题目"><a href="#三、OpenStack运维任务当前任务共8道题目" class="headerlink" title="三、OpenStack运维任务当前任务共8道题目"></a>三、OpenStack运维任务当前任务共8道题目</h3><p><strong>1、【实操题】Heat模板管理（2分）</strong></p>
+<p>在自行搭建的OpenStack私有云平台上，在&#x2F;root目录下编写Heat模板heat-image.yaml，编写模板内容通过使用swift外部存储方式创建镜像heat-image，限制镜像最低磁盘使用为20G，最低内存使用为2G。完成后提交控制节点的用户名、密码和IP地址到答题框。（在提交信息前请准备好yaml模板执行的环境）</p>
+<p><strong>不会</strong></p>
+<p><strong>2、【实操题】Heat模板管理（1.5分）</strong></p>
+<p>在自行搭建的OpenStack私有云平台或赛项提供的all-in-one平台上，在&#x2F;root目录下编写Heat模板create_net.yaml，创建名为Heat-Network网络，选择不共享；创建子网名为Heat-Subnet，子网网段设置为10.20.2.0&#x2F;24，开启DHCP服务，地址池为10.20.2.20-10.20.2.100。完成后提交控制节点的用户名、密码和IP地址到答题框。（在提交信息前请准备好yaml模板执行的环境）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat create_net.yaml </span><br><span class="line">heat_template_version: 2018-03-02</span><br><span class="line">resources:</span><br><span class="line">  network:</span><br><span class="line">    type: OS::Neutron::Net</span><br><span class="line">    properties:</span><br><span class="line">      name: &quot;heat-network&quot;</span><br><span class="line">      admin_state_up: true</span><br><span class="line">      shared: false</span><br><span class="line">  subnet:</span><br><span class="line">    type: OS::Neutron::Subnet</span><br><span class="line">    properties:</span><br><span class="line">      name: &quot;heat-subnet&quot;</span><br><span class="line">      cidr: 10.10.2.0/24</span><br><span class="line">      gateway_ip: 10.10.2.1</span><br><span class="line">      enable_dhcp: true</span><br><span class="line">      allocation_pools:</span><br><span class="line">        - start: 10.10.2.20</span><br><span class="line">          end: 10.10.2.100</span><br><span class="line">      network_id: &#123;get_resource: &quot;network&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>heat stack-create -f  create_net.yaml heta-network</code></p>
+<p><strong>3、【实操题】OpenStack参数调优（2分）</strong></p>
+<p>OpenStack各服务内部通信都是通过RPC来交互，各agent都需要去连接RabbitMQ；随着各服务agent增多，MQ的连接数会随之增多，最终可能会到达上限，成为瓶颈。使用自行搭建的OpenStack私有云平台，分别通过用户级别、系统级别、配置文件来设置RabbitMQ服务的最大连接数为10240，配置完成后提交修改节点的用户名、密码和IP地址到答题框。</p>
+<p>用户级别：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/security/limits.conf`</span><br><span class="line">//添加两行</span><br><span class="line">user             soft    nofile          10240</span><br><span class="line">user             hard    nofile          10240</span><br></pre></td></tr></table></figure>
+
+<p>系统级别：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf </span><br><span class="line">fs.file-max=10240</span><br></pre></td></tr></table></figure>
+
+<p>配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat /usr/lib/systemd/system/rabbitmq-server.service </span><br><span class="line"># systemd unit example</span><br><span class="line">[Unit]</span><br><span class="line">Description=RabbitMQ broker</span><br><span class="line">After=network.target epmd@0.0.0.0.socket</span><br><span class="line">Wants=network.target epmd@0.0.0.0.socket</span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">User=rabbitmq</span><br><span class="line">Group=rabbitmq</span><br><span class="line">NotifyAccess=all</span><br><span class="line">TimeoutStartSec=3600</span><br><span class="line">LimitNOFILE=10240 //添加这一条</span><br><span class="line"># Note:</span><br><span class="line"># You *may* wish to add the following to automatically restart RabbitMQ</span><br><span class="line"># in the event of a failure. systemd service restarts are not a</span><br><span class="line"># replacement for service monitoring. Please see</span><br><span class="line"># http://www.rabbitmq.com/monitoring.html</span><br><span class="line">#</span><br><span class="line"># Restart=on-failure</span><br><span class="line"># RestartSec=10</span><br><span class="line">WorkingDirectory=/var/lib/rabbitmq</span><br><span class="line">ExecStart=/usr/lib/rabbitmq/bin/rabbitmq-server</span><br><span class="line">ExecStop=/usr/lib/rabbitmq/bin/rabbitmqctl stop</span><br><span class="line">ExecStop=/bin/sh -c &quot;while ps -p $MAINPID &gt;/dev/null 2&gt;&amp;1; do sleep 1; done&quot;</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p><code>systemctl daemon-reload</code></p>
+<p><code>systemctl restart rabbitmq-server</code></p>
+<p><strong>查看 rabbitmq 状态，查到 total_limit,10140</strong></p>
+<p><code>rabbitmqctl status</code></p>
+<p><strong>4、【实操题】KVM I&#x2F;O优化（1.5分）</strong></p>
+<p>使用自行搭建的OpenStack私有云平台，优化KVM的I&#x2F;O调度算法，将默认的模式修改为none模式。配置完成后提交控制节点的用户名、密码和IP地址到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# echo none &gt; /sys/block/vda/queue/scheduler </span><br><span class="line">[root@controller ~]# cat /sys/block/vda/queue/scheduler </span><br><span class="line">[none] mq-deadline kyber </span><br></pre></td></tr></table></figure>
+
+<p><strong>5、【实操题】开放镜像（2分）</strong></p>
+<p>使用自行搭建的OpenStack私有云平台。使用提供的cirros-0.3.4-x86_64-disk.img镜像文件（镜像文件在提供的HTTP服务中）在admin项目中创建名为glance-cirros的镜像，通过命令将glance-cirros镜像指定demo项目可以进行共享使用。配置完成后提交controller控制节点的用户名、密码和IP地址到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# source /etc/keystone/admin-openrc.sh </span><br><span class="line">[root@controller ~]# glance image-create --name glance-cirros --disk-format qcow2 --container-format bare &lt; cirros-0.3.4-x86_64-disk.img </span><br><span class="line">+------------------+--------------------------------------+</span><br><span class="line">| Property         | Value                                |</span><br><span class="line">+------------------+--------------------------------------+</span><br><span class="line">| checksum         | ee1eca47dc88f4879d8a229cc70a07c6     |</span><br><span class="line">| container_format | bare                                 |</span><br><span class="line">| created_at       | 2022-04-22T05:43:46Z                 |</span><br><span class="line">| disk_format      | qcow2                                |</span><br><span class="line">| id               | b18ba8b5-a016-4a0d-9115-9748d23084d4 |</span><br><span class="line">| min_disk         | 0                                    |</span><br><span class="line">| min_ram          | 0                                    |</span><br><span class="line">| name             | glance-cirros                        |</span><br><span class="line">| owner            | e0ab86e9a7e947d38ef4b86dfa1e3942     |</span><br><span class="line">| protected        | False                                |</span><br><span class="line">| size             | 13287936                             |</span><br><span class="line">| status           | active                               |</span><br><span class="line">| tags             | []                                   |</span><br><span class="line">| updated_at       | 2022-04-22T05:43:47Z                 |</span><br><span class="line">| virtual_size     | None                                 |</span><br><span class="line">| visibility       | shared                               |</span><br><span class="line">+------------------+--------------------------------------+</span><br><span class="line">[root@controller ~]# openstack project list</span><br><span class="line">+----------------------------------+------------------------------------------------------------------+</span><br><span class="line">| ID                               | Name                                                             |</span><br><span class="line">+----------------------------------+------------------------------------------------------------------+</span><br><span class="line">| 88585c35bd8d483abf671329fa9b1a7a | service                                                          |</span><br><span class="line">| 89de021d5c934f3cb70e397d0d6eb3c7 | e0ab86e9a7e947d38ef4b86dfa1e3942-e2eb5f10-5316-4ba8-857d-23b75de |</span><br><span class="line">| b4bc592766104dd3912e4532c53ebaa1 | demo                                                             |</span><br><span class="line">| e0ab86e9a7e947d38ef4b86dfa1e3942 | admin                                                            |</span><br><span class="line">+----------------------------------+------------------------------------------------------------------+</span><br><span class="line">[root@controller ~]# glance member-create b18ba8b5-a016-4a0d-9115-9748d23084d4            b4bc592766104dd3912e4532c53ebaa1</span><br><span class="line">+--------------------------------------+----------------------------------+---------+</span><br><span class="line">| Image ID                             | Member ID                        | Status  |</span><br><span class="line">+--------------------------------------+----------------------------------+---------+</span><br><span class="line">| b18ba8b5-a016-4a0d-9115-9748d23084d4 | b4bc592766104dd3912e4532c53ebaa1 | pending |</span><br><span class="line">+--------------------------------------+----------------------------------+---------+</span><br><span class="line">[root@controller ~]# glance member-update b18ba8b5-a016-4a0d-9115-9748d23084d4 b4bc592766104dd3912e4532c53ebaa1 accepted</span><br><span class="line">+--------------------------------------+----------------------------------+----------+</span><br><span class="line">| Image ID                             | Member ID                        | Status   |</span><br><span class="line">+--------------------------------------+----------------------------------+----------+</span><br><span class="line">| b18ba8b5-a016-4a0d-9115-9748d23084d4 | b4bc592766104dd3912e4532c53ebaa1 | accepted |</span><br><span class="line">+--------------------------------------+----------------------------------+----------+</span><br></pre></td></tr></table></figure>
+
+<p><strong>6、【实操题】修改glance存储后端（2分）</strong></p>
+<p>在提供的OpenStack私有云平台，创建一台云主机（镜像使用CentOS7.5，flavor使用带临时磁盘50G的），配置该主机为nfs的server端，将该云主机中的&#x2F;mnt&#x2F;test目录进行共享（目录不存在可自行创建）。然后配置controller节点为nfs的client端，要求将&#x2F;mnt&#x2F;test目录作为glance后端存储的挂载目录。配置完成后提交controller控制节点的用户名、密码和IP地址到答题框。</p>
+<p><strong>nfs服务端：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs ~]# umount /mnt</span><br><span class="line">[root@nfs ~]# lsblk</span><br><span class="line">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">vda    253:0    0  100G  0 disk </span><br><span class="line">└─vda1 253:1    0  100G  0 part /</span><br><span class="line">vdb    253:16   0   50G  0 disk </span><br><span class="line">[root@nfs ~]# </span><br><span class="line">[root@nfs ~]# mkfs.ext4 /dev/vdb</span><br><span class="line">mke2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">文件系统标签=</span><br><span class="line">OS type: Linux</span><br><span class="line">块大小=4096 (log=2)</span><br><span class="line">分块大小=4096 (log=2)</span><br><span class="line">Stride=0 blocks, Stripe width=0 blocks</span><br><span class="line">3276800 inodes, 13107200 blocks</span><br><span class="line">655360 blocks (5.00%) reserved for the super user</span><br><span class="line">第一个数据块=0</span><br><span class="line">Maximum filesystem blocks=2162163712</span><br><span class="line">400 block groups</span><br><span class="line">32768 blocks per group, 32768 fragments per group</span><br><span class="line">8192 inodes per group</span><br><span class="line">Superblock backups stored on blocks: </span><br><span class="line">        32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, </span><br><span class="line">        4096000, 7962624, 11239424</span><br><span class="line">Allocating group tables: 完成                            </span><br><span class="line">正在写入inode表: 完成                            </span><br><span class="line">Creating journal (32768 blocks): 完成</span><br><span class="line">Writing superblocks and filesystem accounting information: 完成   </span><br><span class="line">[root@nfs ~]# mount /dev/vdb /mnt</span><br><span class="line">[root@nfs ~]# lsblk</span><br><span class="line">NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">vda    253:0    0  100G  0 disk </span><br><span class="line">└─vda1 253:1    0  100G  0 part /</span><br><span class="line">vdb    253:16   0   50G  0 disk /mnt</span><br></pre></td></tr></table></figure>
+
+<p><code>yum install -y nfs-utils rpcbind</code></p>
+<p> <code>mkdir /mnt/test</code></p>
+<p><code>echo /mnt/test *(rw,async,no_root_squash) &gt; /etc/exports</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@nfs ~]# systemctl restart rpcbind</span><br><span class="line">[root@nfs ~]# systemctl restart nfs</span><br><span class="line">[root@nfs ~]# systemctl enable rpcbind</span><br><span class="line">[root@nfs ~]# systemctl enable nfs</span><br></pre></td></tr></table></figure>
+
+<p><strong>nfs客户端：</strong></p>
+<p><code>echo 192.168.20.106:/mnt/test /var/lib/glance/images nfs default netdev 0 0 &gt; /etc/fstab</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# systemctl restart rpcbind</span><br><span class="line">[root@controller ~]# systemctl restart nfs</span><br><span class="line">[root@controller ~]# systemctl enable rpcbind</span><br><span class="line">[root@controller ~]# systemctl enable nfs</span><br><span class="line">[root@controller ~]# showmount -e 192.168.20.106</span><br><span class="line">Export list for 192.168.20.106:</span><br><span class="line">/mnt/test *</span><br><span class="line">[root@controller ~]# mount -t nfs 192.168.20.106:/mnt/test /var/lib/glance/images/</span><br><span class="line">[root@controller ~]# chown -R glance:glance /var/lib/glance/images/</span><br><span class="line">[root@controller ~]# ll /var/lib/glance/</span><br><span class="line">总用量 4</span><br><span class="line">drwxr-xr-x 2 glance glance 4096 4月  25 06:18 images</span><br><span class="line">[root@controller ~]# mount </span><br><span class="line">...............................................................</span><br><span class="line">192.168.20.106:/mnt/test on /var/lib/glance/images type nfs4 (rw,relatime,vers=4.1,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,clientaddr=192.168.20.105,local_lock=none,addr=192.168.20.106)</span><br></pre></td></tr></table></figure>
+
+<p><strong>7、【实操题】Raid管理（1分）</strong></p>
+<p>在提供的OpenStack私有云平台，创建一台云主机，flavor使用带有50G临时磁盘的，然后在云主机上对云硬盘进行操作。要求分出4个大小为5G的分区，使用这4个分区，创建名为&#x2F;dev&#x2F;md5、raid级别为5的磁盘阵列加一个热备盘（&#x2F;dev&#x2F;vdb4为热备盘）。完成后提交云主机的用户名、密码和IP地址到答题框。</p>
+<p><code>yum install -y mdadm</code></p>
+<p><code>umount /mnt</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">[root@raid ~]# fdisk /dev/vdb</span><br><span class="line">Welcome to fdisk (util-linux 2.23.2).</span><br><span class="line">Changes will remain in memory only, until you decide to write them.</span><br><span class="line">Be careful before using the write command.</span><br><span class="line">Command (m for help): n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): </span><br><span class="line">Using default response p</span><br><span class="line">Partition number (1-4, default 1): </span><br><span class="line">First sector (2048-104857599, default 2048): </span><br><span class="line">Using default value 2048</span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (2048-104857599, default 104857599): +5G</span><br><span class="line">Partition 1 of type Linux and of size 5 GiB is set</span><br><span class="line">Command (m for help): n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (1 primary, 0 extended, 3 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): </span><br><span class="line">Using default response p</span><br><span class="line">Partition number (2-4, default 2): </span><br><span class="line">First sector (10487808-104857599, default 10487808): </span><br><span class="line">Using default value 10487808</span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (10487808-104857599, default 104857599): +5G</span><br><span class="line">Partition 2 of type Linux and of size 5 GiB is set</span><br><span class="line">Command (m for help): n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (2 primary, 0 extended, 2 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): </span><br><span class="line">Using default response p</span><br><span class="line">Partition number (3,4, default 3): </span><br><span class="line">First sector (20973568-104857599, default 20973568): </span><br><span class="line">Using default value 20973568</span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (20973568-104857599, default 104857599): +5G  </span><br><span class="line">Partition 3 of type Linux and of size 5 GiB is set</span><br><span class="line">Command (m for help): n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (3 primary, 0 extended, 1 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default e): p</span><br><span class="line">Selected partition 4</span><br><span class="line">First sector (31459328-104857599, default 31459328): </span><br><span class="line">Using default value 31459328</span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (31459328-104857599, default 104857599): +5G</span><br><span class="line">Partition 4 of type Linux and of size 5 GiB is set</span><br><span class="line">Command (m for help): t</span><br><span class="line">Partition number (1-4, default 4): 1</span><br><span class="line">Hex code (type L to list all codes): fd</span><br><span class="line">Changed type of partition &#x27;Linux&#x27; to &#x27;Linux raid autodetect&#x27;</span><br><span class="line">Command (m for help): t</span><br><span class="line">Partition number (1-4, default 4): 2</span><br><span class="line">Hex code (type L to list all codes): fd</span><br><span class="line">Changed type of partition &#x27;Linux&#x27; to &#x27;Linux raid autodetect&#x27;</span><br><span class="line">Command (m for help): t</span><br><span class="line">Partition number (1-4, default 4): 3</span><br><span class="line">Hex code (type L to list all codes): fd</span><br><span class="line">Changed type of partition &#x27;Linux&#x27; to &#x27;Linux raid autodetect&#x27;</span><br><span class="line">Command (m for help): t</span><br><span class="line">Partition number (1-4, default 4): 4</span><br><span class="line">Hex code (type L to list all codes): fd</span><br><span class="line">Changed type of partition &#x27;Linux&#x27; to &#x27;Linux raid autodetect&#x27;</span><br><span class="line">Command (m for help): w</span><br><span class="line">The partition table has been altered!</span><br><span class="line">Calling ioctl() to re-read partition table.</span><br><span class="line">Syncing disks.</span><br></pre></td></tr></table></figure>
+
+<p><code>mdadm -C /dev/md5 -l 5 -n 3 -x 1 /dev/vdb1 /dev/vdb2 /dev/vdb3 /dev/vdb4</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@raid ~]# mdadm -D /dev/md5 </span><br><span class="line">/dev/md5:</span><br><span class="line">           Version : 1.2</span><br><span class="line">     Creation Time : Fri Apr 22 07:34:32 2022</span><br><span class="line">        Raid Level : raid5</span><br><span class="line">        Array Size : 10475520 (9.99 GiB 10.73 GB)</span><br><span class="line">     Used Dev Size : 5237760 (5.00 GiB 5.36 GB)</span><br><span class="line">      Raid Devices : 3</span><br><span class="line">     Total Devices : 4</span><br><span class="line">       Persistence : Superblock is persistent</span><br><span class="line">   Update Time : Fri Apr 22 07:40:00 2022</span><br><span class="line">         State : clean </span><br><span class="line">Active Devices : 3</span><br><span class="line">   Working Devices : 4</span><br><span class="line">    Failed Devices : 0</span><br><span class="line">     Spare Devices : 1</span><br><span class="line">        Layout : left-symmetric</span><br><span class="line">    Chunk Size : 512K</span><br><span class="line">Consistency Policy : resync</span><br><span class="line">          Name : raid.novalocal:5  (local to host raid.novalocal)</span><br><span class="line">          UUID : a7ee7f6c:33942c54:654cf6c9:880cc731</span><br><span class="line">        Events : 20</span><br><span class="line">Number   Major   Minor   RaidDevice State</span><br><span class="line">   0     253       17        0      active sync   /dev/vdb1</span><br><span class="line">   1     253       18        1      active sync   /dev/vdb2</span><br><span class="line">   4     253       19        2      active sync   /dev/vdb3</span><br><span class="line">   3     253       20        -      spare   /dev/vdb4</span><br></pre></td></tr></table></figure>
+
+<p><strong>8、【实操题】redis主从（1分）</strong></p>
+<p>使用提供的OpenStack私有云平台，申请两台CentOS7.5系统的云主机，使用提供的http源，在两个节点自行安装redis服务并启动，配置redis的访问需要密码，密码设置为123456。然后将这两个redis节点配置为redis的主从架构。配置完成后提交redis主节点的用户名、密码和IP地址到答题框。</p>
+<p>主节点：</p>
+<p><code>yum install -y redis</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/redis.conf </span><br><span class="line">bind 0.0.0.0</span><br><span class="line">protected-mode no</span><br><span class="line">requirepass 123456</span><br></pre></td></tr></table></figure>
+
+<p><code>systemctl restart redis</code></p>
+<p><code>systemctl enable  redis</code></p>
+<p>从节点：</p>
+<p><code>yum install -y redis</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/redis.conf</span><br><span class="line">bind 0.0.0.0</span><br><span class="line">protected-mode no</span><br><span class="line">slaveof 192.168.20.129 6379</span><br><span class="line">masterauth 123456</span><br></pre></td></tr></table></figure>
+
+<p><code>systemctl restart redis</code></p>
+<p><code>systemctl enable  redis</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@redis-2 ~]# redis-cli </span><br><span class="line">127.0.0.1:6379&gt; info</span><br><span class="line">.................</span><br><span class="line"># Replication</span><br><span class="line">role:slave</span><br><span class="line">master_host:192.168.20.129</span><br><span class="line">master_port:6379</span><br><span class="line">master_link_status:up</span><br><span class="line">master_last_io_seconds_ago:7</span><br><span class="line">master_sync_in_progress:0</span><br><span class="line">slave_repl_offset:589</span><br><span class="line">slave_priority:100</span><br><span class="line">slave_read_only:1</span><br><span class="line">connected_slaves:0</span><br><span class="line">master_repl_offset:0</span><br><span class="line">repl_backlog_active:0</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:0</span><br><span class="line">repl_backlog_histlen:0</span><br><span class="line">....................</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/25/%E4%BA%91%E8%AE%A1%E7%AE%97-2022%E6%A0%B7%E9%A2%98-%E7%A7%81%E6%9C%89%E4%BA%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          云计算-2022样题-私有云
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">云计算-容器云-任务3</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>云计算-私有云-任务2 | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="云计算赛项第一场-私有云【任务2】OpenStack 搭建任务[10 分]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云计算-私有云-任务2">
+<meta property="og:url" content="http://example.com/2022/03/30/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A12/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="云计算赛项第一场-私有云【任务2】OpenStack 搭建任务[10 分]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-30T06:24:34.000Z">
+<meta property="article:modified_time" content="2022-10-27T07:36:32.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="私有云">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-云计算-私有云-任务2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/03/30/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A12/" class="article-date">
+  	<time datetime="2022-03-30T06:24:34.000Z" itemprop="datePublished">2022-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      云计算-私有云-任务2
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" rel="tag">私有云</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="云计算赛项第一场-私有云"><a href="#云计算赛项第一场-私有云" class="headerlink" title="云计算赛项第一场-私有云"></a>云计算赛项第一场-私有云</h1><h2 id="【任务2】OpenStack-搭建任务-10-分"><a href="#【任务2】OpenStack-搭建任务-10-分" class="headerlink" title="【任务2】OpenStack 搭建任务[10 分]"></a>【任务2】OpenStack 搭建任务[10 分]</h2><span id="more"></span>
+
+<h3 id="【题目1】基础安装-1-分"><a href="#【题目1】基础安装-1-分" class="headerlink" title="【题目1】基础安装[1 分]"></a>【题目1】基础安装[1 分]</h3><p>任务需要完成openstack 平台的安装搭建及运维任务（无安装脚本）</p>
+<p>使用提供的脚本框架iaas-pre-host.sh 和openrc.sh 环境变量文件，填充脚本（只需填充中文注释下的内容），在controller 和compute 节点上分别安装openstack 平台的基础组件并完成相关配置。安装完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><code>yum install -y iaas-xiandian</code></p>
+<p>编辑文件&#x2F;etc&#x2F;xiandian&#x2F;openrc.sh,此文件是安装过程中的各项参数，根据每项参数上一行的说明及服务器实际情况进行配置。</p>
+<p><code>vi /etc/xiandian/openrc.sh</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">HOST_IP=192.168.20.123</span><br><span class="line"></span><br><span class="line">HOST_PASS=000000</span><br><span class="line"></span><br><span class="line">HOST_NAME=controller</span><br><span class="line"></span><br><span class="line">HOST_IP_NODE=192.168.20.110</span><br><span class="line"></span><br><span class="line">HOST_PASS_NODE=000000</span><br><span class="line"></span><br><span class="line">HOST_NAME_NODE=compute</span><br><span class="line"></span><br><span class="line">network_segment_IP=192.168.20.0/24</span><br><span class="line"></span><br><span class="line">RABBIT_USER=openstack</span><br><span class="line"></span><br><span class="line">RABBIT_PASS=000000</span><br><span class="line"></span><br><span class="line">DB_PASS=000000</span><br><span class="line"></span><br><span class="line">DOMAIN_NAME=demo</span><br><span class="line"></span><br><span class="line">ADMIN_PASS=000000</span><br><span class="line"></span><br><span class="line">DEMO_PASS=000000</span><br><span class="line"></span><br><span class="line">KEYSTONE_DBPASS=000000</span><br><span class="line"></span><br><span class="line">GLANCE_DBPASS=000000</span><br><span class="line"></span><br><span class="line">GLANCE_PASS=000000</span><br><span class="line"></span><br><span class="line">NOVA_DBPASS=000000</span><br><span class="line"></span><br><span class="line">NOVA_PASS=000000</span><br><span class="line"></span><br><span class="line">NEUTRON_DBPASS=000000</span><br><span class="line"></span><br><span class="line">NEUTRON_PASS=000000</span><br><span class="line"></span><br><span class="line">METADATA_SECRET=000000</span><br><span class="line"></span><br><span class="line">INTERFACE_IP=192.168.20.123/192.168.20.110（controllerIP/computeIP）</span><br><span class="line"></span><br><span class="line">INTERFACE_NAME=enp9s0 （外部网络网卡名称）</span><br><span class="line"></span><br><span class="line">Physical_NAME=provider （外部网络适配器名称）</span><br><span class="line"></span><br><span class="line">minvlan=101 （vlan网络范围的第一个vlanID）</span><br><span class="line"></span><br><span class="line">maxvlan=200 （vlan网络范围的最后一个vlanID）</span><br><span class="line"></span><br><span class="line">CINDER_DBPASS=000000</span><br><span class="line"></span><br><span class="line">CINDER_PASS=000000</span><br><span class="line"></span><br><span class="line">BLOCK_DISK=vdb1 （空白分区）</span><br><span class="line"></span><br><span class="line">SWIFT_PASS=000000</span><br><span class="line"></span><br><span class="line">OBJECT_DISK=vdb2 （空白分区）</span><br><span class="line"></span><br><span class="line">STORAGE_LOCAL_NET_IP=192.168.20.110</span><br><span class="line"></span><br><span class="line">HEAT_DBPASS=000000</span><br><span class="line"></span><br><span class="line">HEAT_PASS=000000</span><br><span class="line"></span><br><span class="line">ZUN_DBPASS=000000</span><br><span class="line"></span><br><span class="line">ZUN_PASS=000000</span><br><span class="line"></span><br><span class="line">KURYR_DBPASS=000000</span><br><span class="line"></span><br><span class="line">KURYR_PASS=000000</span><br><span class="line"></span><br><span class="line">CEILOMETER_DBPASS=000000</span><br><span class="line"></span><br><span class="line">CEILOMETER_PASS=000000</span><br><span class="line"></span><br><span class="line">AODH_DBPASS=000000</span><br><span class="line"></span><br><span class="line">AODH_PASS=000000</span><br></pre></td></tr></table></figure>
+
+<p><strong>controller&#x2F;compute</strong></p>
+<p>执行脚本</p>
+<p><code>iaas-pre-host.sh</code></p>
+<h3 id="【题目2】数据库与基础服务安装-1-分"><a href="#【题目2】数据库与基础服务安装-1-分" class="headerlink" title="【题目2】数据库与基础服务安装[1 分]"></a>【题目2】数据库与基础服务安装[1 分]</h3><p>使用提供的脚本框架iaas-install-mysql.sh，填充脚本（只需填充中文注释下的内容），在controller 节点上安装mariadb、mencached、rabbitmq 等服务并完成相关配置。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-mysql.sh</code></p>
+<p><strong>进入数据库</strong></p>
+<p><code>mysql -uroot -p000000</code></p>
+<p><strong>创建chinaskilldb数据库</strong></p>
+<p><code>create database chinaskilldb;</code></p>
+<p><strong>进入库</strong></p>
+<p><code>use chinaskilldb;</code></p>
+<p><strong>创建testable表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table testable(</span><br><span class="line">    -&gt; id int not null primary key,</span><br><span class="line">    -&gt; Teamname varchar(50),</span><br><span class="line">    -&gt; remarks varchar(255));</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入数据</strong></p>
+<p><code>insert into testable values(1,&quot;cloud&quot;,&quot;chinaskill&quot;);</code></p>
+<p><strong>将memcached的缓存大小从64Mib改成256Mib。</strong></p>
+<p><code>sed -i &#39;s/64/256/g&#39; /etc/sysconfig/memcached</code> </p>
+<p><strong>使用rabbitmq命令 创建用户，并设置Administrators限权</strong></p>
+<p><code>rabbitmqctl add_user chinaskill 000000</code></p>
+<p><code>rabbitmqctl set_permissions chinaskill &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</code></p>
+<h3 id="【题目3】Keystone-服务安装-1-分"><a href="#【题目3】Keystone-服务安装-1-分" class="headerlink" title="【题目3】Keystone 服务安装[1 分]"></a>【题目3】Keystone 服务安装[1 分]</h3><p>使用提供的脚本框架iaas-install-keystone.sh，填充脚本（只需填充中文注释下的内容），在controller 节点上安装keystone 服务并完成相关配置。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong></p>
+<p><code>iaas-install-keystone.sh</code></p>
+<p><strong>创建一个用户</strong></p>
+<p><code>source /etc/keystone/admin-openrc.sh</code> </p>
+<p><code>openstack user create --domain demo --password 000000 chinaskill</code></p>
+<h3 id="【题目4】Glance-安装-1-分"><a href="#【题目4】Glance-安装-1-分" class="headerlink" title="【题目4】Glance 安装[1 分]"></a>【题目4】Glance 安装[1 分]</h3><p>使用提供的脚本框架iaas-install-glance.sh，填充脚本（只需填充中文注释下的内容），在controller 节点上安装glance 服务并完成相关配置。安装完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-glance.sh</code></p>
+<p><strong>上传一个镜像</strong></p>
+<p><code>*glance image-create --name cirros --disk-format qcow2 --container bare --progress &lt; openstack/cirros-0.3.4-x86_64-disk.img*</code> </p>
+<h3 id="【题目5】Nova-安装-1-分"><a href="#【题目5】Nova-安装-1-分" class="headerlink" title="【题目5】Nova 安装[1 分]"></a>【题目5】Nova 安装[1 分]</h3><p>使用提供的脚本框架iaas-install-nova-controller.sh 和iaas-install-nova-compute.sh，填充脚本（只需填充中文注释下的内容），在controller 和compute 节点上安装nova 服务并完成配置。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-nova-controller.sh</code></p>
+<p><strong>创建一个测试云主机类型</strong></p>
+<p><code>[root@controller ~]*# openstack flavor create --id 1 --disk 20 --ram 1024 test</code></p>
+<p><strong>compute</strong> </p>
+<p><code>iaas-install-nova-compute.sh</code></p>
+<h3 id="【题目6】Neutron-安装-1-分"><a href="#【题目6】Neutron-安装-1-分" class="headerlink" title="【题目6】Neutron 安装[1 分]"></a>【题目6】Neutron 安装[1 分]</h3><p>使用提供的脚本框架iaas-install-neutron-controller.sh和iaas-install-neutron-compute.sh，填充脚本（只需填充中文注释下的内容），在controller 和compute 节点上安装neutron 服务并完成配置。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-neutron-controller</code></p>
+<p><strong>创建云主机网络extnet</strong></p>
+<p><code>openstack network create --share --external --provider-physical-network provider --provider-network-type vlan extnet</code></p>
+<p><strong>子网extsubnet</strong></p>
+<p><code>openstack subnet create --network extnet --gateway=192.168.200.1 --subnet-range 192.168.200.0/24 extsubnet</code></p>
+<p>这里也可以图形化操作</p>
+<p><strong>compute</strong> </p>
+<p><code>iaas-install-neutron-compute.sh</code></p>
+<h3 id="【题目7】Doshboard-安装-1-分"><a href="#【题目7】Doshboard-安装-1-分" class="headerlink" title="【题目7】Doshboard 安装[1 分]"></a>【题目7】Doshboard 安装[1 分]</h3><p>使用提供的脚本框架iaas-install-dashboard.sh，填充脚本（只需填充中文注释下的内容），在controller 节点上安装dashboard 服务并完成相关配置。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-dashboard.sh</code></p>
+<h3 id="【题目8】Cinder-安装-1-分"><a href="#【题目8】Cinder-安装-1-分" class="headerlink" title="【题目8】Cinder 安装[1 分]"></a>【题目8】Cinder 安装[1 分]</h3><p>使用提供的脚本框架iaas-install-cinder-controller.sh 和iaas-install-cinder-compute.sh，填充脚本（只需填充中文注释下的内容），在controller 和compute 节点上安装cinder 服务并完成配置。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-cinder-controller.sh</code></p>
+<p><strong>compute</strong> </p>
+<p><code>iaas-install-cinder-compute.sh</code></p>
+<h3 id="【题目9】Swift-安装-1-分"><a href="#【题目9】Swift-安装-1-分" class="headerlink" title="【题目9】Swift 安装[1 分]"></a>【题目9】Swift 安装[1 分]</h3><p>使用提供的脚本框架iaas-install-swift-controller.sh 和iaas-install-swift-compute.sh，填充脚本（只需填充中文注释下的内容），在controller 和compute 节点上安装swift 服务并完成配置。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-swift-controller.sh</code></p>
+<p><strong>compute</strong> </p>
+<p><code>iaas-install-swift-compute.sh</code></p>
+<h3 id="【题目10】Heat-安装-1-分"><a href="#【题目10】Heat-安装-1-分" class="headerlink" title="【题目10】Heat 安装[1 分]"></a>【题目10】Heat 安装[1 分]</h3><p>使用提供的脚本框架iaas-install-heat.sh，填充脚本（只需填充中文注释下的内容），在controller 节点上安装heat 服务并完成相关配置。完成后提交控制节点的用户名、密码和IP地址到答题框。</p>
+<p><strong>controller</strong> </p>
+<p><code>iaas-install-heat.sh</code></p>
+<p><strong>OpenStack 搭建任务完成</strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/30/%E4%BA%91%E8%AE%A1%E7%AE%97%E5%87%86%E5%A4%87%E4%BB%BB%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          云计算准备任务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/29/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">云计算-私有云</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

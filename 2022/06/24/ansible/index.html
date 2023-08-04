@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ansible | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Ansible 部署服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ansible">
+<meta property="og:url" content="http://example.com/2022/06/24/ansible/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="Ansible 部署服务">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-24T11:44:21.000Z">
+<meta property="article:modified_time" content="2022-07-02T11:36:38.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="私有云">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-ansible" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/06/24/ansible/" class="article-date">
+  	<time datetime="2022-06-24T11:44:21.000Z" itemprop="datePublished">2022-06-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ansible
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" rel="tag">私有云</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Ansible-部署服务"><a href="#Ansible-部署服务" class="headerlink" title="Ansible 部署服务"></a>Ansible 部署服务<span id="more"></span></h1><p>使用赛项提供的 OpenStack 私有云平台，创建 2 台系统为 centos7.5 的云主机，其中一台作为 ansible 的母机并命名为 ansible，另外一台云主机命名为 node1，通过 http 服务中的ansible.tar.gz 软件包在 ansible 节点安装 ansible 服务；并用这台母机，编写 ansible 脚本（在&#x2F;root 目 录 下 创 建 ansible_ftp 目 录 作 为 ansible 工 作 目 录 ， 部 署 的 入 口 文 件 命 名 为install_ftp.yaml）。install_ftp.yaml 文件中需要完成的内容为<br>（1）yaml 中被执行节点为 node1，执行者为 root；<br>（2）使用 copy 模块将 ansible 节点的 local.repo 传到 node 节点；（local.repo 用于配置2021 年职业院校技能大赛“云计算”赛项 赛卷node 节点的 yum 源，可自行创建）<br>（3）使用 yum 模块安装 ftp 服务；<br>（4）使用 service 模块启动 ftp 服务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible openstack]# cat ftpd.yaml </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">- name: install ftpd</span><br><span class="line">  hosts: compute</span><br><span class="line">  tasks:</span><br><span class="line">    - name: copy local.repo to compute</span><br><span class="line">      copy:</span><br><span class="line">        src: /etc/yum.repos.d/http.repo</span><br><span class="line">        dest: /etc/yum.repos.d/local.repo</span><br><span class="line"></span><br><span class="line">    - name: install ftpd </span><br><span class="line">      yum:</span><br><span class="line">        name:</span><br><span class="line">          - vsftpd</span><br><span class="line">        state: latest</span><br><span class="line"></span><br><span class="line">    - name: enable ftpd service</span><br><span class="line">      service:</span><br><span class="line">        name: vsftpd</span><br><span class="line">        state: started</span><br><span class="line">        enabled: true</span><br></pre></td></tr></table></figure>
+
+<h1 id="ansible搭建openstack"><a href="#ansible搭建openstack" class="headerlink" title="ansible搭建openstack"></a><strong>ansible搭建openstack</strong></h1><p><code>yum install -y ansible</code></p>
+<p><code>mkdir openstack</code></p>
+<p><code>cd openstack</code></p>
+<p><code>cp /etc/ansible/ansible.cfg .</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible openstack]# cat /etc/ansible/hosts </span><br><span class="line"></span><br><span class="line">[controller]</span><br><span class="line">192.168.20.113</span><br><span class="line"></span><br><span class="line">[compute]</span><br><span class="line">192.168.20.120</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat ansible.cfg</span><br><span class="line">[defaults]</span><br><span class="line">inventory      = /etc/ansible/hosts</span><br><span class="line">remote_user = root</span><br><span class="line">[privilege_escalation]</span><br><span class="line">become=True</span><br><span class="line">become_method=sudo</span><br><span class="line">become_user=root</span><br><span class="line">become_ask_pass=False</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible openstack]# cat openstack_start.yaml </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">- name: init</span><br><span class="line">  hosts: all</span><br><span class="line">  roles:</span><br><span class="line">    - init</span><br><span class="line"></span><br><span class="line">- name: openrc</span><br><span class="line">  hosts: all</span><br><span class="line">  roles:</span><br><span class="line">    - jinjia2</span><br><span class="line"></span><br><span class="line">- name: install controller</span><br><span class="line">  hosts: controller</span><br><span class="line">  roles:</span><br><span class="line">    - mariadb</span><br><span class="line">    - keystone</span><br><span class="line">    - glance</span><br><span class="line">    - nova-controller</span><br><span class="line">    - neutron-controller</span><br><span class="line">    - dashboard</span><br><span class="line">    - cinder-controller</span><br><span class="line">    - swift-controller</span><br><span class="line">    - heat</span><br><span class="line">- name: install compute</span><br><span class="line">  hosts: compute</span><br><span class="line">  roles:</span><br><span class="line">    - nova-compute</span><br><span class="line">    - neutron-compute</span><br><span class="line">    - cinder-compute</span><br><span class="line">    - swift-compute</span><br></pre></td></tr></table></figure>
+
+<p><code>for i in &#123;init,jinjia2,mariadb,keystone,glance,nova-controller,neutron-controller,dashboard,cinder-controller,swift-controller,heat,nova-compute,neutron-compute,cinder-compute,swift-compute&#125;;do ansible-galaxy init roles/$i ;done</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible openstack]# cat roles/init/tasks/main.yml </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">- name: init controller</span><br><span class="line">  block:</span><br><span class="line"></span><br><span class="line">    - name: hostname</span><br><span class="line">      shell: hostnamectl set-hostname controller</span><br><span class="line"></span><br><span class="line">    - name: bash</span><br><span class="line">      shell: bash</span><br><span class="line"></span><br><span class="line">    - name: delete yum</span><br><span class="line">      shell: rm -rf /etc/yum.repos.d/*</span><br><span class="line"></span><br><span class="line">    - name: copy yum</span><br><span class="line">      copy:</span><br><span class="line">        src: /etc/yum.repos.d/http.repo</span><br><span class="line">        dest: /etc/yum.repos.d/local.repo</span><br><span class="line">      when: ansible_hostname == &#x27;controller&#x27;</span><br><span class="line"></span><br><span class="line">- name: init compute</span><br><span class="line">  block:</span><br><span class="line"></span><br><span class="line">    - name: hostname</span><br><span class="line">      shell: hostnamectl set-hostname compute</span><br><span class="line"></span><br><span class="line">    - name: bash</span><br><span class="line">      shell: bash</span><br><span class="line"></span><br><span class="line">    - name: delete yum</span><br><span class="line">      shell: rm -rf /etc/yum.repos.d/*</span><br><span class="line"></span><br><span class="line">    - name: copy yum</span><br><span class="line">      copy:</span><br><span class="line">        src: /etc/yum.repos.d/http.repo</span><br><span class="line">        dest: /etc/yum.repos.d/local.repo</span><br><span class="line"></span><br><span class="line">    - name: umount</span><br><span class="line">      mount: </span><br><span class="line">        path: /mnt</span><br><span class="line">        state: unmounted</span><br><span class="line"></span><br><span class="line">    - name: part1</span><br><span class="line">      parted:</span><br><span class="line">        device: /dev/vdb</span><br><span class="line">        number: 1</span><br><span class="line">        state: present</span><br><span class="line">        part_end: 20GiB</span><br><span class="line"></span><br><span class="line">    - name: part2</span><br><span class="line">      parted:</span><br><span class="line">        device: /dev/vdb</span><br><span class="line">        number: 2</span><br><span class="line">        state: present</span><br><span class="line">        part_start: 20GiB</span><br><span class="line">        part_end: 40GiB</span><br><span class="line"></span><br><span class="line">  when: ansible_hostname == &#x27;compute&#x27;</span><br><span class="line"></span><br><span class="line">- name: install</span><br><span class="line">  yum: </span><br><span class="line">    name: iaas-xiandian</span><br><span class="line">    state: latest</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible openstack]# cat roles/jinjia2/tasks/main.yml </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># tasks file for roles/jinjia2</span><br><span class="line"></span><br><span class="line">- name: jinjia2</span><br><span class="line">  block:</span><br><span class="line">    - name: template</span><br><span class="line">      template: </span><br><span class="line">        src: ../templates/openrc.sh.j2</span><br><span class="line">        dest: /etc/xiandian/openrc.sh</span><br><span class="line">    - name: pre-host</span><br><span class="line">      shell: iaas-pre-host.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible openstack]# cat roles/mariadb/tasks/main.yml </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># tasks file for roles/mariadb</span><br><span class="line"></span><br><span class="line">- name: install mariadb</span><br><span class="line">  shell: iaas-install-mysql.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@ansible openstack]# cat roles/keystone/tasks/main.yml </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># tasks file for roles/keystone</span><br><span class="line"></span><br><span class="line">- name: install keystone</span><br><span class="line">  shell: iaas-install-keystone.sh</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/06/30/pig-dockerfile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          pig-dockerfile
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/06/06/python-api/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python-api</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

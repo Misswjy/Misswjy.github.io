@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>云计算-容器云-任务3 | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="云计算赛项第二场-容器云-江苏卷-任务3【任务3】基于Kubernetes 构建持续集成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云计算-容器云-任务3">
+<meta property="og:url" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="云计算赛项第二场-容器云-江苏卷-任务3【任务3】基于Kubernetes 构建持续集成">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab2.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab3.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab4.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab5.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab6.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab7.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab8.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab9.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab10.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab11.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab12.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab13.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab14.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab15.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab16.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab17.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab18.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab20.jpg">
+<meta property="og:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab21.jpg">
+<meta property="article:published_time" content="2022-04-09T03:11:20.000Z">
+<meta property="article:modified_time" content="2022-04-19T02:00:34.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="容器云">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-云计算-容器云-任务3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/" class="article-date">
+  	<time datetime="2022-04-09T03:11:20.000Z" itemprop="datePublished">2022-04-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      云计算-容器云-任务3
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" rel="tag">容器云</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="云计算赛项第二场-容器云-江苏卷-任务3"><a href="#云计算赛项第二场-容器云-江苏卷-任务3" class="headerlink" title="云计算赛项第二场-容器云-江苏卷-任务3"></a>云计算赛项第二场-容器云-江苏卷-任务3</h1><h2 id="【任务3】基于Kubernetes-构建持续集成"><a href="#【任务3】基于Kubernetes-构建持续集成" class="headerlink" title="【任务3】基于Kubernetes 构建持续集成"></a>【任务3】基于Kubernetes 构建持续集成<span id="more"></span></h2><h3 id="【题目1】安装Jenkins-环境-2-分"><a href="#【题目1】安装Jenkins-环境-2-分" class="headerlink" title="【题目1】安装Jenkins 环境[2 分]"></a>【题目1】安装Jenkins 环境[2 分]</h3><p>在master 节点上使用镜像jenkins&#x2F;Jenkins:2.262-centos部署Jenkins 服务，具体要求如下：<br>（1）容器名称：jenkins；<br>（2）端口映射：8080:8080；<br>（3）使用root 身份生成容器；<br>（4）离线安装Jenkins 插件；<br>（5）设置Jenkins 用户：chinaskill；密码：000000；<br>（6）在授权策略中配置“任何用户可以做任何事(没有任何限制)”。<br>使用chinaskill 用户登录Jenkins，完成后提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><strong>创建挂载目录</strong></p>
+<p><code>mkdir -p /home/jenkins_home</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name jenkins -p 8080:8080 -u root \</span><br><span class="line">-v /home/jenkins_home/:/var/jenkins_home \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">-v /usr/bin/docker:/usr/bin/docker \</span><br><span class="line">-v /usr/bin/kubectl:/usr/local/bin/kubectl \</span><br><span class="line">-v /root/.kube/:/root/.kube/ \</span><br><span class="line">--restart always jenkins/jenkins:2.262-centos</span><br></pre></td></tr></table></figure>
+
+<p><strong>离线安装插件</strong></p>
+<p><code>cp -rf /opt/plugins/* /home/jenkins_home/plugins/</code></p>
+<p><strong>重启容器</strong></p>
+<p><code>docker restart jenkins</code></p>
+<p><strong>进入容器</strong></p>
+<p><code>docker exec -it jenkins bash</code></p>
+<p><strong>查看密码</strong></p>
+<p><code>cat /var/jenkins_home/secrets/initialAdminPassword</code> </p>
+<p><strong>浏览器输入192.168.20.132:8080</strong></p>
+<p> 输入密码&gt;选择插件来安装&gt;取消所有选择&gt;安装</p>
+<h3 id="【题目2】安装Gitlab-环境-1-分"><a href="#【题目2】安装Gitlab-环境-1-分" class="headerlink" title="【题目2】安装Gitlab 环境[1 分]"></a>【题目2】安装Gitlab 环境[1 分]</h3><p>在master 节点上使用镜像gitlab&#x2F;gitlab-ce:12.9.2-ce.0部署Gitlab 服务，具体要求如下：<br>（1）容器名称：gitlab；<br>（2）端口映射：1022:22、81:80、443:443；<br>（3）容器重启策略：always；<br>（4）设置root 用户及密码；<br>（5）使用root 用户登录Gitlab，密码：00000000；<br>（6）新建项目Springcloud，将&#x2F;opt&#x2F;ChinaskillProject 中的代码上传到ChinaskillProject 项目中。<br>完成后提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><strong>创建挂载目录</strong></p>
+<p><code>mkdir -k /home/gitlab&#123;config,logs,data&#125;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -h gitlab -p 1022:22 -p 81:80 -p 443:443 \</span><br><span class="line">-v /home/gitlab/config/:/etc/gitlab \</span><br><span class="line">-v /home/gitlab/logs/:/var/log/gitlab \</span><br><span class="line">-v /home/gitlab/data/:/var/opt/gitlab \</span><br><span class="line">--restart always --privileged=true \</span><br><span class="line">--name mygitlab gitlab/gitlab-ce:12.9.2-ce.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>确实密码为00000000</strong></p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab.jpg" class="">
+
+<p><strong>用户名为root，密码为00000000</strong></p>
+<p><strong>新建项目</strong></p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab2.jpg" class="">
+
+<p><strong>项目名为ChinaskillProject</strong></p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab3.jpg" class="">
+
+<p> <strong>安装git</strong></p>
+<p><code>yum install -y git</code></p>
+<p><code>git config --global user.name &quot;Administrator&quot;</code></p>
+<p><code>git config --global user.email &quot;admin@example.com&quot;</code></p>
+<p><code>git clone http://192.168.20.132:443/root/chinaskillproject.git</code></p>
+<p>查看是否克隆到本地</p>
+<p><strong>将&#x2F;opt&#x2F;ChinaskillProject 中的代码上传到ChinaskillProject 项目中。</strong></p>
+<p><code>cd chinaskillproject</code></p>
+<p><code>cp -rf /opt/ChinaskillProject/* /root/chinaskillproject/</code></p>
+<p><code>git add .</code></p>
+<p><code>git commit -m &quot;add README&quot;</code></p>
+<p><code>git push -u origin master</code></p>
+<h3 id="【题目3】配置Jenkins-连接Gitlab-1-分"><a href="#【题目3】配置Jenkins-连接Gitlab-1-分" class="headerlink" title="【题目3】配置Jenkins 连接Gitlab[1 分]"></a>【题目3】配置Jenkins 连接Gitlab[1 分]</h3><p>配置Jenkins 连接Gitlab，具体要求如下：<br>（1）设置Outbound requests；<br>（2）生成“Access Tokens”并命名为jenkins；<br>（3）设置Jenkins 取消对’&#x2F;project’ end-point 进行身份验证；<br>（4）测试Jenkins 与Gitlab 的连通性。<br>完成后提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><strong>设置Outbound requests</strong></p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab4.jpg" class="">
+
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab5.jpg" class="">
+
+<h3 id="【题目3】配置Jenkins-连接Gitlab-1-分-1"><a href="#【题目3】配置Jenkins-连接Gitlab-1-分-1" class="headerlink" title="【题目3】配置Jenkins 连接Gitlab[1 分]"></a>【题目3】配置Jenkins 连接Gitlab[1 分]</h3><p>配置Jenkins 连接Gitlab，具体要求如下：<br>（1）设置Outbound requests；<br>（2）生成“Access Tokens”并命名为jenkins；<br>（3）设置Jenkins 取消对’&#x2F;project’ end-point 进行身份验证；<br>（4）测试Jenkins 与Gitlab 的连通性。<br>完成后提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><strong>设置Outbound requests</strong></p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab6.jpg" class="">
+
+<p>复制访问令牌</p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab7.jpg" class="">
+
+<p>测试Jenkins 与Gitlab 的连通性</p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab8.jpg" class="">
+
+<p>访问令牌复制到API token</p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab9.jpg" class="">
+
+<p>点击Test Connection</p>
+<h3 id="4-配置Jenkins连接maven"><a href="#4-配置Jenkins连接maven" class="headerlink" title="4.配置Jenkins连接maven"></a>4.配置Jenkins连接maven</h3><p>采用docker in docker的方式在Jenkins内安装maven</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cp  /opt/ChinaskillMall/apache-maven-3.6.3-bin.tar.gz /root/jenkins/</span><br><span class="line">[root@master ~]#  docker exec -it jenkins bash</span><br><span class="line">[root@b957b62337cc]# tar -zxvf /var/jenkins_home/apache-maven-3.6.3-bin.tar.gz -C .</span><br><span class="line">[root@2927036f2450]# mv apache-maven-3.6.3 /usr/local/maven</span><br><span class="line">//配置maven环境变量</span><br><span class="line">[root@b957b62337cc]# vi /etc/profile</span><br><span class="line">export  M2_HOME=/usr/local/maven</span><br><span class="line">export  PATH=$PATH:$M2_HOME/bin</span><br><span class="line">[root@2927036f2450  /]# vim /root/.bashrc</span><br><span class="line">if [ -f /etc/bashrc  ]; then</span><br><span class="line">        . /etc/bashrc</span><br><span class="line">        source  /etc/profile</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>在Jenkins中配置maven信息</p>
+<p>Dashboard-全局工具配置</p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab10.jpg" class="">
+
+<h3 id="5-配置CI-x2F-CD"><a href="#5-配置CI-x2F-CD" class="headerlink" title="5.配置CI&#x2F;CD"></a>5.配置CI&#x2F;CD</h3><p>新建流水线任务</p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab11.jpg" class="">
+
+<p>勾选Build when a change is pushed to GitLab. GitLab webhook URL: <a target="_blank" rel="noopener" href="http://192.168.20.102:8080/project/ChinaskillProject">http://192.168.20.102:8080/project/ChinaskillProject</a></p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab12.jpg" class="">
+
+<p>复制 secret token</p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab13.jpg" class="">
+
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab14.jpg" class="">
+
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab15.jpg" class="">
+
+<p>生成ssh密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cd ChinaskillProject/</span><br><span class="line">[root@master ChinaskillProject]# ssh-keygen </span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/root/.ssh/id_rsa): </span><br><span class="line">/root/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? </span><br><span class="line">[root@master ChinaskillProject]# cd ..</span><br><span class="line">[root@master ~]# cat /root/.ssh/id_rsa</span><br><span class="line">-----BEGIN RSA PRIVATE KEY-----</span><br><span class="line">MIIEowIBAAKCAQEAz5EcPpwUTM4IPR1wpi2u7l3nelQi29eXjLXhQI9swCgHxu+M</span><br><span class="line">tAl0kQJvFOPAg7DUxTjForAVAMkzZljDd4uTV+VCairuFeXApyM+LokxZkvJsvsH</span><br><span class="line">upXwVqvGEifGP+tQbC9tPhIQ2a1aRZBiSYetuDjZdjwQcxgARfgJjqeH7Rw5red8</span><br><span class="line">V4e7VgF8e6RBVJycSVqfuysxyFVBsUCS1vHAK7GvjmfoUJ/t8mv4s/ClL+PzzZe4</span><br><span class="line">dUO3OftAKU6qIFrpf6kC57/LsZmNWWBy9suYXpK+92Yo8cOwtBkdBtGJSo5EblzA</span><br><span class="line">hUQjSftoC9SuTw3wN6DwwV5RcqUe99vDYVSVowIDAQABAoIBACB4Rr7Uk6hgIpHM</span><br><span class="line">5S5Zvx+yuN8+AiX5188/NHlw9kYo/O510sDnKcD1bIMMDbWMF/yyINiOSvrQfqXo</span><br><span class="line">BMvSnb4GMxmAlbX/Nt/ud2+4Lm4eNPM2qcLaabplLJrydeTR3sbNtH0dPl2O7Kwt</span><br><span class="line">JfLyso469mm0g649du17G6OhOXYxyATNMX7AnNFRpH5zKft+FhSpVNxdAoOEYMKt</span><br><span class="line">1ucUf5GoWCnbrl0caaXyLqlRGAuTa3+EqlaQXhOv7cq5L13v6xbSDpCHh0krnKk6</span><br><span class="line">G/4Ui+styCVM7Dm0imMztRGULE6pIwnV/MLeDYBfhSjWckXm1ofgt3TPDQ+vQqqW</span><br><span class="line">yqrtz+ECgYEA6DRDdirL+pA2jf0yZR2v60L3+AIUoVyn3EkqTVmiEqEDGj1drK8t</span><br><span class="line">U9/f/QiTPVIlq17GN6iErvMCM9E11/d0EKTiTDe2T4dmu7fEL5KUpndMCJeHZzL1</span><br><span class="line">Ythq5AVfnfxShJx+RI5VY/p+VLNWSCcIIFenK4BBC7O12o74ENOHeS8CgYEA5NaA</span><br><span class="line">aI+QnUQVTJTTvBX2JB8SNh0fyArRi/wmA3Gj0CWz1OMSnhhwVeS0a6aTm7BPVgsh</span><br><span class="line">kBnjX6xnYccXq4bo0bHLrFXKXRVzTCquNjPCCC8mRG5TlO6hdFHKLuKmaRZc3jW5</span><br><span class="line">9kzC/Ub5F4gl0zhGoBAjVqVVj0qQHrUp4kFHZc0CgYA5nF3wf4XEUOt4Jw3N0KPI</span><br><span class="line">9wCW481Ci76KBQ0dy9NOU+x1IiyPn5bbbHwiR3JgkHUQI5+CR6lDzr8JJCr7vkVp</span><br><span class="line">q78Jsfjlmm5+vIVMWE3RT1/p8c6CaD5Bm/hJQpwKkoPWqw0Y7Ud6WrflQ+lwVV7K</span><br><span class="line">x3SOcm+w+5Fu/HHHmvPNuQKBgHYpDETxXIrYDOduMaZ88IvWP2ERyMdSTsEpgbdl</span><br><span class="line">hmCEF0dluMdJdzfi0AaGDNHnSA/1z27I708HhppGY0J+dtlQJQrngYZu/QnnP+1c</span><br><span class="line">7GOtdOUA0sekMFoPoYZ0IdlBYtKai1tSZ5zAeP5dnqph9JXRv22OEY/bwG8avHXH</span><br><span class="line">n0ZBAoGBAJc5nHZXXFCLiBw6af+3yOJXWzH6D8XqHbedoCEg9gKIld9mL5XKvX7S</span><br><span class="line">5ul60aLUrOS/CTrPNVaeD9RI+mLFevZ72cGfB/+MYaeT7+IjtzxjbZixyCl8K1An</span><br><span class="line">F15HoJX0BWon5FTqp06Fdy3Y4fPgqwwO2/IdAkOGi8AxKftwWLfC</span><br><span class="line">-----END RSA PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<p>复制密钥</p>
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab16.jpg" class="">
+
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab17.jpg" class="" title="]()![gitlab17">
+
+<p>写流水线脚本</p>
+<p>构建微服务项目中的gateway和config服务,</p>
+<p>将构建后的镜像自动上传到Harbor仓库，</p>
+<p>并自动发布gateway和config服务到Kubernetes集群的springcloud命名空间下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">node&#123;</span><br><span class="line">    stage(&#x27;git clone&#x27;)&#123;</span><br><span class="line">        //check CODE 从代码仓库克隆</span><br><span class="line">        git credentialsId: &#x27;7fc32029-1f4f-4b77-a161-47dc4dae39ef&#x27;, url: &#x27;http://192.168.20.102:81/root/ChinaskillProject.git&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">stage(&#x27;maven build&#x27;)&#123;</span><br><span class="line"></span><br><span class="line">//maven编译</span><br><span class="line">        sh  &#x27;&#x27;&#x27;/usr/local/maven/bin/mvn package -DskipTests -f  /var/jenkins_home/workspace/ChinaskillProject&#x27;&#x27;&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">stage(&#x27;image build&#x27;)&#123;</span><br><span class="line"></span><br><span class="line">//构建镜像，并将镜像ID变量作为tag</span><br><span class="line">        sh &#x27;&#x27;&#x27;</span><br><span class="line">              echo $BUILD_ID</span><br><span class="line">              docker build -t 192.168.20.102/chinaskillproject/gateway:$BUILD_ID -f  /var/jenkins_home/workspace/ChinaskillProject/gateway/Dockerfile   /var/jenkins_home/workspace/ChinaskillProject/gateway</span><br><span class="line">              docker build -t 192.168.20.102/chinaskillproject/config:$BUILD_ID -f  /var/jenkins_home/workspace/ChinaskillProject/config/Dockerfile   /var/jenkins_home/workspace/ChinaskillProject/config&#x27;&#x27;&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">stage(&#x27;upload registry&#x27;)&#123;</span><br><span class="line"></span><br><span class="line">//上传构建完成的镜像到harbor镜像仓库</span><br><span class="line">        sh &#x27;&#x27;&#x27;docker login  192.168.20.102 -u=admin -p=Harbor12345</span><br><span class="line">            docker push 192.168.20.102/chinaskillproject/gateway:$BUILD_ID</span><br><span class="line">            docker push 192.168.20.102/chinaskillproject/config:$BUILD_ID&#x27;&#x27;&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">stage(&#x27;deploy k8s&#x27;)&#123;</span><br><span class="line">    //创建命名空间，部署yaml脚本到k8s集群</span><br><span class="line">   sh &#x27;sed -i &quot;s/sqshq\\/piggymetrics-gateway/192.168.20.102\\/chinaskillproject\\/gateway:$BUILD_ID/g&quot; /var/jenkins_home/workspace/ChinaskillProject/yaml/deployment/gateway-deployment.yaml&#x27; </span><br><span class="line">   sh &#x27;sed -i &quot;s/sqshq\\/piggymetrics-config/192.168.20.102\\/chinaskillproject\\/config:$BUILD_ID/g&quot; /var/jenkins_home/workspace/ChinaskillProject/yaml/deployment/config-deployment.yaml&#x27; </span><br><span class="line">   sh &#x27;kubectl create ns springcloud&#x27;</span><br><span class="line">   sh &#x27;kubectl apply -f  /var/jenkins_home/workspace/ChinaskillProject/yaml/deployment/gateway-deployment.yaml  --kubeconfig=/root/.kube/config&#x27;</span><br><span class="line">   sh &#x27;kubectl apply -f  /var/jenkins_home/workspace/ChinaskillProject/yaml/deployment/config-deployment.yaml  --kubeconfig=/root/.kube/config&#x27;</span><br><span class="line">   sh &#x27;kubectl apply -f  /var/jenkins_home/workspace/ChinaskillProject/yaml/svc/gateway-svc.yaml --kubeconfig=/root/.kube/config&#x27;</span><br><span class="line">   sh &#x27;kubectl apply -f  /var/jenkins_home/workspace/ChinaskillProject/yaml/svc/config-svc.yaml --kubeconfig=/root/.kube/config&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab18.jpg" class="">
+
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab20.jpg" class="">
+
+<img src="/2022/04/09/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A13/gitlab21.jpg" class="">
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/22/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          云计算-私有云
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">云计算-私有云-任务3</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

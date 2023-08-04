@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="dockerfile部署prometheus1、【实操题】容器化部署Node-Exporter （1分）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Misswjy&#39;Blog">
+<meta property="og:url" content="http://example.com/2023/04/20/docker%E9%83%A8%E7%BD%B2prometheus/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="dockerfile部署prometheus1、【实操题】容器化部署Node-Exporter （1分）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-20T08:52:59.417Z">
+<meta property="article:modified_time" content="2023-08-04T13:13:21.847Z">
+<meta property="article:author" content="Miss">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-docker部署prometheus" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2023/04/20/docker%E9%83%A8%E7%BD%B2prometheus/" class="article-date">
+  	<time datetime="2023-04-20T08:52:59.417Z" itemprop="datePublished">2023-04-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="dockerfile部署prometheus"><a href="#dockerfile部署prometheus" class="headerlink" title="dockerfile部署prometheus"></a>dockerfile部署prometheus</h1><h4 id="1、【实操题】容器化部署Node-Exporter-（1分）"><a href="#1、【实操题】容器化部署Node-Exporter-（1分）" class="headerlink" title="1、【实操题】容器化部署Node-Exporter （1分）"></a>1、【实操题】容器化部署Node-Exporter （1分）<span id="more"></span></h4><p>在master节点上编写&#x2F;root&#x2F;Monitor&#x2F;Dockerfile- exporter文件构建monitor-exporter:v1.0镜像，具体要求如下：（需要用到的软件包：Monitor.tar.gz）</p>
+<p>（1）基础镜像：centos:centos7.9.2009；</p>
+<p>（2）使用二进制包node_exporter-0.18.1.linux-amd64.tar.gz安装node-exporter服务；</p>
+<p>（3）声明端口：9100；</p>
+<p>（4）设置服务开机自启。</p>
+<p>完成后构建镜像，并提交master节点的IP地址、用户名和密码到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-node1 Monitor]# cat Dockerfile-exporter </span><br><span class="line">FROM centos:7.9.2009</span><br><span class="line">ADD node_exporter-0.18.1.linux-amd64.tar.gz /usr/local</span><br><span class="line">RUN chmod +x /usr/local/node_exporter-0.18.1.linux-amd64/node_exporter</span><br><span class="line">EXPOSE 9100</span><br><span class="line">CMD [&quot;/usr/local/node_exporter-0.18.1.linux-amd64/node_exporter&quot;]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2、【实操题】容器化部署Alertmanager-（1-5分）"><a href="#2、【实操题】容器化部署Alertmanager-（1-5分）" class="headerlink" title="2、【实操题】容器化部署Alertmanager （1.5分）"></a>2、【实操题】容器化部署Alertmanager （1.5分）</h4><p>在master节点上编写&#x2F;root&#x2F;Monitor&#x2F;Dockerfile-alert文件构建monitor-alert:v1.0镜像，具体要求如下：（需要用到的软件包：Monitor.tar.gz）</p>
+<p>（1）基础镜像：centos:centos7.9.2009；</p>
+<p>（2）使用提供的二进制包alertmanager-0.19.0.linux-amd64.tar.gz安装Alertmanager服务；</p>
+<p>（3）声明端口：9093、9094；</p>
+<p>（4）设置服务开机自启。</p>
+<p>完成后构建镜像，并提交master节点的IP地址、用户名和密码到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-node1 Monitor]# cat alertmanager/alertmanager.yml </span><br><span class="line">global:</span><br><span class="line">resolve_timeout: 5m</span><br><span class="line">smtp_smarthost: &#x27;114463512@.163.com:465&#x27;</span><br><span class="line">smtp_from: &#x27;alert@163.com&#x27;</span><br><span class="line">smtp_auth_username: &#x27;114463512@163.com&#x27;</span><br><span class="line">smtp_auth_password: &#x27;flwlf[a;&#x27;     </span><br><span class="line">smtp_require_tls: false</span><br><span class="line"></span><br><span class="line">route:</span><br><span class="line">  receiver: &quot;default&quot;</span><br><span class="line">  group_wait: 10s</span><br><span class="line">  group_interval: 1m</span><br><span class="line">  repeat_interval: 1h</span><br><span class="line">  group_by: [&#x27;alertname&#x27;]</span><br><span class="line"></span><br><span class="line">inhibit_rules:</span><br><span class="line">- source_match:</span><br><span class="line">  severity: &#x27;critical&#x27;</span><br><span class="line">  target_match:</span><br><span class="line">    severity: &#x27;warning&#x27;</span><br><span class="line">  equal: [&#x27;alertname&#x27;, &#x27;instance&#x27;]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-node1 Monitor]# cat alert-rules.yml </span><br><span class="line">groups:</span><br><span class="line"></span><br><span class="line">  - name: node-alert</span><br><span class="line">    rules:</span><br><span class="line">    - alert: NodeDown</span><br><span class="line">      expr: up&#123;job=&quot;node&quot;&#125; == 0</span><br><span class="line">      for: 5m</span><br><span class="line">      labels:</span><br><span class="line">        severity: critical</span><br><span class="line">        instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">      annotations:</span><br><span class="line">        summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; down&quot;</span><br><span class="line">        description: &quot;Instance: &#123;&#123; $labels.instance &#125;&#125; 已经宕机 5分钟&quot;</span><br><span class="line">        value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">    - alert: NodeCpuHigh</span><br><span class="line">      expr: (1 - avg by (instance) (irate(node_cpu_seconds_total&#123;job=&quot;node&quot;,mode=&quot;idle&quot;&#125;[5m]))) * 100 &gt; 80</span><br><span class="line">      for: 5m</span><br><span class="line">      labels:</span><br><span class="line">        severity: warning</span><br><span class="line">        instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">      annotations:</span><br><span class="line">        summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; cpu使用率过高&quot;</span><br><span class="line">        description: &quot;CPU 使用率超过 80%&quot;</span><br><span class="line">        value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">    - alert: NodeCpuIowaitHigh</span><br><span class="line">      expr: avg by (instance) (irate(node_cpu_seconds_total&#123;job=&quot;node&quot;,mode=&quot;iowait&quot;&#125;[5m])) * 100 &gt; 50</span><br><span class="line">      for: 5m</span><br><span class="line">      labels:</span><br><span class="line">        severity: warning</span><br><span class="line">        instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">      annotations:</span><br><span class="line">        summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; cpu iowait 使用率过高&quot;</span><br><span class="line">        description: &quot;CPU iowait 使用率超过 50%&quot;</span><br><span class="line">        value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">    - alert: NodeLoad5High</span><br><span class="line">          expr: node_load5 &gt; (count by (instance) (node_cpu_seconds_total&#123;job=&quot;node&quot;,mode=&#x27;system&#x27;&#125;)) * 1.2</span><br><span class="line">          for: 5m</span><br><span class="line">          labels:</span><br><span class="line">            severity: warning</span><br><span class="line">            instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">          annotations:</span><br><span class="line">            summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; load(5m) 过高&quot;</span><br><span class="line">            description: &quot;Load(5m) 过高，超出cpu核数 1.2倍&quot;</span><br><span class="line">            value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line">        - alert: NodeMemoryHigh</span><br><span class="line">          expr: (1 - node_memory_MemAvailable_bytes&#123;job=&quot;node&quot;&#125; / node_memory_MemTotal_bytes&#123;job=&quot;node&quot;&#125;) * 100 &gt; 90</span><br><span class="line">          for: 5m</span><br><span class="line">          labels:</span><br><span class="line">            severity: warning</span><br><span class="line">            instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">          annotations:</span><br><span class="line">            summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; memory 使用率过高&quot;</span><br><span class="line">            description: &quot;Memory 使用率超过 90%&quot;</span><br><span class="line">            value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">        - alert: NodeDiskRootHigh</span><br><span class="line">          expr: (1 - node_filesystem_avail_bytes&#123;job=&quot;node&quot;,fstype=~&quot;ext.*|xfs&quot;,mountpoint =&quot;/&quot;&#125; / node_filesystem_size_bytes&#123;job=&quot;node&quot;,fstype=~&quot;ext.*|xfs&quot;,mountpoint =&quot;/&quot;&#125;) * 100 &gt;</span><br><span class="line">           90</span><br><span class="line">          for: 10m</span><br><span class="line">          labels:</span><br><span class="line">            severity: warning</span><br><span class="line">            instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">          annotations:</span><br><span class="line">            summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; disk(/ 分区) 使用率过高&quot;</span><br><span class="line">            description: &quot;Disk(/ 分区) 使用率超过 90%&quot;</span><br><span class="line">            value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line"> - alert: NodeDiskBootHigh</span><br><span class="line">   expr: (1 - node_filesystem_avail_bytes&#123;job=&quot;node&quot;,fstype=~&quot;ext.*|xfs&quot;,mountpoint =&quot;/boot&quot;&#125; / node_filesystem_size_bytes&#123;job=&quot;node&quot;,fstype=~&quot;ext.*|xfs&quot;,mountpoint =&quot;/boot&quot;&#125;)</span><br><span class="line"></span><br><span class="line"> * 100 &gt; 80</span><br><span class="line">   for: 10m</span><br><span class="line">   labels:</span><br><span class="line">     severity: warning</span><br><span class="line">     instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">   annotations:</span><br><span class="line">     summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; disk(/boot 分区) 使用率过高&quot;</span><br><span class="line">     description: &quot;Disk(/boot 分区) 使用率超过 80%&quot;</span><br><span class="line">     value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">   - alert: NodeDiskReadHigh</span><br><span class="line">     expr: irate(node_disk_read_bytes_total&#123;job=&quot;node&quot;&#125;[5m]) &gt; 20 * (1024 ^ 2)</span><br><span class="line">     for: 5m</span><br><span class="line">     labels:</span><br><span class="line">       severity: warning</span><br><span class="line">       instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">     annotations:</span><br><span class="line">       summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; disk 读取字节数 速率过高&quot;</span><br><span class="line">       description: &quot;Disk 读取字节数 速率超过 20 MB/s&quot;</span><br><span class="line">       value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">   - alert: NodeDiskWriteHigh</span><br><span class="line">     expr: irate(node_disk_written_bytes_total&#123;job=&quot;node&quot;&#125;[5m]) &gt; 20 * (1024 ^ 2)</span><br><span class="line">     for: 5m</span><br><span class="line">     labels:</span><br><span class="line">       severity: warning</span><br><span class="line">       instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">     annotations:</span><br><span class="line">       summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; disk 写入字节数 速率过高&quot;</span><br><span class="line">       description: &quot;Disk 写入字节数 速率超过 20 MB/s&quot;</span><br><span class="line">       value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">   - alert: NodeDiskReadRateCountHigh</span><br><span class="line">     expr: irate(node_disk_reads_completed_total&#123;job=&quot;node&quot;&#125;[5m]) &gt; 3000</span><br><span class="line">     for: 5m</span><br><span class="line"></span><br><span class="line">   - alert: NodeDiskReadRateCountHigh</span><br><span class="line">         expr: irate(node_disk_reads_completed_total&#123;job=&quot;node&quot;&#125;[5m]) &gt; 3000</span><br><span class="line">         for: 5m</span><br><span class="line">         labels:</span><br><span class="line">           severity: warning</span><br><span class="line">           instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">         annotations:</span><br><span class="line">           summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; disk iops 每秒读取速率过高&quot;</span><br><span class="line">           description: &quot;Disk iops 每秒读取速率超过 3000 iops&quot;</span><br><span class="line">           value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line">       - alert: NodeDiskWriteRateCountHigh</span><br><span class="line">         expr: irate(node_disk_writes_completed_total&#123;job=&quot;node&quot;&#125;[5m]) &gt; 3000</span><br><span class="line">         for: 5m</span><br><span class="line">         labels:</span><br><span class="line">           severity: warning</span><br><span class="line">           instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">         annotations:</span><br><span class="line">           summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; disk iops 每秒写入速率过高&quot;</span><br><span class="line">           description: &quot;Disk iops 每秒写入速率超过 3000 iops&quot;</span><br><span class="line">           value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line">       - alert: NodeInodeRootUsedPercentHigh</span><br><span class="line">         expr: (1 - node_filesystem_files_free&#123;job=&quot;node&quot;,fstype=~&quot;ext4|xfs&quot;,mountpoint=&quot;/&quot;&#125; / node_filesystem_files&#123;job=&quot;node&quot;,fstype=~&quot;ext4|xfs&quot;,mountpoint=&quot;/&quot;&#125;) * 100 &gt; 80</span><br><span class="line">         for: 10m</span><br><span class="line">         labels:</span><br><span class="line">           severity: warning</span><br><span class="line">           instance: &quot;&#123;&#123; $labels.instance &#125;&#125;&quot;</span><br><span class="line">         annotations:</span><br><span class="line">           summary: &quot;instance: &#123;&#123; $labels.instance &#125;&#125; disk(/ 分区) inode 使用率过高&quot;</span><br><span class="line">           description: &quot;Disk (/ 分区) inode 使用率超过 80%&quot;</span><br><span class="line">           value: &quot;&#123;&#123; $value &#125;&#125;&quot;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-node1 Monitor]# cat Dockerfile-alert </span><br><span class="line">FROM centos:7.9.2009</span><br><span class="line">ADD alertmanager-0.19.0.linux-amd64.tar.gz /usr/local/</span><br><span class="line">RUN chmod +x /usr/local/alertmanager-0.19.0.linux-amd64/alertmanager</span><br><span class="line">EXPOSE 9093</span><br><span class="line">EXPOSE 9094</span><br><span class="line">CMD [&quot;/usr/local/alertmanager-0.19.0.linux-amd64/alertmanager&quot;,&quot;--config.file=/usr/local/alertmanager-0.19.0.linux-amd64/alertmanager.yml&quot;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、【实操题】容器化部署Grafana（1-5分）"><a href="#3、【实操题】容器化部署Grafana（1-5分）" class="headerlink" title="3、【实操题】容器化部署Grafana（1.5分）"></a>3、【实操题】容器化部署Grafana（1.5分）</h4><p>在master节点上写&#x2F;root&#x2F;Monitor&#x2F;Dockerfile-grafana文件构建monitor-grafana:v1.0镜像，具体要求如下：（需要用到的软件包：Monitor.tar.gz）</p>
+<p>（1）基础镜像：centos:centos7.9.2009；</p>
+<p>（2）使用提供的二进制包grafana-6.4.1.linux-amd64.tar.gz安装grafana服务；</p>
+<p>（3）声明端口：3000；</p>
+<p>（4）设置nacos服务开机自启。</p>
+<p>完成后构建镜像，并提交master节点的IP地址、用户名和密码到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-node1 Monitor]# cat Dockerfile-grafana </span><br><span class="line">FROM centos:7.9.2009</span><br><span class="line">ADD grafana-6.4.1.linux-amd64.tar.gz /usr/local/</span><br><span class="line">RUN chmod +x /usr/local/grafana-6.4.1/bin/grafana-server</span><br><span class="line">EXPOSE 3000</span><br><span class="line">CMD [&quot;/usr/local/grafana-6.4.1/bin/grafana-server&quot;,&quot;--config=/usr/local/grafana-6.4.1/conf/defaults.ini&quot;,&quot;--homepath=/usr/local/grafana-6.4.1&quot;] </span><br></pre></td></tr></table></figure>
+
+<h4 id="4、【实操题】容器化部署Prometheus（1-5分）"><a href="#4、【实操题】容器化部署Prometheus（1-5分）" class="headerlink" title="4、【实操题】容器化部署Prometheus（1.5分）"></a>4、【实操题】容器化部署Prometheus（1.5分）</h4><p>在master节点上编写&#x2F;root&#x2F;Monitor&#x2F;Dockerfile-prometheus文件构建monitor-prometheus:v1.0镜像，具体要求如下：（需要用到的软件包：Monitor.tar.gz）</p>
+<p>（1）基础镜像：centos:centos7.9.2009；</p>
+<p>（2）使用提供的二进制包prometheus-2.13.0.linux-amd64.tar.gz安装promethues服务；</p>
+<p>（3）编写prometheus.yml文件，创建3个任务模板：prometheus、node和alertmanager，并将该文件拷贝到&#x2F;data&#x2F;prometheus&#x2F;目录下；</p>
+<p>（4）声明端口：9090；</p>
+<p>（5）设置服务开机自启。</p>
+<p>完成后构建镜像，并提交master节点的IP地址、用户名和密码到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-node1 monint]# cat prometheus.yml </span><br><span class="line"></span><br><span class="line"># my global config</span><br><span class="line"></span><br><span class="line">global:</span><br><span class="line">  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.</span><br><span class="line">  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.</span><br><span class="line"></span><br><span class="line">  # scrape_timeout is set to the global default (10s).</span><br><span class="line"></span><br><span class="line"># Alertmanager configuration</span><br><span class="line"></span><br><span class="line">alerting:</span><br><span class="line">  alertmanagers:</span><br><span class="line">    - static_configs:</span><br><span class="line">        - targets: </span><br><span class="line">          - 192.168.20.133:9093</span><br><span class="line"></span><br><span class="line"># Load rules once and periodically evaluate them according to the global &#x27;evaluation_interval&#x27;.</span><br><span class="line"></span><br><span class="line">rule_files:</span><br><span class="line"></span><br><span class="line">  - &quot;rules/*.yml&quot;</span><br><span class="line"></span><br><span class="line">  # - &quot;second_rules.yml&quot;</span><br><span class="line"></span><br><span class="line"># A scrape configuration containing exactly one endpoint to scrape:</span><br><span class="line"></span><br><span class="line"># Here it&#x27;s Prometheus itself.</span><br><span class="line"></span><br><span class="line">scrape_configs:</span><br><span class="line"></span><br><span class="line">  # The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span><br><span class="line"></span><br><span class="line">  - job_name: &quot;prometheus&quot;</span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [&quot;192.168.20.133:9090&quot;]</span><br><span class="line"></span><br><span class="line">  - job_name: &quot;node&quot;</span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [&quot;192.168.20.133:9100&quot;]</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FROM centos:7.9.2009</span><br><span class="line">ADD prometheus-2.13.0.linux-amd64.tar.gz /usr/local/</span><br><span class="line">RUN chmod +x /usr/local/prometheus-2.13.0.linux-amd64/prometheus</span><br><span class="line">ADD prometheus.yml /usr/local/prometheus-2.13.0.linux-amd64/</span><br><span class="line">RUN mkdir /usr/local/prometheus-2.13.0.linux-amd64/rules</span><br><span class="line">ADD alert-rules.yml /usr/local/prometheus-2.13.0.linux-amd64/rules </span><br><span class="line">EXPOSE 9090</span><br><span class="line">CMD [&quot;/usr/local/prometheus-2.13.0.linux-amd64/prometheus&quot;,&quot;--config.file=/usr/local/prometheus-2.13.0.linux-amd64/prometheus.yml&quot;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、【实操题】编排部署监控系统（4-5分）"><a href="#5、【实操题】编排部署监控系统（4-5分）" class="headerlink" title="5、【实操题】编排部署监控系统（4.5分）"></a>5、【实操题】编排部署监控系统（4.5分）</h4><p>在master节点上编写&#x2F;root&#x2F;Monitor&#x2F;docker-compose.yaml文件，具体要求如下：</p>
+<p>（1）容器1名称：monitor-node；镜像：monitor-exporter:v1.0；端口映射：9100:9100；</p>
+<p>（2）容器2名称：monitor- alertmanager；镜像：monitor-alert:v1.0；端口映射：9093:9093、9094:9094；</p>
+<p>（3）容器3名称：monitor-grafana；镜像：monitor-grafana:v1.0；端口映射：3000:3000；</p>
+<p>（4）容器4名称：monitor-prometheus；镜像：monitor-prometheus:v1.0；端口映射：9090:9090。</p>
+<p>完成后编排部署监控系统，将Prometheus设置为Grafana的数据源，并命名为Prometheus。然后提交master节点的IP地址、用户名和密码到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@k8s-master-node1 Monitor]# cat docker-compose.yaml </span><br><span class="line">version: &#x27;3&#x27;</span><br><span class="line">services:</span><br><span class="line">  node-exporter:</span><br><span class="line">    image: monitor-exporter:v1.0</span><br><span class="line">    container_name: &quot;monitor-node&quot;</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;9100:9100&quot;</span><br><span class="line">    restart: always</span><br><span class="line">  alertmanager:</span><br><span class="line">    image: monitor-alert:v1.0</span><br><span class="line">    container_name: &quot;monitor-alertmanager&quot;</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;9093:9093&quot;</span><br><span class="line">      - &quot;9094:9094&quot;</span><br><span class="line">    restart: always</span><br><span class="line">  grafana:</span><br><span class="line">    image: monitor-grafana:v1.0</span><br><span class="line">    container_name: &quot;monitor-grafana&quot;</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;3000:3000&quot;</span><br><span class="line">    restart: always</span><br><span class="line"></span><br><span class="line">  prometheus:</span><br><span class="line">    image: monitor-prometheus:v1.0</span><br><span class="line">    container_name: &quot;monitor-prometheus&quot;</span><br><span class="line">    depends_on:</span><br><span class="line">      - node-exporter</span><br><span class="line">      - alertmanager</span><br><span class="line">      - grafana</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;9090:9090&quot;</span><br><span class="line">    restart: always </span><br></pre></td></tr></table></figure>
+
+<h2 id="三、容器云应用搭建：基于Kubernetes构建CICD（当前任务共4道题目）"><a href="#三、容器云应用搭建：基于Kubernetes构建CICD（当前任务共4道题目）" class="headerlink" title="三、容器云应用搭建：基于Kubernetes构建CICD（当前任务共4道题目）"></a>三、容器云应用搭建：基于Kubernetes构建CICD（当前任务共4道题目）</h2><h4 id="1、【实操题】安装Jenkins环境（2分）"><a href="#1、【实操题】安装Jenkins环境（2分）" class="headerlink" title="1、【实操题】安装Jenkins环境（2分）"></a>1、【实操题】安装Jenkins环境（2分）</h4><p>使用镜像jenkins&#x2F;Jenkins:latest在Kubernetes集群devops命名空间下完成Jenkins的部署，Deployment和Service名称均为jenkins，要求以NodePort方式将Jenkins的8080端口对外暴露为30880，并使用提供的软件包完成Blue Ocean等离线插件的安装。部署完成后设置Jenkins用户名为jenkins；密码为000000，并在授权策略中配置“任何用户可以做任何事(没有任何限制)”。</p>
+<p>完成后交master节点的用户名、密码和IP地址到答题框。（需要用到的软件包路径http:&#x2F;&#x2F;<IP>&#x2F;BlueOcean.tar.gz）</p>
+<h4 id="2、【实操题】安装GitLab环境（2分）"><a href="#2、【实操题】安装GitLab环境（2分）" class="headerlink" title="2、【实操题】安装GitLab环境（2分）"></a>2、【实操题】安装GitLab环境（2分）</h4><p>使用镜像gitlab&#x2F;gitlab-ce:latest在Kubernetes集群devops命名空间下完成GitLab的部署，Deployment和Service名称均为gitlab，设置GitLab的root用户密码为admin@123，并以NodePort方式将GitLab的80端口对外暴露为30888。部署完成后新建公开项目springcloud，并将springcloud文件夹中的代码上传到该项目。</p>
+<p>完成后提交master节点的用户名、密码和IP地址到答题框。（需要用到的软件包路径http:&#x2F;&#x2F;<IP>&#x2F;BlueOcean.tar.gz）</p>
+<h3 id="3、【实操题】配置Jenkins连接GitLab（2分）"><a href="#3、【实操题】配置Jenkins连接GitLab（2分）" class="headerlink" title="3、【实操题】配置Jenkins连接GitLab（2分）"></a>3、【实操题】配置Jenkins连接GitLab（2分）</h3><p>在GitLab中生成名为jenkins的“Access Tokens”，在Jenkins中配置GitLab凭据并测试其连通性。</p>
+<p>完成后提交master节点的用户名、密码和IP地址到答题框。（需要用到的软件包路径http:&#x2F;&#x2F;<IP>&#x2F;BlueOcean.tar.gz）</p>
+<h3 id="4、【实操题】构建CI-x2F-CD（4分）"><a href="#4、【实操题】构建CI-x2F-CD（4分）" class="headerlink" title="4、【实操题】构建CI&#x2F;CD（4分）"></a>4、【实操题】构建CI&#x2F;CD（4分）</h3><p>在Jenkins中新建流水线任务springcloud，流水线选择“Pipeline script from SCM”。在springcloud项目中新建Jenkinsfile脚本文件，编写声明式Pipeline，要求完成构建maven项目，然后构建Docker镜像并推送到Harbor仓库的springcloud项目，并基于新构建的镜像完成config和gateway服务自动发布到Kubernetes集群springcloud命名空间下。最后配置Webhook触发构建。</p>
+<p>完成后提交master节点的用户名、密码和IP地址到答题框。（需要用到的软件包路径http:&#x2F;&#x2F;<IP>&#x2F;BlueOcean.tar.gz）</p>
+<h3 id="1、【实操题】WordPress上云–使用多容器Pod部署服务（2分）"><a href="#1、【实操题】WordPress上云–使用多容器Pod部署服务（2分）" class="headerlink" title="1、【实操题】WordPress上云–使用多容器Pod部署服务（2分）"></a>1、【实操题】WordPress上云–使用多容器Pod部署服务（2分）</h3><p>使用Deployment方式将WordPress博客系统部署到Kubernetes集群default命名空间下，名称为wordpress，要求将Wordpress应用和MySQL数据库部署到同一Pod中，使用环境变量设置数据库用户及密码均为wordpress，并新建数据库wordpress。</p>
+<p>完成后提交master节点的用户名、密码和IP地址到答题框。(需要用到的软件包：WordPress.tar.gz)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: wordpress</span><br><span class="line">spec:</span><br><span class="line"> selector:</span><br><span class="line">  matchLabels:</span><br><span class="line">   app: wordpress</span><br><span class="line"> replicas: 1</span><br><span class="line"> template:</span><br><span class="line">  metadata:</span><br><span class="line">   labels:</span><br><span class="line">    app: wordpress</span><br><span class="line">  spec:</span><br><span class="line">   containers:</span><br><span class="line">    \- name: wordpress</span><br><span class="line">     image: wordpress:5.8.2-apache</span><br><span class="line">     env:</span><br><span class="line">      \- name: WORDPRESS_DB_HOST</span><br><span class="line">       value: mysql:3306</span><br><span class="line">      \- name: WORDPRESS_DB_USER</span><br><span class="line">       value: root</span><br><span class="line">      \- name: WORDPRESS_DB_PASSWORD</span><br><span class="line">       value: wordpress</span><br><span class="line">      \- name: WORDPRESS_DB_NAME</span><br><span class="line">       value: wordpress</span><br><span class="line"></span><br><span class="line">​    \- name: mysql</span><br><span class="line">​     image: mysql:5.7</span><br><span class="line">​     env:</span><br><span class="line">​      \- name: MYSQL_ROOT_PASSWORD</span><br><span class="line">​       value: wordpress</span><br><span class="line">​      \- name: MYSQL_DATABASE</span><br><span class="line">​       value: wordpress</span><br><span class="line">​      \- name: MYSQL_USER</span><br><span class="line">​       value: wordpress</span><br><span class="line">​      \- name: MYSQL_PASSWORD</span><br><span class="line">​       value: wordpress </span><br><span class="line">​     volumeMounts:</span><br><span class="line">​      \- name: mysql</span><br><span class="line">​       mountPath: /var/lib/mysql </span><br><span class="line"></span><br><span class="line">   volumes:</span><br><span class="line">    \- name: mysql</span><br><span class="line">     hostPath: </span><br><span class="line">      path: /root/db_data</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2、【实操题】WordPress上云–使用Service暴露服务（2分）"><a href="#2、【实操题】WordPress上云–使用Service暴露服务（2分）" class="headerlink" title="2、【实操题】WordPress上云–使用Service暴露服务（2分）"></a>2、【实操题】WordPress上云–使用Service暴露服务（2分）</h3><p>在Kubernetes集群default命名空间下为WordPress服务创建一个NodePort类型的Service，名称为wordpress，将80端口对外暴露为30083端口；为MySQL服务创建一个ClusterIP类型的Service，名称为wordpress-mysql。</p>
+<p>完成后提交master节点的用户名、密码和IP地址到答题框。(需要用到的软件包：WordPress.tar.gz)</p>
+<h3 id="3、【实操题】WordPress上云–使用StorageClass实现持久化存储（2分）"><a href="#3、【实操题】WordPress上云–使用StorageClass实现持久化存储（2分）" class="headerlink" title="3、【实操题】WordPress上云–使用StorageClass实现持久化存储（2分）"></a>3、【实操题】WordPress上云–使用StorageClass实现持久化存储（2分）</h3><p>在master节点上部署NFS服务器，创建共享目录&#x2F;data&#x2F;kubernetes，基于该NFS服务器在Kubernetes集群中创建名为nfs-storage的默认动态存储类。基于nfs-storage动态存储类，在Kubernetes集群default命名空间下创建两个PVC，PVC1名称mysql-pvc，PVC2名称wordpress-pvc，大小均为20G，均使用ReadWriteMany模式。</p>
+<p>完成后提交master节点的用户名、密码和IP地址到答题框。(需要用到的软件包：WordPress.tar.gz)</p>
+<h3 id="4、【实操题】HPA管理–快速扩容（3分）"><a href="#4、【实操题】HPA管理–快速扩容（3分）" class="headerlink" title="4、【实操题】HPA管理–快速扩容（3分）"></a>4、【实操题】HPA管理–快速扩容（3分）</h3><p>默认情况下HPA是无法调整伸缩灵敏度的，但不同的业务场景对伸缩灵敏度的要求不一样。要求在default命名空间下使用nginx镜像创建一个名为web的deployment，自定义HPA的伸缩灵敏度，为该deployment创建一个名为web的HPA，扩容时立即新增当前9倍数量的副本数，时间窗口为5s，伸缩范围为1–1000。假如一开始只有1个Pod，当CPU使用率超过80%时，Pod数量变化趋势为：1 → 10 → 100 → 1000。</p>
+<p>完成后提交master节点的IP地址、用户名和密码到答题框。</p>
+<h3 id="5、【实操题】流量管理–创建基于用户身份的路由（3分）"><a href="#5、【实操题】流量管理–创建基于用户身份的路由（3分）" class="headerlink" title="5、【实操题】流量管理–创建基于用户身份的路由（3分）"></a>5、【实操题】流量管理–创建基于用户身份的路由（3分）</h3><p>为Bookinfo应用创建一个名为reviews的VirtualService，要求来自名为Jason的用户的所有流量将被路由到reviews服务的v2版本。</p>
+<p>完成后提交master节点的IP地址、用户名和密码到答题框。</p>
+<h2 id="五、容器云平台运维开发：Kubernetes-APIs运维开发（当前任务共2道题目）"><a href="#五、容器云平台运维开发：Kubernetes-APIs运维开发（当前任务共2道题目）" class="headerlink" title="五、容器云平台运维开发：Kubernetes APIs运维开发（当前任务共2道题目）"></a>五、容器云平台运维开发：Kubernetes APIs运维开发（当前任务共2道题目）</h2><h4 id="1、【实操题】Kubernetes-Python运维开发：使用SDK方式管理deployment服务（3分）"><a href="#1、【实操题】Kubernetes-Python运维开发：使用SDK方式管理deployment服务（3分）" class="headerlink" title="1、【实操题】Kubernetes Python运维开发：使用SDK方式管理deployment服务（3分）"></a>1、【实操题】Kubernetes Python运维开发：使用SDK方式管理deployment服务（3分）</h4><p>在提供的OpenStack私有云平台上，使用k8s-python-dev镜像创建1台云主机，云主机类型使用4vCPU&#x2F;12G内存&#x2F;100G硬盘。该主机中已经默认安装了所需的开发环境，登录默认账号密码为“root&#x2F;1DaoYun@2022”。</p>
+<p>使用Kubernetes python SDK的“kubernetes”Python库，在&#x2F;root目录下，创建sdk_manager_deployment.py文件，要求编写python代码，代码实现以下任务：</p>
+<p>（1）首先使用nginx-deployment.yaml文件创建deployment资源。</p>
+<p>（2）创建完成后，查询该服务的信息，查询的body部分通过控制台输出，并以json格式的文件输出到当前目录下的deployment_sdk_dev.json文件中。</p>
+<p>编写完成后，提交该云主机的用户名、密码和IP地址到答题框。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/12/2023%E4%BA%91%E8%AE%A1%E7%AE%97%E5%9B%BD%E8%B5%9B%E6%A0%B7%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          2023云计算国赛样题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/04/19/openstacksdk/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

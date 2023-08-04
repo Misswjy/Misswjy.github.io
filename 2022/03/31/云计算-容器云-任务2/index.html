@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>“云计算-容器云-任务2” | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="云计算赛项第二场-容器云-江苏卷-任务2【任务2】基于Docker 容器的web 应用系统部署[10 分]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="“云计算-容器云-任务2”">
+<meta property="og:url" content="http://example.com/2022/03/31/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A12/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="云计算赛项第二场-容器云-江苏卷-任务2【任务2】基于Docker 容器的web 应用系统部署[10 分]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-31T13:06:06.000Z">
+<meta property="article:modified_time" content="2022-06-28T09:37:56.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="容器云">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-云计算-容器云-任务2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/03/31/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A12/" class="article-date">
+  	<time datetime="2022-03-31T13:06:06.000Z" itemprop="datePublished">2022-03-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      “云计算-容器云-任务2”
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" rel="tag">容器云</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="云计算赛项第二场-容器云-江苏卷-任务2"><a href="#云计算赛项第二场-容器云-江苏卷-任务2" class="headerlink" title="云计算赛项第二场-容器云-江苏卷-任务2"></a>云计算赛项第二场-容器云-江苏卷-任务2</h1><h2 id="【任务2】基于Docker-容器的web-应用系统部署-10-分"><a href="#【任务2】基于Docker-容器的web-应用系统部署-10-分" class="headerlink" title="【任务2】基于Docker 容器的web 应用系统部署[10 分]"></a>【任务2】基于Docker 容器的web 应用系统部署[10 分]<span id="more"></span></h2><p>将MariaDB 数据库组件、Redis 消息组件、RabbitMQ 消息组件、Nacos-Registry 注册中心服务组件和前端Nginx 组件按照要求进行容器化。（所需要的软件包mall-swarm.tar.gz在http 服务中）。<br><strong>【适用平台】私有云</strong></p>
+<h3 id="【题目1】容器化部署Redis"><a href="#【题目1】容器化部署Redis" class="headerlink" title="【题目1】容器化部署Redis"></a>【题目1】容器化部署Redis</h3><p>在 master 节 点 上 编 写 &#x2F;root&#x2F;redis&#x2F;Dockerfile文 件 构 建chinaskill-redis:v1.1 镜像，具体要求如下：</p>
+<p>（1）基础镜像：centos:centos7.5.1804；<br>（2）作者：Chinaskill；<br>（3）修改配置文件中的bind 127.0.0.1为bind 0.0.0.0；<br>（4）设置Redis免密，并关闭保护模式；<br>（5）开放端口：6379；<br>（6）设置服务开机自启。<br>完成后构建镜像，并提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><code>cd /root</code></p>
+<p><code>mkdir redis</code></p>
+<p><code>cd redis</code></p>
+<p><code>vi Dockerfile</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FROM centos:centos7.5.1804</span><br><span class="line">MAINTAINER Chinaskill</span><br><span class="line">RUN rm -rf /etc/yum.repos.d/*</span><br><span class="line">ADD local.repo /etc/yum.repos.d/</span><br><span class="line">RUN yum -y install redis</span><br><span class="line">RUN sed -i &#x27;s/bind 127.0.0.1/bind 0.0.0.0/g&#x27; /etc/redis.conf &amp;&amp; sed -i &#x27;s/protected-mode yes/protected-mode no/g&#x27; /etc/redis.conf</span><br><span class="line">EXPOSE 6379</span><br><span class="line">CMD [&quot;redis-server&quot;,&quot;/etc/redis.conf&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><code>vi local.repo</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[docker]</span><br><span class="line">baseurl=http://172.19.25.11/paas/kubernetes-repo/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[centos]</span><br><span class="line">baseurl=ftp://192.168.20.132/centos</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p><code>docker build -t chinaskill-redis:v1.1 .</code></p>
+<h3 id="【题目2】容器化部署MariaDB"><a href="#【题目2】容器化部署MariaDB" class="headerlink" title="【题目2】容器化部署MariaDB"></a>【题目2】容器化部署MariaDB</h3><p>在 master 节 点 上 编 写 &#x2F;root&#x2F;mariadb&#x2F;Dockerfile 文 件 构 建chinaskill-mariadb:v1.1 镜像，具体要求如下：</p>
+<p>（1）基础镜像：centos:centos7.5.1804；<br>（2）作者：Chinaskill；<br>（3）安装并初始化mariadb，密码：root；<br>（4）设置数据库编码为UTF-8；<br>（5）开放端口：3306<br>（6）设置mariadb 开机自启。<br>完成后构建镜像，并提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><code>cd /root</code></p>
+<p><code>mkdir mariadb</code></p>
+<p><code>cd mariadb</code></p>
+<p><code>vi Dockerfile</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">FROM centos:centos7.5.1804</span><br><span class="line">MAINTAINER chinaskill</span><br><span class="line">RUN rm -rf /etc/yum.repos.d/*</span><br><span class="line">ADD local.repo /etc/yum.repos.d/</span><br><span class="line">ADD gpmall.sql /opt/</span><br><span class="line">ADD start.sh /opt/</span><br><span class="line">RUN yum -y install mariadb-server \</span><br><span class="line">&amp;&amp; chmod +x /opt/start.sh \</span><br><span class="line">&amp;&amp; /opt/start.sh</span><br><span class="line">EXPOSE 3306</span><br><span class="line">ENV LC_ALL en_US.UTF-8</span><br><span class="line">CMD mysqld_safe</span><br></pre></td></tr></table></figure>
+
+<p><code>cp /root/redis/local.repo /root/mariadb/</code></p>
+<p><code>cp /opt/ChinaskillMall/gpmall.sql /root/mariadb/</code></p>
+<p><code>vi start.sh</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">mysql_install_db --user=mysql</span><br><span class="line">mysqld_safe &amp;</span><br><span class="line">sleep 3</span><br><span class="line">mysqladmin -u root password &#x27;123456&#x27;</span><br><span class="line">mysql -uroot -p123456 -e &quot;grant all privileges on *.* to &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;123456&#x27;;&quot;</span><br><span class="line">mysql -uroot -p123456 -e &quot;create database gpmall;use gpmall;source /opt/gpmall.sql;&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>docker build -t chinaskill-mariadb:v1.1 .</code></p>
+<h3 id="【题目3】容器化部署zookeeper"><a href="#【题目3】容器化部署zookeeper" class="headerlink" title="【题目3】容器化部署zookeeper"></a>【题目3】容器化部署zookeeper</h3><p>在 master 节 点 上 编 写 &#x2F;root&#x2F;zookeeper&#x2F;Dockerfile 文 件 构 建chinaskill-zookeeper:v1.1 镜像，具体要求如下：</p>
+<p>（1）基础镜像：centos:centos7.5.1804；<br>（2）作者：Chinaskill；<br>（3）开放端口：2181;<br>（4）设置 服务开机自启。<br>完成后构建镜像，并提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><code>cd /root</code></p>
+<p><code>mkdir zookeeper</code></p>
+<p><code>cd zookeeper</code></p>
+<p><code>vi Dockerfile</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM centos:centos7.5.1804</span><br><span class="line">MAINTAINER Chinaskill</span><br><span class="line">EXPOSE 2181</span><br><span class="line">RUN rm -rf /etc/yum.repos.d/*</span><br><span class="line">COPY ftp.repo /etc/yum.repos.d/ftp.repo</span><br><span class="line">ADD zookeeper-3.4.14.tar.gz /opt</span><br><span class="line">RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel \</span><br><span class="line">&amp;&amp; mv /opt/zookeeper-3.4.14/conf/zoo_sample.cfg /opt/zookeeper-3.4.14/conf/zoo.cfg</span><br><span class="line">CMD [&quot;sh&quot;,&quot;-c&quot;,&quot;/opt/zookeeper-3.4.14/bin/zkServer.sh start &amp;&amp; tail -f /etc/shadow&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><code>vi ftp.repo</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[docker]</span><br><span class="line">baseurl=http://172.19.25.11/paas/kubernetes-repo/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[centos]</span><br><span class="line">baseurl=ftp://192.168.20.132/centos</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p><code>cp /opt/ChinaskillMall/zookeeper-3.4.14.tar.gz /root/zookeeper/</code></p>
+<p><code>docker build -t chinaskill-zookeeper:v1.1 .</code></p>
+<h3 id="【题目4】容器化部署kafka"><a href="#【题目4】容器化部署kafka" class="headerlink" title="【题目4】容器化部署kafka"></a>【题目4】容器化部署kafka</h3><p>在 master 节 点 上 编 写 &#x2F;root&#x2F;kafka&#x2F;Dockerfile 文 件 构 建chinaskill-kafka:v1.1 镜像，具体要求如下：</p>
+<p>（1）基础镜像：centos:centos7.5.1804；<br>（2）作者：Chinaskill；<br>（3）开放端口：9092;<br>（4）设置 服务开机自启。<br>完成后构建镜像，并提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><code>cd /root</code></p>
+<p><code>mkdir kafka</code></p>
+<p><code>cd kafka</code></p>
+<p><code>vi Dockerfile</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">FROM centos:centos7.5.1804</span><br><span class="line">MAINTAINER Chinaskill</span><br><span class="line">RUN rm -rf /etc/yum.repos.d/*</span><br><span class="line">ADD local.repo /etc/yum.repos.d/</span><br><span class="line">ADD zookeeper-3.4.14.tar.gz /opt</span><br><span class="line">ADD kafka_2.11-1.1.1.tgz /opt</span><br><span class="line">RUN yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel \</span><br><span class="line"> &amp;&amp; mv /opt/zookeeper-3.4.14/conf/zoo_sample.cfg /opt/zookeeper-3.4.14/conf/zoo.cfg</span><br><span class="line">EXPOSE 9092</span><br><span class="line">CMD [&quot;sh&quot;,&quot;-c&quot;,&quot;/opt/zookeeper-3.4.14/bin/zkServer.sh start &amp;&amp; /opt/kafka_2.11-1.1.1/bin/kafka-server-start.sh /opt/kafka_2.11-1.1.1/config/server.properties&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><code>cp /opt/ChinaskillMall/kafka_2.11-1.1.1.tgz /root/kafka/</code></p>
+<p><code>cp /opt/ChinaskillMall/zookeeper-3.4.14.tar.gz /root/kafka/</code></p>
+<p><code>cp /root/redis/local.repo /root/kafka</code></p>
+<p><code>docker build -t chinaskill-kafka:v1.1 .</code></p>
+<h3 id="【题目5】容器化部署nginx"><a href="#【题目5】容器化部署nginx" class="headerlink" title="【题目5】容器化部署nginx"></a>【题目5】容器化部署nginx</h3><p>在 master 节 点 上 编 写 &#x2F;root&#x2F;nginx&#x2F;Dockerfile 文 件 构 建chinaskill-nginx:v1.1 镜像，具体要求如下：</p>
+<p>（1）基础镜像：centos:centos7.5.1804；<br>（2）作者：Chinaskill；<br>（3）开放端口 80 8081 8082 8083;<br>（4）设置 服务开机自启。<br>完成后构建镜像，并提交master 节点的用户名、密码和IP 到答题框。</p>
+<p><code>cd /root</code></p>
+<p><code>mkdir nginx</code></p>
+<p><code>cd nginx</code></p>
+<p><code>vi Dockerfile</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FROM centos:centos7.5.1804</span><br><span class="line">MAINTAINER Chinaskill</span><br><span class="line">RUN rm -rf /etc/yum.repos.d/*</span><br><span class="line">ADD local.repo /etc/yum.repos.d/</span><br><span class="line">ADD *.jar /root/</span><br><span class="line">ADD setup.sh /root/</span><br><span class="line">RUN yum install -y nginx java-1.8.0-openjdk java-1.8.0-openjdk-devel </span><br><span class="line">RUN sed -i &#x27;1a location /shopping &#123; proxy_pass http://127.0.0.1:8081; &#125;&#x27; /etc/nginx/conf.d/default.conf </span><br><span class="line">RUN sed -i &#x27;2a location /user &#123; proxy_pass http://127.0.0.1:8082; &#125;&#x27; /etc/nginx/conf.d/default.conf </span><br><span class="line">RUN sed -i &#x27;3a location /casher &#123; proxy_pass http://127.0.0.1:8083; &#125;&#x27; /etc/nginx/conf.d/default.conf </span><br><span class="line">RUN chmod +x /root/setup.sh </span><br><span class="line">RUN rm -rf /usr/share/nginx/html/</span><br><span class="line">EXPOSE 80 8081 8082 8083</span><br><span class="line">ADD dist/ /usr/share/nginx/html/</span><br><span class="line">CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><code>vi local.repo</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[centos]</span><br><span class="line">baseurl=ftp://192.168.20.132/centos</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[docker]</span><br><span class="line">baseurl=ftp://192.168.20.132/kubernetes-repo</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[gpmal]</span><br><span class="line">baseurl=http://172.19.25.11/paas/ChinaskillMall/gpmall-repo</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p><code>cp /opt/ChinaskillMall/*.jar /root/nginx/</code></p>
+<p><code>cp /opt/ChinaskillMall/dist/ /root/nginx/</code></p>
+<p><code>vi setup.sh</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">nohup java -jar /root/shopping-provider-0.0.1-SNAPSHOT.jar &amp;</span><br><span class="line">sleep 5</span><br><span class="line">nohup java -jar /root/user-provider-0.0.1-SNAPSHOT.jar &amp;</span><br><span class="line">sleep 5</span><br><span class="line">nohup java -jar /root/gpmall-shopping-0.0.1-SNAPSHOT.jar &amp;</span><br><span class="line">sleep 5</span><br><span class="line">nohup java -jar /root/gpmall-user-0.0.1-SNAPSHOT.jar &amp;</span><br><span class="line">sleep 5</span><br></pre></td></tr></table></figure>
+
+<p><code>docker build -t chinaskill-nginx:v1.1 .</code></p>
+<h3 id="【题目6】容器编排"><a href="#【题目6】容器编排" class="headerlink" title="【题目6】容器编排"></a>【题目6】容器编排</h3><p>在master 节点上编写&#x2F;root&#x2F;chinaskill&#x2F;docker-compose.yaml 文件，具体要求如下：<br>（1）容器1 名称：mall-mysql；镜像：chinaskill-mariadb:v1.1；端口映射：13306:3306；<br>（2）容器 2 名称：mall-redis；镜像：chinaskill-redis:v1.1;端口映射：16379:6379;</p>
+<p>（3）容器3名称：mall-kafka; 镜像：chinaskill-kafka:v1.1;端口映射：19092:9092;</p>
+<p>（4）容器4名称：mall-zookeeper；镜像：chinaskill-zookeeper:v1.1;端口映射：12181:2181;</p>
+<p>（5）容器5名称：mall-nginx；镜像：chinaskill-nginx:v1.1;端口映射：83:80;1443:443;</p>
+<p><code>cd /root</code></p>
+<p><code>mkdir chinaskil</code></p>
+<p><code>cd chinaskill</code></p>
+<p><code>vi docker-compose.yaml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3.3&#x27;</span><br><span class="line">services:</span><br><span class="line">  mall-mysql:</span><br><span class="line">    image: chinaskill-mariadb:v1.1</span><br><span class="line">    ports:</span><br><span class="line">      - 13306:3306</span><br><span class="line"></span><br><span class="line">  mall-redis:</span><br><span class="line">    image: chinaskill-redis:v1.1</span><br><span class="line">    ports:</span><br><span class="line">      - 16379:6379</span><br><span class="line"></span><br><span class="line">  mall-kafka:</span><br><span class="line">    image: chinaskill-kafka:v1.1</span><br><span class="line">    ports:</span><br><span class="line">      - 19092:9092</span><br><span class="line"></span><br><span class="line">  mall-zookeeper:</span><br><span class="line">    image: chinaskill-zookeeper:v1.1</span><br><span class="line">    ports:</span><br><span class="line">      - 12181:2181</span><br><span class="line"></span><br><span class="line">  mall-nginx:</span><br><span class="line">    image: chinaskill-nginx:v1.1</span><br><span class="line">    depends_on:</span><br><span class="line">      - mall-mysql</span><br><span class="line">      - mall-redis</span><br><span class="line">      - mall-zookeeper</span><br><span class="line">      - mall-kafka</span><br><span class="line">    links:</span><br><span class="line">      - mall-mysql:mysql.mall</span><br><span class="line">      - mall-redis:redis.mall</span><br><span class="line">      - mall-zookeeper:zookeeper.mall</span><br><span class="line">      - mall-kafka:kafka.mall</span><br><span class="line">    ports:</span><br><span class="line">      - 83:80</span><br><span class="line">      - 1443:443</span><br><span class="line">    command: [&quot;sh&quot;,&quot;-c&quot;,&quot;/root/setup.sh &amp;&amp; nginx &amp;&amp; tail -f /etc/shadow&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><code>docker-compose up -d</code></p>
+<p>查看是否开启成功</p>
+<p><code>docker ps</code></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/08/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A13/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          云计算-私有云-任务3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/31/%E4%BA%91%E8%AE%A1%E7%AE%97-%E5%AE%B9%E5%99%A8%E4%BA%91-%E4%BB%BB%E5%8A%A11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">云计算-容器云-任务1</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

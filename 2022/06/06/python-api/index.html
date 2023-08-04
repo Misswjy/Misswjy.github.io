@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python-api | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="OpenStack API 运维任务[10 分]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-api">
+<meta property="og:url" content="http://example.com/2022/06/06/python-api/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="OpenStack API 运维任务[10 分]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-06T03:49:02.000Z">
+<meta property="article:modified_time" content="2022-06-28T11:59:54.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="私有云">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-python-api" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/06/06/python-api/" class="article-date">
+  	<time datetime="2022-06-06T03:49:02.000Z" itemprop="datePublished">2022-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python-api
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" rel="tag">私有云</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="OpenStack-API-运维任务-10-分"><a href="#OpenStack-API-运维任务-10-分" class="headerlink" title="OpenStack API 运维任务[10 分]"></a>OpenStack API 运维任务[10 分]<span id="more"></span></h1><p>【题目 1】使用 python 调用 api 实现创建 user[2 分]<br>在自行搭建的 OpenStack 私有云平台或提供的 all-in-one 平台上，根据 http 服务中提供的 Python-api.tar.gz 软件包，完成 python3.6 软件和依赖库的安装。在 controller 节点的&#x2F;root2021 年职业院校技能大赛“云计算”赛项 赛卷目录下创建 create_user.py 文件，编写 python 代码对接 OpenStack API，完成用户的创建。要求在 OpenStack 私有云平台中创建用户 chinaskill，描述为“API create user!”。执行完代码要求输出“用户创建成功”。根据上述要求编写 python 代码，完成后，将 controller 节点的IP 地址，用户名和密码提交。（考试系统会连接到你的 controller 节点，去执行 python 脚本，请准备好运行的环境，以便考试系统访问）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat create_user.py </span><br><span class="line">#coding=utf-8</span><br><span class="line">import json</span><br><span class="line">import requests</span><br><span class="line">body = &#123;</span><br><span class="line">        &quot;auth&quot;:&#123;</span><br><span class="line">            &quot;identity&quot;:&#123;</span><br><span class="line">               &quot;methods&quot;:[&quot;password&quot;],</span><br><span class="line">               &quot;password&quot;:&#123;</span><br><span class="line">                   &quot;user&quot;:&#123;</span><br><span class="line">                      &quot;id&quot;:&quot;179fac1341f64033800765d4be2f09c2&quot;,</span><br><span class="line">                      &quot;password&quot;:&quot;000000&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">             &quot;scope&quot;:&#123;</span><br><span class="line">                  &quot;project&quot;:&#123;</span><br><span class="line">                      &quot;id&quot;:&quot;ddc482a7bfb64a078f92260296ea723c&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">headers = &#123;&#125;</span><br><span class="line">def get_token():</span><br><span class="line">    url = &quot;http://192.168.20.113:5000/v3/auth/tokens&quot;</span><br><span class="line">    re = requests.post(url,headers=headers,data=json.dumps(body)).headers[&quot;X-Subject-Token&quot;]</span><br><span class="line">    return re</span><br><span class="line">def create_user():</span><br><span class="line">    url = &quot;http://192.168.20.113:35357/v3/users&quot;</span><br><span class="line">    headers[&quot;X-Auth-Token&quot;] = get_token()</span><br><span class="line">    body=&#123;</span><br><span class="line">        &quot;user&quot;:&#123;</span><br><span class="line">           &quot;domain_id&quot;:&quot;8f508b3360814db4ae9397996299ba7e&quot;,</span><br><span class="line">           &quot;password&quot;:&quot;000000&quot;,</span><br><span class="line">           &quot;name&quot;:&quot;chinaskill&quot;,</span><br><span class="line">           &quot;description&quot;:&quot;API create user!&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">    re = requests.post(url,headers=headers,data=json.dumps(body)).json()</span><br><span class="line">create_user()</span><br><span class="line">print(&quot;用户创建成功&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>【题目 2】使用 python 调用 api 实现创建 flavor[2 分]<br>在自行搭建的 OpenStack 私有云平台或提供的 all-in-one 平台上。在 controller 节点的&#x2F;root目录下创建 create_flavor.py 文件，在该文件中编写 python 代码对接 openstack api，要求在openstack 私有云平台上创建一个云主机类型，名字为 pvm_flavor、vcpu 为 1 个、内存为1024m、硬盘为 20G、ID 为 9999。执行完代码要求输出“云主机类型创建成功”。根据上述要求编写 python 代码，完成后，将 controller 节点的 IP 地址，用户名和密码提交。（考试系统会连接到你的 controller 节点，去执行 python 脚本，请准备好运行的环境，以便考试系统访问）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat create_flavor.py </span><br><span class="line">#coding=utf-8</span><br><span class="line">import json</span><br><span class="line">import requests</span><br><span class="line">body = &#123;</span><br><span class="line">          &quot;auth&quot;:&#123;</span><br><span class="line">            &quot;identity&quot;:&#123;</span><br><span class="line">               &quot;methods&quot;:[&quot;password&quot;],</span><br><span class="line">               &quot;password&quot;:&#123;</span><br><span class="line">                  &quot;user&quot;:&#123;</span><br><span class="line">                    &quot;id&quot;:&quot;179fac1341f64033800765d4be2f09c2&quot;,</span><br><span class="line">                    &quot;password&quot;:&quot;000000&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">          &quot;scope&quot;:&#123;</span><br><span class="line">            &quot;project&quot;:&#123;</span><br><span class="line">               &quot;id&quot;:&quot;ddc482a7bfb64a078f92260296ea723c&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">headers = &#123;&#125;</span><br><span class="line">def get_token():</span><br><span class="line">    url=&quot;http://192.168.20.113:5000/v3/auth/tokens&quot;</span><br><span class="line">    re = requests.post(url,headers=headers,data=json.dumps(body)).headers[&quot;X-Subject-Token&quot;]</span><br><span class="line">    return re</span><br><span class="line">def create_flavor():</span><br><span class="line">    url=&quot;http://192.168.20.113:8774/v2.1/flavors&quot;</span><br><span class="line">    headers[&quot;X-Auth-Token&quot;]=get_token()</span><br><span class="line">    body=&#123;</span><br><span class="line">       &quot;flavor&quot;:&#123;</span><br><span class="line">          &quot;name&quot;:&quot;pvm_flavor&quot;,</span><br><span class="line">          &quot;id&quot;:9999,</span><br><span class="line">          &quot;vcpus&quot;:1,</span><br><span class="line">          &quot;ram&quot;:1024,</span><br><span class="line">          &quot;disk&quot;:20</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">    re = requests.post(url,headers=headers,data=json.dumps(body)).json()</span><br><span class="line">create_flavor()</span><br><span class="line">print(&#x27;云主机类型创建成功&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>【题目 3】使用 python 调用 api 实现创建网络[2 分]<br>在自行搭建的 OpenStack 私有云平台或提供的 all-in-one 平台上。在 controller 节点的&#x2F;root目录下创建 create_network.py 文件，编写 python 代码对接 OpenStack API，完成网络的创建。要求：（1）为平台创建内部网络 pvm_int，子网名称为 pvm_intsubnet;（2）设置云主机网络子网 IP 网段为 192.168.x.0&#x2F;24（其中 x 是考位号），网关为 192.168.x.1（如果存在同名内网，代码中需先进行删除操作）。执行完代码要求输出“网络创建成功”。根据上述要求编写 python 代码，完成后，将 controller 节点的 IP 地址，用户名和密码提交。（考试系统会连接到你的 controller 节点，去执行 python 脚本，请准备好运行的环境，以便考试系统访问）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat net.py </span><br><span class="line">#coding=utf-8</span><br><span class="line">import json</span><br><span class="line">import requests</span><br><span class="line">url = &quot;http://192.168.20.113&quot;</span><br><span class="line">body=&#123;</span><br><span class="line">   &quot;auth&quot;:&#123;</span><br><span class="line">      &quot;identity&quot;:&#123;</span><br><span class="line">         &quot;methods&quot;:[&quot;password&quot;],</span><br><span class="line">         &quot;password&quot;:&#123;</span><br><span class="line">            &quot;user&quot;:&#123;</span><br><span class="line">               &quot;id&quot;:&quot;52c7c503e67b45fa9116baa4d302edad&quot;,</span><br><span class="line">               &quot;password&quot;:&quot;000000&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">    &quot;scope&quot;:&#123;</span><br><span class="line">       &quot;project&quot;:&#123;</span><br><span class="line">           &quot;id&quot;:&quot;01622847ee724c3ba59b94b5a1afa4d0&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">headers=&#123;&#125;</span><br><span class="line">def get_token():</span><br><span class="line">    tokenurl=url+&quot;:5000/v3/auth/tokens&quot;</span><br><span class="line">    re=requests.post(url=tokenurl,headers=headers,data=json.dumps(body)).headers[&quot;X-Subject-Token&quot;]</span><br><span class="line">    return re</span><br><span class="line">def net_create():</span><br><span class="line">    neturl=url+&quot;:9696/v2.0/networks&quot;</span><br><span class="line">    suburl=url+&quot;:9696/v2.0/subnets&quot;</span><br><span class="line">    headers[&quot;X-Auth-Token&quot;]=get_token()</span><br><span class="line">    body=&#123;</span><br><span class="line">       &quot;network&quot;: &#123;</span><br><span class="line">            &quot;provider:physical_network&quot;: &quot;provider&quot;, #可以不写</span><br><span class="line">            &quot;project_id&quot;: &quot;01622847ee724c3ba59b94b5a1afa4d0&quot;, #可以不写</span><br><span class="line">            &quot;name&quot;: &quot;pvm_int&quot;,</span><br><span class="line">            &quot;admin_state_up&quot;: &quot;true&quot;, #可以不写</span><br><span class="line">            &quot;provider:network_type&quot;: &quot;vlan&quot; #可以不写</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">    re=requests.post(url=neturl,headers=headers,data=json.dumps(body)).json()</span><br><span class="line">    print(re)</span><br><span class="line">    re=re.get(&#x27;network&#x27;)</span><br><span class="line">    id=re[&#x27;id&#x27;]</span><br><span class="line">    body1=&#123;</span><br><span class="line">       &quot;subnet&quot;: &#123;</span><br><span class="line">            &quot;enable_dhcp&quot;: &quot;true&quot;,</span><br><span class="line">            &quot;network_id&quot;: id,</span><br><span class="line">            &quot;gateway_ip&quot;: &quot;192.168.23.1&quot;,</span><br><span class="line">            &quot;allocation_pools&quot;: [</span><br><span class="line">             &#123;</span><br><span class="line">                &quot;start&quot;: &quot;192.168.23.10&quot;,</span><br><span class="line">                &quot;end&quot;: &quot;192.168.23.100&quot;</span><br><span class="line">             &#125;</span><br><span class="line">            ],</span><br><span class="line">            &quot;cidr&quot;: &quot;192.168.23.0/24&quot;,</span><br><span class="line">            &quot;project_id&quot;: &quot;01622847ee724c3ba59b94b5a1afa4d0&quot;,</span><br><span class="line">            &quot;name&quot;: &quot;pvm_intsubnet&quot;,</span><br><span class="line">            &quot;ip_version&quot;: 4</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">    re1=requests.post(url=suburl,headers=headers,data=json.dumps(body1)).json()  </span><br><span class="line">    print(re1)</span><br><span class="line">net_create()</span><br><span class="line">print(&quot;网络创建成功&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>【题目 4】使用 python 调用 api 实现创建镜像[2 分]<br>在自行搭建的 OpenStack 私有云平台或提供的 all-in-one 平台上。在 controller 节点的&#x2F;root目录下创建 create_image.py 文件，编写 python 代码对接 OpenStack API，完成镜像的上传。要求在 OpenStack 私有云平台中上传镜像 cirros-0.3.4-x86_64-disk.img，名字为 pvm_image，disk_format 为 qcow2，container_format 为 bare。执行完代码要求输出“镜像创建成功，id为:xxxxxx”。根据上述要求编写 python 代码，完成后，将 controller 节点的 IP 地址，用户名和密码提交。（考试系统会连接到你的 controller 节点，去执行 python 脚本，请准备好运行的环境，以便考试系统访问）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat create_image.py </span><br><span class="line">#coding=utf-8</span><br><span class="line">import json</span><br><span class="line">import requests</span><br><span class="line">url = &quot;http://192.168.20.113&quot;</span><br><span class="line">body=&#123;</span><br><span class="line">   &quot;auth&quot;:&#123;</span><br><span class="line">      &quot;identity&quot;:&#123;</span><br><span class="line">         &quot;methods&quot;:[&quot;password&quot;],</span><br><span class="line">         &quot;password&quot;:&#123;</span><br><span class="line">            &quot;user&quot;:&#123;</span><br><span class="line">               &quot;id&quot;:&quot;52c7c503e67b45fa9116baa4d302edad&quot;,</span><br><span class="line">               &quot;password&quot;:&quot;000000&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">    &quot;scope&quot;:&#123;</span><br><span class="line">       &quot;project&quot;:&#123;</span><br><span class="line">           &quot;id&quot;:&quot;01622847ee724c3ba59b94b5a1afa4d0&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">headers=&#123;&#125;</span><br><span class="line">def get_token():</span><br><span class="line">    tokenurl=url+&quot;:5000/v3/auth/tokens&quot;</span><br><span class="line">    re=requests.post(url=tokenurl,headers=headers,data=json.dumps(body)).headers[&quot;X-Subject-Token&quot;]</span><br><span class="line">    return re</span><br><span class="line"></span><br><span class="line">def create_image():</span><br><span class="line">    glanceurl=url+&quot;:9292/v2/images&quot;</span><br><span class="line">    headers[&quot;X-Auth-Token&quot;]=get_token()</span><br><span class="line">    body1=&#123;</span><br><span class="line">             &quot;name&quot;: &quot;pvm_image&quot;,</span><br><span class="line">             &quot;disk_format&quot;: &quot;qcow2&quot;,</span><br><span class="line">             &quot;container_format&quot;: &quot;bare&quot;</span><br><span class="line">&#125;</span><br><span class="line">    re=requests.post(url=glanceurl,headers=headers,data=json.dumps(body1)).json()</span><br><span class="line">    print(re)</span><br><span class="line">    id=re[&#x27;id&#x27;]    </span><br><span class="line">    return id   </span><br><span class="line">def put_image():</span><br><span class="line">    glanceurl=url+&quot;:9292/v2/images&quot;</span><br><span class="line">    image_id=create_image()</span><br><span class="line">    headers[&quot;Content-Type&quot;]=&quot;application/octet-stream&quot;</span><br><span class="line">    a=open(&quot;cirros-0.3.4-x86_64-disk.img&quot;,&quot;rb&quot;).read()</span><br><span class="line">    req=requests.put(&quot;http://192.168.20.113:9292/v2/images/&#123;&#125;/file&quot;.format(image_id),data=a,headers=headers)</span><br><span class="line">    print(&quot;镜像上传成功,id为:&quot;+image_id)</span><br><span class="line">put_image()</span><br></pre></td></tr></table></figure>
+
+<p>【题目 5】使用 python 调用 api 实现创建云主机[2 分]<br>在自行搭建的 OpenStack 私有云平台或提供的 all-in-one 平台上。在 controller 节点的&#x2F;root目录下创建 create_vm.py 文件，编写 python 代码对接 OpenStack API，完成云主机的创建。要求使用 pvm_image、pvm_flavor、pvm_intsubnet 创建 1 台云主机 pvm1（如果存在同名虚拟主机，代码中需先进行删除操作）。执行完代码要求输出“创建云主机成功”。根据上述要求编写 python 代码，完成后，将 controller 节点的 IP 地址，用户名和密码提交。（考试系统会连接到你的 controller 节点，去执行 python 脚本，请准备好运行的环境，以便考试系统访问）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">[root@controller ~]# cat create_server.py </span><br><span class="line">#coding=utf-8</span><br><span class="line">import json</span><br><span class="line">import requests</span><br><span class="line">url = &quot;http://192.168.20.113&quot;</span><br><span class="line">body=&#123;</span><br><span class="line">   &quot;auth&quot;:&#123;</span><br><span class="line">      &quot;identity&quot;:&#123;</span><br><span class="line">         &quot;methods&quot;:[&quot;password&quot;],</span><br><span class="line">         &quot;password&quot;:&#123;</span><br><span class="line">            &quot;user&quot;:&#123;</span><br><span class="line">               &quot;id&quot;:&quot;52c7c503e67b45fa9116baa4d302edad&quot;,</span><br><span class="line">               &quot;password&quot;:&quot;000000&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">    &quot;scope&quot;:&#123;</span><br><span class="line">       &quot;project&quot;:&#123;</span><br><span class="line">           &quot;id&quot;:&quot;01622847ee724c3ba59b94b5a1afa4d0&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">headers=&#123;&#125;</span><br><span class="line">def get_token():</span><br><span class="line">    tokenurl=url+&quot;:5000/v3/auth/tokens&quot;</span><br><span class="line">    re=requests.post(url=tokenurl,headers=headers,data=json.dumps(body)).headers[&quot;X-Subject-Token&quot;]</span><br><span class="line">    return re</span><br><span class="line">def create_server():</span><br><span class="line">    svurl=url+&quot;:8774/v2.1/servers&quot;</span><br><span class="line">    headers[&quot;X-Auth-Token&quot;]=get_token()</span><br><span class="line">    body=&#123;</span><br><span class="line">       &quot;server&quot;:&#123;</span><br><span class="line">           &quot;name&quot;: &quot;pvm1&quot;,</span><br><span class="line">           &quot;imageRef&quot;: &quot;b2da2db6-ede4-4007-8778-e2da9a11223f&quot;,</span><br><span class="line">           &quot;flavorRef&quot;: &quot;9999&quot;,</span><br><span class="line">           &quot;networks&quot;: [&#123;&quot;uuid&quot;:&quot;65b2bd8b-3d99-47ed-ba3f-31864ae77b19&quot;&#125;]</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">    re=requests.post(url=svurl,headers=headers,data=json.dumps(body)).json()</span><br><span class="line">    print(re)</span><br><span class="line">create_server()</span><br><span class="line">print(&#x27;云主机创建成功&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/06/24/ansible/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          ansible
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/25/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">k8s学习日记day5</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

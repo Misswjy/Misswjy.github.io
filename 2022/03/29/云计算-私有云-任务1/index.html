@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>云计算-私有云 | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="云计算赛项第一场-私有云云计算-私有云-基础运维任务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云计算-私有云">
+<meta property="og:url" content="http://example.com/2022/03/29/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A11/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="云计算赛项第一场-私有云云计算-私有云-基础运维任务">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-29T11:56:42.000Z">
+<meta property="article:modified_time" content="2022-03-31T07:54:58.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="私有云">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-云计算-私有云-任务1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/03/29/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A11/" class="article-date">
+  	<time datetime="2022-03-29T11:56:42.000Z" itemprop="datePublished">2022-03-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      云计算-私有云
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" rel="tag">私有云</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="云计算赛项第一场-私有云"><a href="#云计算赛项第一场-私有云" class="headerlink" title="云计算赛项第一场-私有云"></a>云计算赛项第一场-私有云</h1><h2 id="云计算-私有云-基础运维任务"><a href="#云计算-私有云-基础运维任务" class="headerlink" title="云计算-私有云-基础运维任务"></a>云计算-私有云-基础运维任务<span id="more"></span></h2><p><strong>某企业拟使用OpenStack 搭建一个企业云平台，以实现资源池化弹性管理、企业应用集</strong><br><strong>中管理、统一安全认证和授权等管理。</strong></p>
+<table>
+<thead>
+<tr>
+<th>设备名称</th>
+<th>主机名</th>
+<th>接口</th>
+<th>IP 地址</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>云服务器1</td>
+<td>Controller</td>
+<td>eth0 <br/>eth1</td>
+<td>172.129.x.0&#x2F;24 <br/>自定义</td>
+<td>Vlan x<br/>自行创建</td>
+</tr>
+<tr>
+<td>云服务器2</td>
+<td>Compute</td>
+<td>eth0<br/>eth1</td>
+<td>172.129.x.0&#x2F;24 <br/>自定义</td>
+<td>Vlan x<br/>自行创建</td>
+</tr>
+<tr>
+<td>云服务器3<br/>…<br/>云服务器n</td>
+<td>自定义</td>
+<td>eth0</td>
+<td>172.129.x.0&#x2F;24</td>
+<td>用于实操题</td>
+</tr>
+<tr>
+<td>PC-1</td>
+<td></td>
+<td>本地连接</td>
+<td>172.24.16.0&#x2F;24</td>
+<td>PC 使用</td>
+</tr>
+</tbody></table>
+<p>说明：<br>1.竞赛使用集群模式进行，比赛时给每个参赛队提供独立的租户与用户，各用户的资源配额相同，选手通过用户名与密码登录竞赛用私有云平台，创建云主机进行相应答题；<br>2.表中的x 为工位号；在进行OpenStack 搭建时的第二块网卡地址根据题意自行创建；<br>3.根据图表给出的信息，检查硬件连线及网络设备配置，确保网络连接正常；<br>4.考试所需要的账号资源、竞赛资源包与附件均会在考位信息表与设备确认单中给出；<br>5.竞赛过程中，为确保服务器的安全，请自行修改服务器密码；在考试系统提交信息时，请确认自己的IP 地址，用户名和密码。</p>
+<h2 id="基础运维任务-5-分"><a href="#基础运维任务-5-分" class="headerlink" title="基础运维任务[5 分]"></a>基础运维任务[5 分]</h2><p><strong>【适用平台】私有云</strong></p>
+<h3 id="【题目1】基础环境配置-1-5-分"><a href="#【题目1】基础环境配置-1-5-分" class="headerlink" title="【题目1】基础环境配置[1.5 分]"></a>【题目1】基础环境配置[1.5 分]</h3><p>使用提供的用户名密码，登录提供的OpenStack 私有云平台，自行使用CentOS7.5 镜像创建两台云主机，控制节点 flavor 使用 4v_12G_100G 的配置，计算节点 flavor 使用4v_8G_100G_50G 的配置。第一张网卡使用提供的网络，第二张网卡使用的网络自行创（网段为10.10.X.0&#x2F;24，X 为工位号）。创建完云主机后确保网络正常通信，然后按以下要求配置服务器：<br><strong>（1）设置控制节点主机名为controller，设置计算节点主机名为compute；</strong></p>
+<p><code>hostnamesctl set-hostname controller</code></p>
+<p><code>hostnamesctl set-hostname compute</code></p>
+<p><strong>（2）修改hosts 文件将IP 地址映射为主机名；</strong></p>
+<p><strong>controller&#x2F;compute</strong></p>
+<p><code>vi /etc/hosts</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.20.123	controller</span><br><span class="line"></span><br><span class="line">192.168.20.110	compute</span><br></pre></td></tr></table></figure>
+
+<p>完成后提交控制节点的用户名、密码和IP 地址到答题框。<br>1.使用hostnamectl 命令查看主机名为controller 计0.5 分</p>
+<p><code>hostnamectl</code></p>
+<p>2.查看hosts 文件中有正确的主机名和IP 映射计0.5 分</p>
+<p><code>cat /etc/hosts</code></p>
+<p>3.控制节点正确使用两块网卡计0.5 分</p>
+<p><code>cat /etc/sysconfig/network-scripts/ifcfg-enp*</code></p>
+<h3 id="【题目2】Yum-源配置-1-分"><a href="#【题目2】Yum-源配置-1-分" class="headerlink" title="【题目2】Yum 源配置[1 分]"></a>【题目2】Yum 源配置[1 分]</h3><p>使用提供的http 服务地址，在http 服务下，存在centos7.5 和iaas 的网络yum 源，使用该http 源作为安装iaas 平台的网络源。分别设置controller 节点和compute 节点的yum 源文件http.repo。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><strong>controller&#x2F;compute</strong></p>
+<p><code>mv /etc/yum.repos.d/* /tmp/</code></p>
+<p><code>vi /etc/yum.repos.d/http.repo</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[centos]</span><br><span class="line"></span><br><span class="line">name=centos</span><br><span class="line"></span><br><span class="line">baseurl=http://172.19.25.11/centos</span><br><span class="line"></span><br><span class="line">gpgcheck=0</span><br><span class="line"></span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[iaas]</span><br><span class="line"></span><br><span class="line">name=iaas</span><br><span class="line"></span><br><span class="line">baseurl=http://172.19.25.11/iaas/iaas/iaas-repo</span><br><span class="line"></span><br><span class="line">gpgcheck=0</span><br><span class="line"></span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p>1.查看&#x2F;etc&#x2F;yum.repos.d&#x2F;http.repo 文件，有正确的baseurl 路径，计1 分</p>
+<p><code>cat /etc/yum.repos.d/http.repo</code></p>
+<p>清除缓存</p>
+<p><code>yum clean</code>        </p>
+<p>检验yum是否配置正确</p>
+<p>&#96;&#96;yum list&#96;        </p>
+<h3 id="【题目3】时间同步配置-1-5-分"><a href="#【题目3】时间同步配置-1-5-分" class="headerlink" title="【题目3】时间同步配置[1.5 分]"></a>【题目3】时间同步配置[1.5 分]</h3><p>在controller 节点上部署chrony 服务器，允许其他节点同步时间，启动服务并设置为开机启动；在compute 节点上指定controller 节点为上游NTP 服务器，重启服务并设为开机启动。完成后提交控制节点的用户名、密码和IP 地址到答题框。</p>
+<p><code>yum install -y chrony</code></p>
+<p><strong>配置controller节点</strong></p>
+<p><code>vi /etc/chrony.conf</code></p>
+<p>删除默认规则（在默认规则前加上#号）</p>
+<p>添加以下规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server controller iburst</span><br><span class="line"></span><br><span class="line">allow 192.168.20.0/24</span><br><span class="line"></span><br><span class="line">local stratum 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置compute节点</strong></p>
+<p><code>vi /etc/chrony.conf</code></p>
+<p>删除默认规则（在默认规则前加上#号）</p>
+<p>添加以下规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server controller iburst</span><br></pre></td></tr></table></figure>
+
+<p>启动服务并设置为开机启动</p>
+<p><code>systemctl restart chronyd</code></p>
+<p><code>systemctl enable chronyd</code></p>
+<p>1.查看&#x2F;etc&#x2F;chrony.conf 配置文件，有正确的配置文件计1 分</p>
+<p><code>cat /etc/chrony.conf</code></p>
+<p>2.查看时间同步服务的状态，正常计0.5 分</p>
+<p><code>systemctl status chronyd</code></p>
+<h3 id="【题目4】计算节点分区-1-分"><a href="#【题目4】计算节点分区-1-分" class="headerlink" title="【题目4】计算节点分区[1 分]"></a>【题目4】计算节点分区[1 分]</h3><p>在compute 节点上利用空白分区划分2 个20G 分区。完成后提交计算节点的用户名、密码和IP 地址到答题框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@compute ~]# umount /dev/vdb</span><br><span class="line"></span><br><span class="line">[root@compute ~]# fdisk /dev/vdb</span><br><span class="line">Welcome to fdisk (util-linux 2.23.2).</span><br><span class="line"></span><br><span class="line">Changes will remain in memory only, until you decide to write them.</span><br><span class="line">Be careful before using the write command.</span><br><span class="line"></span><br><span class="line">Command (m for help): n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): p</span><br><span class="line">Using default response p</span><br><span class="line">Partition number (1-4, default 1): 1</span><br><span class="line">First sector (2048-125829119, default 2048): </span><br><span class="line">Using default value 2048</span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (2048-125829119, default 125829119): +20G</span><br><span class="line">Partition 1 of type Linux and of size 20 GiB is set</span><br><span class="line"></span><br><span class="line">Command (m for help): n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (1 primary, 0 extended, 3 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): p</span><br><span class="line">Partition number (2-4, default 2): 2</span><br><span class="line">First sector (41945088-125829119, default 41945088): </span><br><span class="line">Using default value 41945088</span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (41945088-125829119, default 125829119): +20G</span><br><span class="line">Partition 2 of type Linux and of size 20 GiB is set</span><br><span class="line"></span><br><span class="line">Command (m for help): w</span><br><span class="line">The partition table has been altered!</span><br><span class="line"></span><br><span class="line">Calling ioctl() to re-read partition table.</span><br></pre></td></tr></table></figure>
+
+<p>1.使用lsblk 命令查看分区，有两个20G 分区计1 分，每个0.5 分</p>
+<p><code>lsblk</code></p>
+<p><strong>云计算-私有云-基础运维任务结束</strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/30/%E4%BA%91%E8%AE%A1%E7%AE%97-%E7%A7%81%E6%9C%89%E4%BA%91-%E4%BB%BB%E5%8A%A12/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          云计算-私有云-任务2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/28/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%89%B0%E8%8B%A6%E5%8E%86%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">搭建博客艰苦历程</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

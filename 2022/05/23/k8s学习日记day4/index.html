@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>k8s学习日记day4 | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="kubernetes的Pod详解一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s学习日记day4">
+<meta property="og:url" content="http://example.com/2022/05/23/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day4/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="kubernetes的Pod详解一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-23T04:52:54.000Z">
+<meta property="article:modified_time" content="2022-05-24T09:37:56.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="k8s">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-k8s学习日记day4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/05/23/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day4/" class="article-date">
+  	<time datetime="2022-05-23T04:52:54.000Z" itemprop="datePublished">2022-05-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      k8s学习日记day4
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="kubernetes的Pod详解一"><a href="#kubernetes的Pod详解一" class="headerlink" title="kubernetes的Pod详解一"></a><strong>kubernetes的Pod详解</strong>一<span id="more"></span></h1><h2 id="1-Pod的介绍"><a href="#1-Pod的介绍" class="headerlink" title="1 Pod的介绍"></a>1 Pod的介绍</h2><h3 id="1-1-Pod的结构"><a href="#1-1-Pod的结构" class="headerlink" title="1.1 Pod的结构"></a>1.1 Pod的结构</h3><ul>
+<li><p>每个Pod中都包含一个或者多个容器，这些容器可以分为两类：</p>
+</li>
+<li><p>① 用户程序所在的容器，数量可多可少。</p>
+</li>
+<li><p>② Pause容器，这是每个Pod都会有的一个根容器，它的作用有两个：</p>
+</li>
+<li><ul>
+<li>可以以它为依据，评估整个Pod的健康状况。</li>
+</ul>
+</li>
+<li><ul>
+<li>可以在根容器上设置IP地址，其它容器都共享此IP（Pod的IP），以实现Pod内部的网络通信（这里是Pod内部的通讯，Pod之间的通讯采用虚拟二层网络技术来实现，我们当前环境使用的是Flannel）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-Pod定义"><a href="#1-2-Pod定义" class="headerlink" title="1.2 Pod定义"></a>1.2 Pod定义</h3><ul>
+<li>下面是Pod的资源清单：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1     #必选，版本号，例如v1</span><br><span class="line">kind: Pod       　 #必选，资源类型，例如 Pod</span><br><span class="line">metadata:       　 #必选，元数据</span><br><span class="line">  name: string     #必选，Pod名称</span><br><span class="line">  namespace: string  #Pod所属的命名空间,默认为&quot;default&quot;</span><br><span class="line">  labels:       　　  #自定义标签列表</span><br><span class="line">    - name: string      　          </span><br><span class="line">spec:  #必选，Pod中容器的详细定义</span><br><span class="line">  containers:  #必选，Pod中容器列表</span><br><span class="line">  - name: string   #必选，容器名称</span><br><span class="line">    image: string  #必选，容器的镜像名称</span><br><span class="line">    imagePullPolicy: [ Always|Never|IfNotPresent ]  #获取镜像的策略 </span><br><span class="line">    command: [string]   #容器的启动命令列表，如不指定，使用打包时使用的启动命令</span><br><span class="line">    args: [string]      #容器的启动命令参数列表</span><br><span class="line">    workingDir: string  #容器的工作目录</span><br><span class="line">    volumeMounts:       #挂载到容器内部的存储卷配置</span><br><span class="line">    - name: string      #引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名</span><br><span class="line">      mountPath: string #存储卷在容器内mount的绝对路径，应少于512字符</span><br><span class="line">      readOnly: boolean #是否为只读模式</span><br><span class="line">      ports: #需要暴露的端口库号列表</span><br><span class="line">    - name: string        #端口的名称</span><br><span class="line">      containerPort: int  #容器需要监听的端口号</span><br><span class="line">      hostPort: int       #容器所在主机需要监听的端口号，默认与Container相同</span><br><span class="line">      protocol: string    #端口协议，支持TCP和UDP，默认TCP</span><br><span class="line">      env:   #容器运行前需设置的环境变量列表</span><br><span class="line">    - name: string  #环境变量名称</span><br><span class="line">      value: string #环境变量的值</span><br><span class="line">      resources: #资源限制和请求的设置</span><br><span class="line">      limits:  #资源限制的设置</span><br><span class="line">        cpu: string     #Cpu的限制，单位为core数，将用于docker run --cpu-shares参数</span><br><span class="line">        memory: string  #内存限制，单位可以为Mib/Gib，将用于docker run --memory参数</span><br><span class="line">      requests: #资源请求的设置</span><br><span class="line">        cpu: string    #Cpu请求，容器启动的初始可用数量</span><br><span class="line">        memory: string #内存请求,容器启动的初始可用数量</span><br><span class="line">      lifecycle: #生命周期钩子</span><br><span class="line">      postStart: #容器启动后立即执行此钩子,如果执行失败,会根据重启策略进行重启</span><br><span class="line">      preStop: #容器终止前执行此钩子,无论结果如何,容器都会终止</span><br><span class="line">      livenessProbe:  #对Pod内各容器健康检查的设置，当探测无响应几次后将自动重启该容器</span><br><span class="line">      exec:       　 #对Pod容器内检查方式设置为exec方式</span><br><span class="line">        command: [string]  #exec方式需要制定的命令或脚本</span><br><span class="line">      httpGet:       #对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port</span><br><span class="line">        path: string</span><br><span class="line">        port: number</span><br><span class="line">        host: string</span><br><span class="line">        scheme: string</span><br><span class="line">        HttpHeaders:</span><br><span class="line">        - name: string</span><br><span class="line">          value: string</span><br><span class="line">          tcpSocket:     #对Pod内个容器健康检查方式设置为tcpSocket方式</span><br><span class="line">             port: number</span><br><span class="line">           initialDelaySeconds: 0       #容器启动完成后首次探测的时间，单位为秒</span><br><span class="line">           timeoutSeconds: 0    　　    #对容器健康检查探测等待响应的超时时间，单位秒，默认1秒</span><br><span class="line">           periodSeconds: 0     　　    #对容器监控检查的定期探测时间设置，单位秒，默认10秒一次</span><br><span class="line">           successThreshold: 0</span><br><span class="line">           failureThreshold: 0</span><br><span class="line">           securityContext:</span><br><span class="line">             privileged: false</span><br><span class="line">          restartPolicy: [Always | Never | OnFailure]  #Pod的重启策略</span><br><span class="line">          nodeName: &lt;string&gt; #设置NodeName表示将该Pod调度到指定到名称的node节点上</span><br><span class="line">          nodeSelector: obeject #设置NodeSelector表示将该Pod调度到包含这个label的node上</span><br><span class="line">          imagePullSecrets: #Pull镜像时使用的secret名称，以key：secretkey格式指定</span><br><span class="line">  - name: string</span><br><span class="line">    hostNetwork: false   #是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span><br><span class="line">      volumes:   #在该pod上定义共享存储卷列表</span><br><span class="line">  - name: string    #共享存储卷名称 （volumes类型有很多种）</span><br><span class="line">    emptyDir: &#123;&#125;       #类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值</span><br><span class="line">    hostPath: string   #类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录</span><br><span class="line">      path: string      　　        #Pod所在宿主机的目录，将被用于同期中mount的目录</span><br><span class="line">    secret:       　　　#类型为secret的存储卷，挂载集群与定义的secret对象到容器内部</span><br><span class="line">      scretname: string  </span><br><span class="line">      items:     </span><br><span class="line">      - key: string</span><br><span class="line">        path: string</span><br><span class="line">        configMap:         #类型为configMap的存储卷，挂载预定义的configMap对象到容器内部</span><br><span class="line">          name: string</span><br><span class="line">          items:</span><br><span class="line">      - key: string</span><br><span class="line">        path: string</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>语法：查看每种资源的可配置项</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 查看某种资源可以配置的一级配置</span><br><span class="line"></span><br><span class="line">kubectl explain 资源类型 </span><br><span class="line"></span><br><span class="line"># 查看属性的子属性</span><br><span class="line"></span><br><span class="line">kubectl explain 资源类型.属性</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>示例：查看资源类型为pod的可配置项</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl explain pod</span><br><span class="line">KIND:     Pod</span><br><span class="line">VERSION:  v1</span><br><span class="line"></span><br><span class="line">DESCRIPTION:</span><br><span class="line">     Pod is a collection of containers that can run on a host. This resource is</span><br><span class="line">     created by clients and scheduled onto hosts.</span><br><span class="line"></span><br><span class="line">FIELDS:</span><br><span class="line">   apiVersion   &lt;string&gt;</span><br><span class="line">     APIVersion defines the versioned schema of this representation of an</span><br><span class="line">     object. Servers should convert recognized schemas to the latest internal</span><br><span class="line">     value, and may reject unrecognized values. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources</span><br><span class="line"></span><br><span class="line">   kind &lt;string&gt;</span><br><span class="line">     Kind is a string value representing the REST resource this object</span><br><span class="line">     represents. Servers may infer this from the endpoint the client submits</span><br><span class="line">     requests to. Cannot be updated. In CamelCase. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds</span><br><span class="line"></span><br><span class="line">   metadata     &lt;Object&gt;</span><br><span class="line">     Standard object&#x27;s metadata. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</span><br><span class="line"></span><br><span class="line">   spec &lt;Object&gt;</span><br><span class="line">     Specification of the desired behavior of the pod. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status</span><br><span class="line"></span><br><span class="line">   status       &lt;Object&gt;</span><br><span class="line">     Most recently observed status of the pod. This data may not be up to date.</span><br><span class="line">     Populated by the system. Read-only. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conv</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>示例：查看资源类型为Pod的metadata的属性的可配置项</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl explain pod.metadata</span><br><span class="line">KIND:     Pod</span><br><span class="line">VERSION:  v1</span><br><span class="line"></span><br><span class="line">RESOURCE: metadata &lt;Object&gt;</span><br><span class="line"></span><br><span class="line">DESCRIPTION:</span><br><span class="line">     Standard object&#x27;s metadata. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</span><br><span class="line"></span><br><span class="line">     ObjectMeta is metadata that all persisted resources must have, which</span><br><span class="line">     includes all objects users must create.</span><br><span class="line"></span><br><span class="line">FIELDS:</span><br><span class="line">   annotations  &lt;map[string]string&gt;</span><br><span class="line">     Annotations is an unstructured key value map stored with a resource that</span><br><span class="line">     may be set by external tools to store and retrieve arbitrary metadata. They</span><br><span class="line">     are not queryable and should be preserved when modifying objects. More</span><br><span class="line">     info: http://kubernetes.io/docs/user-guide/annotations</span><br><span class="line"></span><br><span class="line">   clusterName  &lt;string&gt;</span><br><span class="line">     The name of the cluster which the object belongs to. This is used to</span><br><span class="line">     distinguish resources with same name and namespace in different clusters.</span><br><span class="line">     This field is not set anywhere right now and apiserver is going to ignore</span><br><span class="line">     it if set in create or update request.</span><br><span class="line"></span><br><span class="line">   creationTimestamp    &lt;string&gt;</span><br><span class="line">     CreationTimestamp is a timestamp representing the server time when this</span><br><span class="line">     object was created. It is not guaranteed to be set in happens-before order</span><br><span class="line">     across separate operations. Clients may not set this value. It is</span><br><span class="line">     represented in RFC3339 form and is in UTC. Populated by the system.</span><br><span class="line">     Read-only. Null for lists. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</span><br><span class="line"></span><br><span class="line">   deletionGracePeriodSeconds   &lt;integer&gt;</span><br><span class="line">     Number of seconds allowed for this object to gracefully terminate before it</span><br><span class="line">     will be removed from the system. Only set when deletionTimestamp is also</span><br><span class="line">     set. May only be shortened. Read-only.</span><br><span class="line"></span><br><span class="line">   deletionTimestamp    &lt;string&gt;</span><br><span class="line">     DeletionTimestamp is RFC 3339 date and time at which this resource will be</span><br><span class="line">     deleted. This field is set by the server when a graceful deletion is</span><br><span class="line">     requested by the user, and is not directly settable by a client. The</span><br><span class="line">     resource is expected to be deleted (no longer visible from resource lists,</span><br><span class="line">     and not reachable by name) after the time in this field, once the</span><br><span class="line">     finalizers list is empty. As long as the finalizers list contains items,</span><br><span class="line">     deletion is blocked. Once the deletionTimestamp is set, this value may not</span><br><span class="line">     be unset or be set further into the future, although it may be shortened or</span><br><span class="line">     the resource may be deleted prior to this time. For example, a user may</span><br><span class="line">     request that a pod is deleted in 30 seconds. The Kubelet will react by</span><br><span class="line">     sending a graceful termination signal to the containers in the pod. After</span><br><span class="line">     that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL)</span><br><span class="line">     to the container and after cleanup, remove the pod from the API. In the</span><br><span class="line">     presence of network partitions, this object may still exist after this</span><br><span class="line">     timestamp, until an administrator or automated process can determine the</span><br><span class="line">     resource is fully terminated. If not set, graceful deletion of the object</span><br><span class="line">     has not been requested. Populated by the system when a graceful deletion is</span><br><span class="line">     requested. Read-only. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata</span><br><span class="line"></span><br><span class="line">   finalizers   &lt;[]string&gt;</span><br><span class="line">     Must be empty before the object is deleted from the registry. Each entry is</span><br><span class="line">     an identifier for the responsible component that will remove the entry from</span><br><span class="line">     the list. If the deletionTimestamp of the object is non-nil, entries in</span><br><span class="line">     this list can only be removed. Finalizers may be processed and removed in</span><br><span class="line">     any order. Order is NOT enforced because it introduces significant risk of</span><br><span class="line">     stuck finalizers. finalizers is a shared field, any actor with permission</span><br><span class="line">     can reorder it. If the finalizer list is processed in order, then this can</span><br><span class="line">     lead to a situation in which the component responsible for the first</span><br><span class="line">     finalizer in the list is waiting for a signal (field value, external</span><br><span class="line">     system, or other) produced by a component responsible for a finalizer later</span><br><span class="line">     in the list, resulting in a deadlock. Without enforced ordering finalizers</span><br><span class="line">     are free to order amongst themselves and are not vulnerable to ordering</span><br><span class="line">     changes in the list.</span><br><span class="line"></span><br><span class="line">   generateName &lt;string&gt;</span><br><span class="line">     GenerateName is an optional prefix, used by the server, to generate a</span><br><span class="line">     unique name ONLY IF the Name field has not been provided. If this field is</span><br><span class="line">     used, the name returned to the client will be different than the name</span><br><span class="line">     passed. This value will also be combined with a unique suffix. The provided</span><br><span class="line">     value has the same validation rules as the Name field, and may be truncated</span><br><span class="line">     by the length of the suffix required to make the value unique on the</span><br><span class="line">     server. If this field is specified and the generated name exists, the</span><br><span class="line">     server will NOT return a 409 - instead, it will either return 201 Created</span><br><span class="line">     or 500 with Reason ServerTimeout indicating a unique name could not be</span><br><span class="line">     found in the time allotted, and the client should retry (optionally after</span><br><span class="line">     the time indicated in the Retry-After header). Applied only if Name is not</span><br><span class="line">     specified. More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency</span><br><span class="line"></span><br><span class="line">   generation   &lt;integer&gt;</span><br><span class="line">     A sequence number representing a specific generation of the desired state.</span><br><span class="line">     Populated by the system. Read-only.</span><br><span class="line"></span><br><span class="line">   labels       &lt;map[string]string&gt;</span><br><span class="line">     Map of string keys and values that can be used to organize and categorize</span><br><span class="line">     (scope and select) objects. May match selectors of replication controllers</span><br><span class="line">     and services. More info: http://kubernetes.io/docs/user-guide/labels</span><br><span class="line"></span><br><span class="line">   managedFields        &lt;[]Object&gt;</span><br><span class="line">     ManagedFields maps workflow-id and version to the set of fields that are</span><br><span class="line">     managed by that workflow. This is mostly for internal housekeeping, and</span><br><span class="line">     users typically shouldn&#x27;t need to set or understand this field. A workflow</span><br><span class="line">     can be the user&#x27;s name, a controller&#x27;s name, or the name of a specific</span><br><span class="line">     apply path like &quot;ci-cd&quot;. The set of fields is always in the version that</span><br><span class="line">     the workflow used when modifying the object.</span><br><span class="line"></span><br><span class="line">   name &lt;string&gt;</span><br><span class="line">     Name must be unique within a namespace. Is required when creating</span><br><span class="line">     resources, although some resources may allow a client to request the</span><br><span class="line">     generation of an appropriate name automatically. Name is primarily intended</span><br><span class="line">     for creation idempotence and configuration definition. Cannot be updated.</span><br><span class="line">     More info: http://kubernetes.io/docs/user-guide/identifiers#names</span><br><span class="line"></span><br><span class="line">   namespace    &lt;string&gt;</span><br><span class="line">     Namespace defines the space within each name must be unique. An empty</span><br><span class="line">     namespace is equivalent to the &quot;default&quot; namespace, but &quot;default&quot; is the</span><br><span class="line">     canonical representation. Not all objects are required to be scoped to a</span><br><span class="line">     namespace - the value of this field for those objects will be empty. Must</span><br><span class="line">     be a DNS_LABEL. Cannot be updated. More info:</span><br><span class="line">     http://kubernetes.io/docs/user-guide/namespaces</span><br><span class="line"></span><br><span class="line">   ownerReferences      &lt;[]Object&gt;</span><br><span class="line">     List of objects depended by this object. If ALL objects in the list have</span><br><span class="line">     been deleted, this object will be garbage collected. If this object is</span><br><span class="line">     managed by a controller, then an entry in this list will point to this</span><br><span class="line">     controller, with the controller field set to true. There cannot be more</span><br><span class="line">     than one managing controller.</span><br><span class="line"></span><br><span class="line">   resourceVersion      &lt;string&gt;</span><br><span class="line">     An opaque value that represents the internal version of this object that</span><br><span class="line">     can be used by clients to determine when objects have changed. May be used</span><br><span class="line">     for optimistic concurrency, change detection, and the watch operation on a</span><br><span class="line">     resource or set of resources. Clients must treat these values as opaque and</span><br><span class="line">     passed unmodified back to the server. They may only be valid for a</span><br><span class="line">     particular resource or set of resources. Populated by the system.</span><br><span class="line">     Read-only. Value must be treated as opaque by clients and . More info:</span><br><span class="line">     https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency</span><br><span class="line"></span><br><span class="line">   selfLink     &lt;string&gt;</span><br><span class="line">     SelfLink is a URL representing this object. Populated by the system.</span><br><span class="line">     Read-only. DEPRECATED Kubernetes will stop propagating this field in 1.20</span><br><span class="line">     release and the field is planned to be removed in 1.21 release.</span><br><span class="line"></span><br><span class="line">   uid  &lt;string&gt;</span><br><span class="line">     UID is the unique in time and space value for this object. It is typically</span><br><span class="line">     generated by the server on successful creation of a resource and is not</span><br><span class="line">     allowed to change on PUT operations. Populated by the system. Read-only.</span><br><span class="line">     More info: http://kubernetes.io/docs/user-guide/identifiers#uids</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">在kubernetes中基本所有资源的一级属性都是一样的，主要包含5个部分：</span><br><span class="line"></span><br><span class="line">apiVersion  &lt;string&gt;：版本，有kubernetes内部定义，版本号必须用kubectl api-versions查询。</span><br><span class="line"></span><br><span class="line">kind &lt;string&gt;：类型，有kubernetes内部定义，类型必须用kubectl api-resources查询。</span><br><span class="line"></span><br><span class="line">metadata  &lt;Object&gt;：元数据，主要是资源标识和说明，常用的有name、namespace、labels等。</span><br><span class="line"></span><br><span class="line">spec &lt;Object&gt;：描述，这是配置中最重要的一部分，里面是对各种资源配置的详细描述。</span><br><span class="line"></span><br><span class="line">status  &lt;Object&gt;：状态信息，里面的内容不需要定义，由kubernetes自动生成。</span><br><span class="line"></span><br><span class="line">**在上面的属性中，spec是接下来研究的重点，继续看下它的常见子属性：**</span><br><span class="line"></span><br><span class="line">containers  &lt;[]Object&gt;：容器列表，用于定义容器的详细信息。</span><br><span class="line"></span><br><span class="line">nodeName &lt;String&gt;：根据nodeName的值将Pod调度到指定的Node节点上。</span><br><span class="line"></span><br><span class="line">nodeSelector  &lt;map[]&gt; ：根据NodeSelector中定义的信息选择该Pod调度到包含这些Label的Node上。</span><br><span class="line"></span><br><span class="line">hostNetwork  &lt;boolean&gt;：是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络。</span><br><span class="line"></span><br><span class="line">volumes    &lt;[]Object&gt; ：存储卷，用于定义Pod上面挂载的存储信息。</span><br><span class="line"></span><br><span class="line">restartPolicy	&lt;string&gt;：重启策略，表示Pod在遇到故障的时候的处理策略。</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-Pod的配置"><a href="#2-Pod的配置" class="headerlink" title="2 Pod的配置"></a>2 Pod的配置</h2><h3 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h3><ul>
+<li><p>本小节主要来研究pod.spec.containers属性，这也是Pod配置中最为关键的一项配置。</p>
+</li>
+<li><p>示例：查看pod.spec.containers的可选配置项</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl explain pod.spec.containers</span><br><span class="line"># 返回的重要属性</span><br><span class="line">KIND:     Pod</span><br><span class="line">VERSION:  v1</span><br><span class="line">RESOURCE: containers &lt;[]Object&gt;   # 数组，代表可以有多个容器FIELDS:</span><br><span class="line">  name  &lt;string&gt;     # 容器名称</span><br><span class="line">  image &lt;string&gt;     # 容器需要的镜像地址</span><br><span class="line">  imagePullPolicy  &lt;string&gt; # 镜像拉取策略 </span><br><span class="line">  command  &lt;[]string&gt; # 容器的启动命令列表，如不指定，使用打包时使用的启动命令</span><br><span class="line">  args   &lt;[]string&gt; # 容器的启动命令需要的参数列表 </span><br><span class="line">  env    &lt;[]Object&gt; # 容器环境变量的配置</span><br><span class="line">  ports  &lt;[]Object&gt;  # 容器需要暴露的端口号列表</span><br><span class="line">  resources &lt;Object&gt; # 资源限制和资源请求的设置</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-基本配置"><a href="#2-2-基本配置" class="headerlink" title="2.2 基本配置"></a>2.2 基本配置</h3><ul>
+<li>创建pod-base.yaml文件，内容如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-base.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-base</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">    - name: busybox # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/busybox:latest # 容器需要的镜像地址</span><br><span class="line">[root@master ~]# kubectl apply -f pod-base.yaml </span><br><span class="line">pod/pod-base created</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>上面定义了一个比较简单的Pod的配置，里面有两个容器：</p>
+</li>
+<li><ul>
+<li>nginx：用的是1.17.1版本的nginx镜像创建（nginx是一个轻量级的web容器）。</li>
+</ul>
+</li>
+<li><ul>
+<li>busybox：用的是1.30版本的busybox镜像创建（busybox是一个小巧的linux命令集合）。</li>
+</ul>
+</li>
+<li><p>查看Pod状况：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get pods -n dev</span><br><span class="line">NAME       READY   STATUS             RESTARTS   AGE</span><br><span class="line">pod-base   1/2     CrashLoopBackOff   3          62s</span><br></pre></td></tr></table></figure>
+
+<p><strong>表示当前pod里有2个容器其中一个容器故障了 并且pod一直在重启试图恢复它</strong></p>
+<ul>
+<li>通过describe查看内部的详情：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl describe pod pod-base -n dev</span><br><span class="line">Name:         pod-base</span><br><span class="line">Namespace:    dev</span><br><span class="line">Priority:     0</span><br><span class="line">Node:         node1/192.168.20.115</span><br><span class="line">Start Time:   Mon, 23 May 2022 20:18:00 +0000</span><br><span class="line">Labels:       user=xudaxian</span><br><span class="line">Annotations:  Status:  Running</span><br><span class="line">IP:           10.244.1.27</span><br><span class="line">IPs:</span><br><span class="line">  IP:  10.244.1.27</span><br><span class="line">Containers:</span><br><span class="line">  nginx:</span><br><span class="line">    Container ID:   docker://69a12ef22071c018ad434d1a0ce507a9c6a29e036f4d3aa1051fceef35945235</span><br><span class="line">    Image:          192.168.20.119/library/nginx:latest</span><br><span class="line">    Image ID:       docker-pullable://192.168.20.119/library/nginx@sha256:416d511ffa63777489af47f250b70d1570e428b67666567085f2bece3571ad83</span><br><span class="line">    Port:           &lt;none&gt;</span><br><span class="line">    Host Port:      &lt;none&gt;</span><br><span class="line">    State:          Running</span><br><span class="line">      Started:      Mon, 23 May 2022 20:18:01 +0000</span><br><span class="line">    Ready:          True</span><br><span class="line">    Restart Count:  0</span><br><span class="line">    Environment:    &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      /var/run/secrets/kubernetes.io/serviceaccount from default-token-gr9wn (ro)</span><br><span class="line">  busybox:</span><br><span class="line">    Container ID:   docker://d5844970e09d9eb8d924562468cec75d4cf69090ed9db0d769759ac858e31497</span><br><span class="line">    Image:          192.168.20.119/library/busybox:latest</span><br><span class="line">    Image ID:       docker-pullable://192.168.20.119/library/busybox@sha256:2ca5e69e244d2da7368f7088ea3ad0653c3ce7aaccd0b8823d11b0d5de956002</span><br><span class="line">    Port:           &lt;none&gt;</span><br><span class="line">    Host Port:      &lt;none&gt;</span><br><span class="line">    State:          Waiting</span><br><span class="line">      Reason:       CrashLoopBackOff</span><br><span class="line">    Last State:     Terminated</span><br><span class="line">      Reason:       Completed</span><br><span class="line">      Exit Code:    0</span><br><span class="line">      Started:      Mon, 23 May 2022 20:19:37 +0000</span><br><span class="line">      Finished:     Mon, 23 May 2022 20:19:37 +0000</span><br><span class="line">    Ready:          False</span><br><span class="line">    Restart Count:  4</span><br><span class="line">    Environment:    &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      /var/run/secrets/kubernetes.io/serviceaccount from default-token-gr9wn (ro)</span><br><span class="line">Conditions:</span><br><span class="line">  Type              Status</span><br><span class="line">  Initialized       True </span><br><span class="line">  Ready             False </span><br><span class="line">  ContainersReady   False </span><br><span class="line">  PodScheduled      True </span><br><span class="line">Volumes:</span><br><span class="line">  default-token-gr9wn:</span><br><span class="line">    Type:        Secret (a volume populated by a Secret)</span><br><span class="line">    SecretName:  default-token-gr9wn</span><br><span class="line">    Optional:    false</span><br><span class="line">QoS Class:       BestEffort</span><br><span class="line">Node-Selectors:  &lt;none&gt;</span><br><span class="line">Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s</span><br><span class="line">                 node.kubernetes.io/unreachable:NoExecute for 300s</span><br><span class="line">Events:</span><br><span class="line">  Type     Reason     Age                   From               Message</span><br><span class="line"></span><br><span class="line">----     ------     ----                  ----               -------</span><br><span class="line"></span><br><span class="line">  Normal   Scheduled  &lt;unknown&gt;             default-scheduler  Successfully assigned dev/pod-base to node1</span><br><span class="line">  Normal   Pulling    2m53s                 kubelet, node1     Pulling image &quot;192.168.20.119/library/nginx:latest&quot;</span><br><span class="line">  Normal   Pulled     2m53s                 kubelet, node1     Successfully pulled image &quot;192.168.20.119/library/nginx:latest&quot;</span><br><span class="line">  Normal   Created    2m53s                 kubelet, node1     Created container nginx</span><br><span class="line">  Normal   Started    2m52s                 kubelet, node1     Started container nginx</span><br><span class="line">  Normal   Pulling    2m7s (x4 over 2m52s)  kubelet, node1     Pulling image &quot;192.168.20.119/library/busybox:latest&quot;</span><br><span class="line">  Normal   Pulled     2m6s (x4 over 2m52s)  kubelet, node1     Successfully pulled image &quot;192.168.20.119/library/busybox:latest&quot;</span><br><span class="line">  Normal   Created    2m6s (x4 over 2m52s)  kubelet, node1     Created container busybox</span><br><span class="line">  Normal   Started    2m6s (x4 over 2m52s)  kubelet, node1     Started container busybox</span><br><span class="line">  Warning  BackOff    2m5s (x5 over 2m50s)  kubelet, node1     Back-off restarting failed container</span><br></pre></td></tr></table></figure>
+
+<p><strong>此时已经运行起来了一个基本的Pod，虽然它暂时有问题</strong></p>
+<h3 id="2-3-镜像拉取策略"><a href="#2-3-镜像拉取策略" class="headerlink" title="2.3 镜像拉取策略"></a>2.3 镜像拉取策略</h3><ul>
+<li>创建pod-imagepullpolicy.yaml文件，内容如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-imagepullpolicy.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-imagepullpolicy</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">      imagePullPolicy: Always # 用于设置镜像的拉取策略</span><br><span class="line">    - name: busybox # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/busybox:latest # 容器需要的镜像地址</span><br><span class="line">[root@master ~]# kubectl apply -f pod-imagepullpolicy.yaml </span><br><span class="line">pod/pod-imagepullpolicy created</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>imagePullPolicy：用于设置镜像拉取的策略，kubernetes支持配置三种拉取策略：</p>
+</li>
+<li><ul>
+<li>Always：总是从远程仓库拉取镜像（一直远程下载）。</li>
+</ul>
+</li>
+<li><ul>
+<li>IfNotPresent：本地有则使用本地镜像，本地没有则从远程仓库拉取镜像（本地有就用本地，本地没有就使用远程下载）。</li>
+</ul>
+</li>
+<li><ul>
+<li>Never：只使用本地镜像，从不去远程仓库拉取，本地没有就报错（一直使用本地，没有就报错）。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>默认值说明：</p>
+<ul>
+<li><p>如果镜像tag为具体的版本号，默认策略是IfNotPresent。</p>
+</li>
+<li><p>如果镜像tag为latest（最终版本），默认策略是Always。</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>查看Pod详情：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get pods -n dev</span><br><span class="line">NAME                  READY   STATUS             RESTARTS   AGE</span><br><span class="line">pod-base              1/2     CrashLoopBackOff   6          9m50s</span><br><span class="line">pod-imagepullpolicy   1/2     CrashLoopBackOff   3          79s</span><br><span class="line">[root@master ~]# kubectl describe pod pod-imagepullpolicy -n dev</span><br><span class="line">Name:         pod-imagepullpolicy</span><br><span class="line">Namespace:    dev</span><br><span class="line">Priority:     0</span><br><span class="line">Node:         node2/192.168.20.124</span><br><span class="line">Start Time:   Mon, 23 May 2022 20:26:32 +0000</span><br><span class="line">Labels:       user=xudaxian</span><br><span class="line">Annotations:  Status:  Running</span><br><span class="line">IP:           10.244.2.39</span><br><span class="line">IPs:</span><br><span class="line">  IP:  10.244.2.39</span><br><span class="line">Containers:</span><br><span class="line">  nginx:</span><br><span class="line">    Container ID:   docker://9ec1e08eb621e7bd27b58ef48837ea81df6a5841530f410196638ae0ad19c685</span><br><span class="line">    Image:          192.168.20.119/library/nginx:latest</span><br><span class="line">    Image ID:       docker-pullable://192.168.20.119/library/nginx@sha256:416d511ffa63777489af47f250b70d1570e428b67666567085f2bece3571ad83</span><br><span class="line">    Port:           &lt;none&gt;</span><br><span class="line">    Host Port:      &lt;none&gt;</span><br><span class="line">    State:          Running</span><br><span class="line">      Started:      Mon, 23 May 2022 20:26:34 +0000</span><br><span class="line">    Ready:          True</span><br><span class="line">    Restart Count:  0</span><br><span class="line">    Environment:    &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      /var/run/secrets/kubernetes.io/serviceaccount from default-token-gr9wn (ro)</span><br><span class="line">  busybox:</span><br><span class="line">    Container ID:   docker://1df3c0eec902d8d7e0965b4025665c1f34d1d4652929782670108ee75e42197b</span><br><span class="line">    Image:          192.168.20.119/library/busybox:latest</span><br><span class="line">    Image ID:       docker-pullable://192.168.20.119/library/busybox@sha256:2ca5e69e244d2da7368f7088ea3ad0653c3ce7aaccd0b8823d11b0d5de956002</span><br><span class="line">    Port:           &lt;none&gt;</span><br><span class="line">    Host Port:      &lt;none&gt;</span><br><span class="line">    State:          Terminated</span><br><span class="line">      Reason:       Completed</span><br><span class="line">      Exit Code:    0</span><br><span class="line">      Started:      Mon, 23 May 2022 20:28:01 +0000</span><br><span class="line">      Finished:     Mon, 23 May 2022 20:28:01 +0000</span><br><span class="line">    Last State:     Terminated</span><br><span class="line">      Reason:       Completed</span><br><span class="line">      Exit Code:    0</span><br><span class="line">      Started:      Mon, 23 May 2022 20:27:17 +0000</span><br><span class="line">      Finished:     Mon, 23 May 2022 20:27:17 +0000</span><br><span class="line">    Ready:          False</span><br><span class="line">    Restart Count:  4</span><br><span class="line">    Environment:    &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      /var/run/secrets/kubernetes.io/serviceaccount from default-token-gr9wn (ro)</span><br><span class="line">Conditions:</span><br><span class="line">  Type              Status</span><br><span class="line">  Initialized       True </span><br><span class="line">  Ready             False </span><br><span class="line">  ContainersReady   False </span><br><span class="line">  PodScheduled      True </span><br><span class="line">Volumes:</span><br><span class="line">  default-token-gr9wn:</span><br><span class="line">    Type:        Secret (a volume populated by a Secret)</span><br><span class="line">    SecretName:  default-token-gr9wn</span><br><span class="line">    Optional:    false</span><br><span class="line">QoS Class:       BestEffort</span><br><span class="line">Node-Selectors:  &lt;none&gt;</span><br><span class="line">Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s</span><br><span class="line">                 node.kubernetes.io/unreachable:NoExecute for 300s</span><br><span class="line">Events:</span><br><span class="line">  Type     Reason     Age                From               Message</span><br><span class="line"></span><br><span class="line">----     ------     ----               ----               -------</span><br><span class="line"></span><br><span class="line">  Normal   Scheduled  &lt;unknown&gt;          default-scheduler  Successfully assigned dev/pod-imagepullpolicy to node2</span><br><span class="line">  Normal   Pulling    93s                kubelet, node2     Pulling image &quot;192.168.20.119/library/nginx:latest&quot;</span><br><span class="line">  Normal   Pulled     93s                kubelet, node2     Successfully pulled image &quot;192.168.20.119/library/nginx:latest&quot;</span><br><span class="line">  Normal   Created    92s                kubelet, node2     Created container nginx</span><br><span class="line">  Normal   Started    92s                kubelet, node2     Started container nginx</span><br><span class="line">  Normal   Pulling    50s (x4 over 92s)  kubelet, node2     Pulling image &quot;192.168.20.119/library/busybox:latest&quot;</span><br><span class="line">  Normal   Pulled     49s (x4 over 91s)  kubelet, node2     Successfully pulled image &quot;192.168.20.119/library/busybox:latest&quot;</span><br><span class="line">  Normal   Created    49s (x4 over 91s)  kubelet, node2     Created container busybox</span><br><span class="line">  Normal   Started    49s (x4 over 91s)  kubelet, node2     Started container busybox</span><br><span class="line">  Warning  BackOff    48s (x5 over 89s)  kubelet, node2     Back-off restarting failed container</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-启动命令"><a href="#2-4-启动命令" class="headerlink" title="2.4 启动命令"></a>2.4 启动命令</h3><ul>
+<li><p>在前面的案例中，一直有一个问题没有解决，就是busybox容器一直没有成功运行，那么到底是什么原因导致这个容器的故障的呢？</p>
+</li>
+<li><p>原来busybox并不是一个程序，而是类似于一个工具类的集合，kubernetes集群启动管理后，它会自动关闭。解决方法就是让其一直在运行，这就用到了command的配置。</p>
+</li>
+<li><p>创建pod-command.yaml文件，内容如下：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-command.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-command</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">      imagePullPolicy: IfNotPresent # 设置镜像拉取策略</span><br><span class="line">    - name: busybox # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/busybox:latest # 容器需要的镜像地址</span><br><span class="line">      command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;touch /tmp/hello.txt;while true;do /bin/echo $(date +%T) &gt;&gt; /tmp/hello.txt;sleep 3;done;&quot;]</span><br><span class="line">[root@master ~]# kubectl apply -f pod-command.yaml </span><br><span class="line">pod/pod-command unchanged</span><br><span class="line">[root@master ~]# kubectl get pods -n dev</span><br><span class="line">NAME                  READY   STATUS             RESTARTS   AGE</span><br><span class="line">pod-base              1/2     CrashLoopBackOff   7          16m</span><br><span class="line">pod-command           2/2     Running            0          91s</span><br><span class="line">pod-imagepullpolicy   1/2     CrashLoopBackOff   6          7m34s</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>command：用于在Pod中的容器初始化完毕之后执行一个命令。</p>
+<p>这里稍微解释下command中的命令的意思：</p>
+<ul>
+<li><p>“&#x2F;bin&#x2F;sh”,”-c”：使用sh执行命令。</p>
+</li>
+<li><p>touch &#x2F;tmp&#x2F;hello.txt：创建一个&#x2F;tmp&#x2F;hello.txt的文件。</p>
+</li>
+<li><p>while true;do &#x2F;bin&#x2F;echo $(date +%T) &gt;&gt; &#x2F;tmp&#x2F;hello.txt;sleep 3;done：每隔3秒，向文件写入当前时间</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>进入Pod中的busybox容器，查看文件内容：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl exec -it pod-command -n dev -c busybox /bin/sh</span><br><span class="line">kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl kubectl exec [POD] -- [COMMAND] instead.</span><br><span class="line">/ # tail -f /tmp/hello.txt </span><br><span class="line">20:36:09</span><br><span class="line">20:36:12</span><br><span class="line">20:36:15</span><br><span class="line">20:36:18</span><br><span class="line">20:36:21</span><br><span class="line">20:36:24</span><br><span class="line">20:36:27</span><br><span class="line">20:36:30</span><br><span class="line">20:36:33</span><br><span class="line">20:36:36</span><br><span class="line">20:36:39</span><br><span class="line">20:36:42</span><br><span class="line">20:36:45</span><br><span class="line">20:36:48</span><br><span class="line">20:36:51</span><br><span class="line">20:36:54</span><br><span class="line">20:36:57</span><br><span class="line">20:37:00</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>特别说明：通过上面发现command已经可以完成启动命令和传递参数的功能，为什么还要提供一个args选项，用于传递参数？其实和Docker有点关系，kubernetes中的command和args两个参数其实是为了实现覆盖Dockerfile中的ENTRYPOINT的功能：</p>
+<ul>
+<li><p>如果command和args均没有写，那么用Dockerfile的配置。</p>
+</li>
+<li><p>如果command写了，但是args没有写，那么Dockerfile默认的配置会被忽略，执行注入的command。</p>
+</li>
+<li><p>如果command没有写，但是args写了，那么Dockerfile中配置的ENTRYPOINT命令会被执行，使用当前args的参数。</p>
+</li>
+<li><p>如果command和args都写了，那么Dockerfile中的配置会被忽略，执行command并追加上args参数。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="2-5-环境变量（不推荐）"><a href="#2-5-环境变量（不推荐）" class="headerlink" title="2.5 环境变量（不推荐）"></a>2.5 环境变量（不推荐）</h3><ul>
+<li>创建pod-evn.yaml文件，内容如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-env.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-env</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">      imagePullPolicy: IfNotPresent # 设置镜像拉取策略</span><br><span class="line">    - name: busybox # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/busybox:latest # 容器需要的镜像地址</span><br><span class="line">      command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;touch /tmp/hello.txt;while true;do /bin/echo $(date +%T) &gt;&gt; /tmp/hello.txt;sleep 3;done;&quot;]</span><br><span class="line">      env:</span><br><span class="line">        - name: &quot;username&quot;</span><br><span class="line">          value: &quot;admin&quot;</span><br><span class="line">        - name: &quot;password&quot;</span><br><span class="line">          value: &quot;123456&quot;</span><br><span class="line">[root@master ~]# kubectl apply -f pod-env.yaml </span><br><span class="line">pod/pod-env created</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进入容器，输出环境变量：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-env.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-env</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">      imagePullPolicy: IfNotPresent # 设置镜像拉取策略</span><br><span class="line">    - name: busybox # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/busybox:latest # 容器需要的镜像地址</span><br><span class="line">      command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;touch /tmp/hello.txt;while true;do /bin/echo $(date +%T) &gt;&gt; /tmp/hello.txt;sleep 3;done;&quot;]</span><br><span class="line">      env:</span><br><span class="line">        - name: &quot;username&quot;</span><br><span class="line">          value: &quot;admin&quot;</span><br><span class="line">        - name: &quot;password&quot;</span><br><span class="line">          value: &quot;123456&quot;</span><br><span class="line">[root@master ~]# kubectl apply -f pod-env.yaml </span><br><span class="line">pod/pod-env created</span><br><span class="line">[root@master ~]# kubectl exec -it pod-env -n dev -c busybox /bin/sh</span><br><span class="line">kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl kubectl exec [POD] -- [COMMAND] instead.</span><br><span class="line">/ # echo $username</span><br><span class="line">admin</span><br><span class="line">/ # echo $password</span><br><span class="line">123456</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-端口设置"><a href="#2-6-端口设置" class="headerlink" title="2.6 端口设置"></a>2.6 端口设置</h3><ul>
+<li>查看ports支持的子选项：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl explain pod.spec.containers.ports</span><br><span class="line">KIND:     Pod</span><br><span class="line">VERSION:  v1</span><br><span class="line"></span><br><span class="line">RESOURCE: ports &lt;[]Object&gt;</span><br><span class="line"></span><br><span class="line">DESCRIPTION:</span><br><span class="line">     List of ports to expose from the container. Exposing a port here gives the</span><br><span class="line">     system additional information about the network connections a container</span><br><span class="line">     uses, but is primarily informational. Not specifying a port here DOES NOT</span><br><span class="line">     prevent that port from being exposed. Any port which is listening on the</span><br><span class="line">     default &quot;0.0.0.0&quot; address inside a container will be accessible from the</span><br><span class="line">     network. Cannot be updated.</span><br><span class="line"></span><br><span class="line">     ContainerPort represents a network port in a single container.</span><br><span class="line"></span><br><span class="line">FIELDS:</span><br><span class="line">   containerPort        &lt;integer&gt; -required-</span><br><span class="line">     Number of port to expose on the pod&#x27;s IP address. This must be a valid port</span><br><span class="line">     number, 0 &lt; x &lt; 65536.</span><br><span class="line"></span><br><span class="line">   hostIP       &lt;string&gt;</span><br><span class="line">     What host IP to bind the external port to.</span><br><span class="line"></span><br><span class="line">   hostPort     &lt;integer&gt;</span><br><span class="line">     Number of port to expose on the host. If specified, this must be a valid</span><br><span class="line">     port number, 0 &lt; x &lt; 65536. If HostNetwork is specified, this must match</span><br><span class="line">     ContainerPort. Most containers do not need this.</span><br><span class="line"></span><br><span class="line">   name &lt;string&gt;</span><br><span class="line">     If specified, this must be an IANA_SVC_NAME and unique within the pod. Each</span><br><span class="line">     named port in a pod must have a unique name. Name for the port that can be</span><br><span class="line">     referred to by services.</span><br><span class="line"></span><br><span class="line">   protocol     &lt;string&gt;</span><br><span class="line">     Protocol for port. Must be UDP, TCP, or SCTP. Defaults to &quot;TCP&quot;.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">KIND:     Pod</span><br><span class="line">VERSION:  v1</span><br><span class="line">RESOURCE: ports &lt;[]Object&gt;</span><br><span class="line">FIELDS:</span><br><span class="line">  name &lt;string&gt; # 端口名称，如果指定，必须保证name在pod中是唯一的</span><br><span class="line">  containerPort &lt;integer&gt; # 容器要监听的端口(0&lt;x&lt;65536)</span><br><span class="line">  hostPort &lt;integer&gt; # 容器要在主机上公开的端口，如果设置，主机上只能运行容器的一个副本(一般省略）</span><br><span class="line">  hostIP &lt;string&gt;  # 要将外部端口绑定到的主机IP(一般省略)</span><br><span class="line">  protocol &lt;string&gt;  # 端口协议。必须是UDP、TCP或SCTP。默认为“TCP”</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建pod-ports.yaml文件，内容如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-ports.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-ports</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">      imagePullPolicy: IfNotPresent # 设置镜像拉取策略</span><br><span class="line">      ports:</span><br><span class="line">        - name: nginx-port # 端口名称，如果执行，必须保证name在Pod中是唯一的</span><br><span class="line">          containerPort: 80 # 容器要监听的端口 （0~65536）</span><br><span class="line">          protocol: TCP # 端口协议</span><br><span class="line">[root@master ~]# kubectl apply -f pod-ports.yaml </span><br><span class="line">pod/pod-ports created</span><br><span class="line">[root@master ~]# kubectl get pod -n dev -o wide</span><br><span class="line">NAME                  READY   STATUS             RESTARTS   AGE     IP            NODE    NOMINATED NODE   READINESS GATES</span><br><span class="line">pod-base              1/2     CrashLoopBackOff   11         36m     10.244.1.27   node1   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">pod-command           2/2     Running            0          21m     10.244.2.40   node2   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">pod-env               2/2     Running            0          7m33s   10.244.1.28   node1   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">pod-imagepullpolicy   1/2     CrashLoopBackOff   10         27m     10.244.2.39   node2   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">pod-ports             1/1     Running            0          40s     10.244.2.41   node2   &lt;none&gt;           &lt;none&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>访问Pod中的容器中的程序使用的是PodIp:containerPort。</p>
+</blockquote>
+<h3 id="2-7-资源配额"><a href="#2-7-资源配额" class="headerlink" title="2.7 资源配额"></a>2.7 资源配额</h3><ul>
+<li><p>容器中的程序要运行，肯定会占用一定的资源，比如CPU和内存等，如果不对某个容器的资源做限制，那么它就可能吃掉大量的资源，导致其他的容器无法运行。针对这种情况，kubernetes提供了对内存和CPU的资源进行配额的机制，这种机制主要通过resources选项实现，它有两个子选项：</p>
+</li>
+<li><ul>
+<li>limits：用于限制运行的容器的最大占用资源，当容器占用资源超过limits时会被终止，并进行重启。</li>
+</ul>
+</li>
+<li><ul>
+<li>requests：用于设置容器需要的最小资源，如果环境资源不够，容器将无法启动。</li>
+</ul>
+</li>
+<li><p>可以通过上面的两个选项设置资源的上下限。</p>
+</li>
+<li><p>创建pod-resoures.yaml文件，内容如下：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-resources.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-resoures</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">      imagePullPolicy: IfNotPresent # 设置镜像拉取策略</span><br><span class="line">      ports: # 端口设置</span><br><span class="line">        - name: nginx-port # 端口名称，如果执行，必须保证name在Pod中是唯一的</span><br><span class="line">          containerPort: 80 # 容器要监听的端口 （0~65536）</span><br><span class="line">          protocol: TCP # 端口协议</span><br><span class="line">      resources: # 资源配额</span><br><span class="line">        limits: # 限制资源的上限</span><br><span class="line">          cpu: &quot;2&quot; # CPU限制，单位是core数</span><br><span class="line">          memory: &quot;10Gi&quot; # 内存限制</span><br><span class="line">        requests: # 限制资源的下限</span><br><span class="line">          cpu: &quot;1&quot; # CPU限制，单位是core数 </span><br><span class="line">          memory: &quot;10Mi&quot; # 内存限制</span><br><span class="line">[root@master ~]# kubectl apply -f pod-resources.yaml </span><br><span class="line">pod/pod-resoures created</span><br><span class="line">[root@master ~]# kubectl get pods -n dev</span><br><span class="line">NAME                  READY   STATUS             RESTARTS   AGE</span><br><span class="line">pod-base              1/2     NotReady           13         41m</span><br><span class="line">pod-command           2/2     Running            0          27m</span><br><span class="line">pod-env               2/2     Running            0          13m</span><br><span class="line">pod-imagepullpolicy   1/2     CrashLoopBackOff   11         33m</span><br><span class="line">pod-ports             1/1     Running            0          6m23s</span><br><span class="line">pod-resoures          1/1     Running            0          92s</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>cpu：core数，可以为整数或小数。</p>
+<p>memory：内存大小，可以使用Gi、Mi、G、M等形式。</p>
+</blockquote>
+<p><strong>此时pod运行正常</strong></p>
+<ul>
+<li>编辑Pod，修改resources.requests.memory的值为10Gi：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat pod-resources.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: pod-resoures</span><br><span class="line">  namespace: dev</span><br><span class="line">  labels:</span><br><span class="line">    user: xudaxian</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: nginx # 容器名称</span><br><span class="line">      image: 192.168.20.119/library/nginx:latest # 容器需要的镜像地址</span><br><span class="line">      imagePullPolicy: IfNotPresent # 设置镜像拉取策略</span><br><span class="line">      ports: # 端口设置</span><br><span class="line">        - name: nginx-port # 端口名称，如果执行，必须保证name在Pod中是唯一的</span><br><span class="line">          containerPort: 80 # 容器要监听的端口 （0~65536）</span><br><span class="line">          protocol: TCP # 端口协议</span><br><span class="line">      resources: # 资源配额</span><br><span class="line">        limits: # 限制资源的上限</span><br><span class="line">          cpu: &quot;2&quot; # CPU限制，单位是core数</span><br><span class="line">          memory: &quot;10Gi&quot; # 内存限制</span><br><span class="line">        requests: # 限制资源的下限</span><br><span class="line">          cpu: &quot;1&quot; # CPU限制，单位是core数 </span><br><span class="line">          memory: &quot;10Gi&quot; # 内存限制</span><br><span class="line">[root@master ~]# kubectl delete pods pod-resoures -n dev</span><br><span class="line">pod &quot;pod-resoures&quot; deleted</span><br><span class="line">[root@master ~]# kubectl create -f pod-resources.yaml </span><br><span class="line">pod/pod-resoures created</span><br><span class="line">[root@master ~]# kubectl get pods -n dev</span><br><span class="line">NAME                  READY   STATUS             RESTARTS   AGE</span><br><span class="line">pod-base              1/2     CrashLoopBackOff   14         47m</span><br><span class="line">pod-command           2/2     Running            0          32m</span><br><span class="line">pod-env               2/2     Running            0          18m</span><br><span class="line">pod-imagepullpolicy   1/2     CrashLoopBackOff   12         38m</span><br><span class="line">pod-ports             1/1     Running            0          11m</span><br><span class="line">pod-resoures          0/1     Pending            0          7s</span><br><span class="line">[root@master ~]# kubectl describe pods pod-resoures -n dev</span><br><span class="line">Name:         pod-resoures</span><br><span class="line">Namespace:    dev</span><br><span class="line">Priority:     0</span><br><span class="line">Node:         &lt;none&gt;</span><br><span class="line">Labels:       user=xudaxian</span><br><span class="line">Annotations:  &lt;none&gt;</span><br><span class="line">Status:       Pending</span><br><span class="line">IP:           </span><br><span class="line">IPs:          &lt;none&gt;</span><br><span class="line">Containers:</span><br><span class="line">  nginx:</span><br><span class="line">    Image:      192.168.20.119/library/nginx:latest</span><br><span class="line">    Port:       80/TCP</span><br><span class="line">    Host Port:  0/TCP</span><br><span class="line">    Limits:</span><br><span class="line">      cpu:     2</span><br><span class="line">      memory:  10Gi</span><br><span class="line">    Requests:</span><br><span class="line">      cpu:        1</span><br><span class="line">      memory:     10Gi</span><br><span class="line">    Environment:  &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      /var/run/secrets/kubernetes.io/serviceaccount from default-token-gr9wn (ro)</span><br><span class="line">Conditions:</span><br><span class="line">  Type           Status</span><br><span class="line">  PodScheduled   False </span><br><span class="line">Volumes:</span><br><span class="line">  default-token-gr9wn:</span><br><span class="line">    Type:        Secret (a volume populated by a Secret)</span><br><span class="line">    SecretName:  default-token-gr9wn</span><br><span class="line">    Optional:    false</span><br><span class="line">QoS Class:       Burstable</span><br><span class="line">Node-Selectors:  &lt;none&gt;</span><br><span class="line">Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s</span><br><span class="line">                 node.kubernetes.io/unreachable:NoExecute for 300s</span><br><span class="line">Events:</span><br><span class="line">  Type     Reason            Age        From               Message</span><br><span class="line"></span><br><span class="line">----     ------            ----       ----               -------</span><br><span class="line"></span><br><span class="line">  Warning  FailedScheduling  &lt;unknown&gt;  default-scheduler  0/3 nodes are available: 1 node(s) had taint &#123;node-role.kubernetes.io/master: &#125;, that the pod didn&#x27;t tolerate, 2 Insufficient memory.</span><br><span class="line">  Warning  FailedScheduling  &lt;unknown&gt;  default-scheduler  0/3 nodes are available: 1 node(s) had taint &#123;node-role.kubernetes.io/master: &#125;, that the pod didn&#x27;t tolerate, 2 Insufficient memory.</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提示 Insufficient memory 内存不足</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/25/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          k8s学习日记day5
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/20/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">k8s学习日记day3</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>k8s学习日记day1 | Misswjy&#39;Blog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="kubernetes环境资源搭建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s学习日记day1">
+<meta property="og:url" content="http://example.com/2022/05/16/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day1/index.html">
+<meta property="og:site_name" content="Misswjy&#39;Blog">
+<meta property="og:description" content="kubernetes环境资源搭建">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-16T06:13:19.000Z">
+<meta property="article:modified_time" content="2022-06-26T01:56:12.000Z">
+<meta property="article:author" content="Miss">
+<meta property="article:tag" content="k8s">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Misswjy&#39;Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+
+  
+<script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+			<h1 class="header-author"><a href="/">Miss</a></h1>
+		</hgroup>
+
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">Home</a></li>
+				        
+							<li><a href="/archives">Archives</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="half-header-menu">
+						<a class="hide">Home</a>
+						<a>Tags</a>
+						<a>Links</a>
+						<a>About</a>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+					        
+								<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+					        
+						</div>
+						<!-- music -->
+						
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/k8s/" style="font-size: 15px;">k8s</a> <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" style="font-size: 12.5px;">云计算</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E4%BA%91/" style="font-size: 17.5px;">容器云</a> <a href="/tags/%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">应用部署和运维</a> <a href="/tags/%E7%A7%81%E6%9C%89%E4%BA%91/" style="font-size: 20px;">私有云</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/">github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">I&#39;m a developer.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide"></h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author"></h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">Home</a></li>
+		        
+					<li><a href="/archives">Archives</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Misswjy" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/dockery@foxmail.com" title="mail">mail</a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/292671654" title="bilibili">bilibili</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-k8s学习日记day1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/05/16/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day1/" class="article-date">
+  	<time datetime="2022-05-16T06:13:19.000Z" itemprop="datePublished">2022-05-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      k8s学习日记day1
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li></ul>
+	</div>
+
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="kubernetes环境资源搭建"><a href="#kubernetes环境资源搭建" class="headerlink" title="kubernetes环境资源搭建"></a>kubernetes环境资源搭建<span id="more"></span></h1><h2 id="1-环境规划"><a href="#1-环境规划" class="headerlink" title="1 环境规划"></a>1 环境规划</h2><h3 id="1-1-集群类型"><a href="#1-1-集群类型" class="headerlink" title="1.1 集群类型"></a>1.1 集群类型</h3><p>●Kubernetes集群大致分为两类：一主多从和多主多从。</p>
+<p>●一主多从：一个Master节点和多台Node节点，搭建简单，但是有单机故障风险，适合用于测试环境。</p>
+<p>●多主多从：多台Master和多台Node节点，搭建麻烦，安全性高，适合用于生产环境。</p>
+<p><strong>为了测试方便，本次搭建的是一主多从类型的集群。</strong></p>
+<h3 id="1-2-安装方式"><a href="#1-2-安装方式" class="headerlink" title="1.2 安装方式"></a>1.2 安装方式</h3><p>●kubernetes有多种部署方式，目前主流的方式有kubeadm、minikube、二进制包。</p>
+<p>●① minikube：一个用于快速搭建单节点的kubernetes工具。<br>●② kubeadm：一个用于快速搭建kubernetes集群的工具。<br>●③ 二进制包：从官网上下载每个组件的二进制包，依次去安装，此方式对于理解kubernetes组件更加有效。</p>
+<p>●我们需要安装kubernetes的集群环境，但是又不想过于麻烦，所以选择kubeadm方式。</p>
+<h3 id="1-3-主机规划"><a href="#1-3-主机规划" class="headerlink" title="1.3 主机规划"></a>1.3 主机规划</h3><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>IP地址</th>
+<th>操作系统</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>master</td>
+<td>192.168.20.119</td>
+<td>CentOS7.5，基础设施服务器</td>
+<td>8核CPU，12G内存，100G硬盘</td>
+</tr>
+<tr>
+<td>node1</td>
+<td>192.168.20.115</td>
+<td>CentOS7.5，基础设施服务器</td>
+<td>4核CPU，8G内存，100G硬盘</td>
+</tr>
+<tr>
+<td>node2</td>
+<td>192.168.20.124</td>
+<td>CentOS7.5，基础设施服务器</td>
+<td>4核CPU，8G内存，100G硬盘</td>
+</tr>
+</tbody></table>
+<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2 环境搭建"></a><strong>2 环境搭建</strong></h2><h3 id="2-1-前言"><a href="#2-1-前言" class="headerlink" title="2.1 前言"></a>2.1 前言</h3><p>本次环境搭建需要三台CentOS服务器（一主二从），然后在每台服务器中分别安装Docker（18.06.3）、kubeadm（1.18.0）、kubectl（1.18.0）和kubelet（1.18.0）。</p>
+<p><strong>没有特殊说明，就是三台机器都需要执行。</strong></p>
+<h3 id="2-2-环境初始化"><a href="#2-2-环境初始化" class="headerlink" title="2.2 环境初始化"></a><strong>2.2 环境初始化</strong></h3><h4 id="2-2-1-检查操作系统的版本"><a href="#2-2-1-检查操作系统的版本" class="headerlink" title="2.2.1 检查操作系统的版本"></a>2.2.1 检查操作系统的版本</h4><p>●检查操作系统的版本（要求操作系统的版本至少在7.5以上）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.5.1804 (Core)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-2-关闭防火墙和禁止防火墙开机启动"><a href="#2-2-2-关闭防火墙和禁止防火墙开机启动" class="headerlink" title="2.2.2 关闭防火墙和禁止防火墙开机启动"></a><strong>2.2.2 关闭防火墙和禁止防火墙开机启动</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# systemctl stop firewalld</span><br><span class="line">Failed to stop firewalld.service: Unit firewalld.service not loaded.</span><br><span class="line">[root@master ~]# systemctl disable firewalld</span><br><span class="line">Failed to execute operation: No such file or directory</span><br><span class="line"></span><br><span class="line">[root@master ~]# systemctl stop iptables</span><br><span class="line">Failed to stop iptables.service: Unit iptables.service not loaded.</span><br><span class="line">[root@master ~]# systemctl disable iptables</span><br><span class="line">Failed to execute operation: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>我这里是因为没有防火墙</p>
+<h4 id="2-2-3-设置主机名"><a href="#2-2-3-设置主机名" class="headerlink" title="2.2.3 设置主机名"></a><strong>2.2.3 设置主机名</strong></h4><p><strong>master：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# hostnamectl set-hostname master</span><br><span class="line">[root@master ~]# login</span><br></pre></td></tr></table></figure>
+
+<p><strong>node1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@node-1 ~]# hostnamectl set-hostname node1</span><br><span class="line">[root@node-1 ~]# login</span><br></pre></td></tr></table></figure>
+
+<p><strong>node2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@node-2 ~]# hostnamectl set-hostname node2</span><br><span class="line">[root@node-2 ~]# login</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-4-主机名解析"><a href="#2-2-4-主机名解析" class="headerlink" title="2.2.4 主机名解析"></a>2.2.4 主机名解析</h4><p>为了方便后面集群节点间的直接调用，需要配置一下主机名解析，企业中推荐使用内部的DNS服务器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line"></span><br><span class="line">192.168.20.119  master</span><br><span class="line">192.168.20.115  node1</span><br><span class="line">192.168.20.124  node2</span><br></pre></td></tr></table></figure>
+
+<p><strong>三个节点都是一样的</strong></p>
+<h4 id="2-2-5-源配置"><a href="#2-2-5-源配置" class="headerlink" title="2.2.5 源配置"></a><strong>2.2.5 源配置</strong></h4><p><strong>master节点：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# rm -rf /etc/yum.repos.d/*</span><br><span class="line">[root@master ~]# cat /etc/yum.repos.d/local.repo </span><br><span class="line">[k8s]</span><br><span class="line">name=k8s</span><br><span class="line">baseurl=file:///opt/kubernetes-repo</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[centos]</span><br><span class="line">name=centos</span><br><span class="line">baseurl=http://172.19.25.11/centos</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[root@master ~]# yum install -y vsftpd</span><br><span class="line">[root@master ~]# echo anon_root=/opt/ &gt;&gt; /etc/vsftpd/vsftpd.conf</span><br><span class="line">[root@master ~]# systemctl restart vsftpd</span><br><span class="line">[root@master ~]# systemctl enable vsftpd</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/vsftpd.service to /usr/lib/systemd/system/vsftpd.service.</span><br></pre></td></tr></table></figure>
+
+<p><strong>node节点：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# rm -rf /etc/yum.repos.d/*</span><br><span class="line">[root@node1 ~]# cat /etc/yum.repos.d/local.repo </span><br><span class="line">[k8s]</span><br><span class="line">name=k8s</span><br><span class="line">baseurl=ftp://master/kubernetes-repo</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[centos]</span><br><span class="line">name=centos</span><br><span class="line">baseurl=http://172.19.25.11/centos</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[root@node2 ~]# rm -rf /etc/yum.repos.d/*</span><br><span class="line">[root@node2 ~]# cat /etc/yum.repos.d/local.repo </span><br><span class="line">[k8s]</span><br><span class="line">name=k8s</span><br><span class="line">baseurl=ftp://master/kubernetes-repo</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">[centos]</span><br><span class="line">name=centos</span><br><span class="line">baseurl=http://172.19.25.11/centos</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-6-时间同步"><a href="#2-2-6-时间同步" class="headerlink" title="2.2.6 时间同步"></a>2.2.6 时间同步</h4><p><strong>master节点：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# yum install -y chrony</span><br><span class="line">[root@master ~]# sed -i &#x27;3,6s/^/#/g&#x27; /etc/chrony.conf</span><br><span class="line">[root@master ~]# sed -i &quot;7s|^|server master iburst|g&quot; /etc/chrony.conf</span><br><span class="line">[root@master ~]# echo &quot;allow all&quot; &gt;&gt; /etc/chrony.conf</span><br><span class="line">[root@master ~]# echo &quot;local stratum 10&quot; &gt;&gt; /etc/chrony.conf</span><br><span class="line">[root@master ~]# systemctl restart chronyd</span><br><span class="line">[root@master ~]# systemctl enable chronyd</span><br><span class="line">[root@master ~]# timedatectl set-ntp true</span><br><span class="line">[root@master ~]# systemctl restart chronyd</span><br></pre></td></tr></table></figure>
+
+<p><strong>node节点：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# sed -i &#x27;3,6s/^/#/g&#x27; /etc/chrony.conf</span><br><span class="line">[root@node1 ~]# sed -i &quot;7s|^|server master iburst|g&quot; /etc/chrony.conf</span><br><span class="line">[root@node1 ~]# systemctl restart chronyd</span><br><span class="line">[root@node1 ~]# systemctl enable chronyd</span><br><span class="line">[root@node1 ~]# timedatectl set-ntp true</span><br><span class="line">[root@node1 ~]# systemctl restart chronyd</span><br><span class="line">[root@node1 ~]# chronyc sources</span><br><span class="line">210 Number of sources = 1</span><br><span class="line">MS Name/IP address         Stratum Poll Reach LastRx Last sample               </span><br><span class="line">===============================================================================</span><br><span class="line"></span><br><span class="line">^* master                       11   6    17     2    +20us[  +18us] +/-   16ms</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-7-关闭selinux"><a href="#2-2-7-关闭selinux" class="headerlink" title="2.2.7 关闭selinux"></a>2.2.7 关闭selinux</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master]# sed -i &#x27;s/enforcing/disabled/&#x27; /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-8-关闭swap分区"><a href="#2-2-8-关闭swap分区" class="headerlink" title="2.2.8 关闭swap分区"></a><strong>2.2.8 关闭swap分区</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# sed -ri &#x27;s/.*swap.*/#&amp;/&#x27; /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-9-将桥接的IPv4流量传递到iptables的链"><a href="#2-2-9-将桥接的IPv4流量传递到iptables的链" class="headerlink" title="2.2.9 将桥接的IPv4流量传递到iptables的链"></a><strong>2.2.9 将桥接的IPv4流量传递到iptables的链</strong></h4><p><strong>master节点：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@master opt]# modprobe br_netfilter</span><br><span class="line">[root@master opt]# echo &quot;net.ipv4.ip_forward = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">[root@master opt]# echo &quot;net.bridge.bridge-nf-call-ip6tables = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">[root@master opt]# echo &quot;net.bridge.bridge-nf-call-iptables = 1&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">[root@master opt]# sysctl -p</span><br></pre></td></tr></table></figure>
+
+<p><strong>node节点：</strong></p>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 opt]# modprobe br_netfilter</span><br><span class="line">[root@node1 opt]# cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF</span><br><span class="line">&gt; net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">&gt; net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">&gt; EOF</span><br><span class="line">[root@node1 opt]# sysctl -p /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line"></span><br><span class="line">[root@node2 ~]# cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF</span><br><span class="line">&gt; net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">&gt; net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">&gt; EOF</span><br><span class="line">[root@node2 ~]# sysctl -p /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h4 id="2-2-10-开启ipvs"><a href="#2-2-10-开启ipvs" class="headerlink" title="2.2.10 开启ipvs"></a><strong>2.2.10 开启ipvs</strong></h4><p><strong>三个节点都要</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@master opt]# yum -y install ipset ipvsadm</span><br><span class="line">[root@master opt]# cat &gt; /etc/sysconfig/modules/ipvs.modules &lt;&lt;EOF</span><br><span class="line">&gt; #!/bin/bash</span><br><span class="line">&gt; modprobe -- ip_vs</span><br><span class="line">&gt; modprobe -- ip_vs_rr</span><br><span class="line">&gt; modprobe -- ip_vs_wrr</span><br><span class="line">&gt; modprobe -- ip_vs_sh</span><br><span class="line">&gt; modprobe -- nf_conntrack_ipv4</span><br><span class="line">&gt; EOF</span><br><span class="line">[root@master opt]# chmod 755 /etc/sysconfig/modules/ipvs.modules &amp;&amp; bash /etc/sysconfig/modules/ipvs.modules &amp;&amp; lsmod | grep -e ip_vs -e nf_conntrack_ipv4</span><br><span class="line">nf_conntrack_ipv4      15053  0 </span><br><span class="line">nf_defrag_ipv4         12729  1 nf_conntrack_ipv4</span><br><span class="line">ip_vs_sh               12688  0 </span><br><span class="line">ip_vs_wrr              12697  0 </span><br><span class="line">ip_vs_rr               12600  0 </span><br><span class="line">ip_vs                 141432  6 ip_vs_rr,ip_vs_sh,ip_vs_wrr</span><br><span class="line">nf_conntrack          133053  2 ip_vs,nf_conntrack_ipv4</span><br><span class="line">libcrc32c              12644  3 xfs,ip_vs,nf_conntrack</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-每个节点安装Docker、kubeadm、kubelet和kubectl"><a href="#2-3-每个节点安装Docker、kubeadm、kubelet和kubectl" class="headerlink" title="2.3 每个节点安装Docker、kubeadm、kubelet和kubectl"></a><strong>2.3 每个节点安装Docker、kubeadm、kubelet和kubectl</strong></h3><h4 id="2-3-1-安装docker-ce"><a href="#2-3-1-安装docker-ce" class="headerlink" title="2.3.1 安装docker-ce"></a>2.3.1 安装docker-ce</h4><p><strong>三节点</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@master opt]# yum install -y yum-utils device-mapper-p* lvm2</span><br><span class="line">[root@master opt]# yum install -y docker-ce</span><br><span class="line">[root@master opt]# systemctl enable docker &amp;&amp; systemctl start docker</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.</span><br><span class="line">[root@master opt]# tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line"> &#123;</span><br><span class="line">   &quot;insecure-registries&quot; : [&quot;0.0.0.0/0&quot;],</span><br><span class="line"> &quot;registry-mirrors&quot;: [&quot;https://5twf62k1.mirror.aliyuncs.com&quot;],</span><br><span class="line">   &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]</span><br><span class="line"> &#125;</span><br><span class="line"> EOF</span><br><span class="line">[root@master opt]# systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-2安装kubeadm、kubelet和kubectl"><a href="#2-3-2安装kubeadm、kubelet和kubectl" class="headerlink" title="2.3.2安装kubeadm、kubelet和kubectl"></a>2.3.2安装kubeadm、kubelet和kubectl</h4><p><strong>三节点</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master opt]# yum install -y kubelet-1.18.1 kubeadm-1.18.1 kubectl-1.18.1</span><br><span class="line">[root@master opt]# systemctl enable kubelet</span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /usr/lib/systemd/system/kubelet.service.</span><br><span class="line">[root@master opt]# systemctl start kubelet</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-3-master节点部署"><a href="#2-3-3-master节点部署" class="headerlink" title="2.3.3 master节点部署"></a>2.3.3 master节点部署</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">[root@master opt]# kubeadm init --kubernetes-version=1.18.1 --apiserver-advertise-address=$IP --image-repository 192.168.20.119/library --pod-network-cidr=10.244.0.0/16</span><br><span class="line">W0518 05:17:21.372074    3287 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]</span><br><span class="line">[init] Using Kubernetes version: v1.18.1</span><br><span class="line">[preflight] Running pre-flight checks</span><br><span class="line">[preflight] Pulling images required for setting up a Kubernetes cluster</span><br><span class="line">[preflight] This might take a minute or two, depending on the speed of your internet connection</span><br><span class="line">[preflight] You can also perform this action in beforehand using &#x27;kubeadm config images pull&#x27;</span><br><span class="line">[kubelet-start] Writing kubelet environment file with flags to file &quot;/var/lib/kubelet/kubeadm-flags.env&quot;</span><br><span class="line">[kubelet-start] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;</span><br><span class="line">[kubelet-start] Starting the kubelet</span><br><span class="line">[certs] Using certificateDir folder &quot;/etc/kubernetes/pki&quot;</span><br><span class="line">[certs] Generating &quot;ca&quot; certificate and key</span><br><span class="line">[certs] Generating &quot;apiserver&quot; certificate and key</span><br><span class="line">[certs] apiserver serving cert is signed for DNS names [master kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.20.119]</span><br><span class="line">[certs] Generating &quot;apiserver-kubelet-client&quot; certificate and key</span><br><span class="line">[certs] Generating &quot;front-proxy-ca&quot; certificate and key</span><br><span class="line">[certs] Generating &quot;front-proxy-client&quot; certificate and key</span><br><span class="line">[certs] Generating &quot;etcd/ca&quot; certificate and key</span><br><span class="line">[certs] Generating &quot;etcd/server&quot; certificate and key</span><br><span class="line">[certs] etcd/server serving cert is signed for DNS names [master localhost] and IPs [192.168.20.119 127.0.0.1 ::1]</span><br><span class="line">[certs] Generating &quot;etcd/peer&quot; certificate and key</span><br><span class="line">[certs] etcd/peer serving cert is signed for DNS names [master localhost] and IPs [192.168.20.119 127.0.0.1 ::1]</span><br><span class="line">[certs] Generating &quot;etcd/healthcheck-client&quot; certificate and key</span><br><span class="line">[certs] Generating &quot;apiserver-etcd-client&quot; certificate and key</span><br><span class="line">[certs] Generating &quot;sa&quot; key and public key</span><br><span class="line">[kubeconfig] Using kubeconfig folder &quot;/etc/kubernetes&quot;</span><br><span class="line">[kubeconfig] Writing &quot;admin.conf&quot; kubeconfig file</span><br><span class="line">[kubeconfig] Writing &quot;kubelet.conf&quot; kubeconfig file</span><br><span class="line">[kubeconfig] Writing &quot;controller-manager.conf&quot; kubeconfig file</span><br><span class="line">[kubeconfig] Writing &quot;scheduler.conf&quot; kubeconfig file</span><br><span class="line">[control-plane] Using manifest folder &quot;/etc/kubernetes/manifests&quot;</span><br><span class="line">[control-plane] Creating static Pod manifest for &quot;kube-apiserver&quot;</span><br><span class="line">[control-plane] Creating static Pod manifest for &quot;kube-controller-manager&quot;</span><br><span class="line">W0518 05:17:30.213101    3287 manifests.go:225] the default kube-apiserver authorization-mode is &quot;Node,RBAC&quot;; using &quot;Node,RBAC&quot;</span><br><span class="line">[control-plane] Creating static Pod manifest for &quot;kube-scheduler&quot;</span><br><span class="line">W0518 05:17:30.216982    3287 manifests.go:225] the default kube-apiserver authorization-mode is &quot;Node,RBAC&quot;; using &quot;Node,RBAC&quot;</span><br><span class="line">[etcd] Creating static Pod manifest for local etcd in &quot;/etc/kubernetes/manifests&quot;</span><br><span class="line">[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory &quot;/etc/kubernetes/manifests&quot;. This can take up to 4m0s</span><br><span class="line">[apiclient] All control plane components are healthy after 21.516345 seconds</span><br><span class="line">[upload-config] Storing the configuration used in ConfigMap &quot;kubeadm-config&quot; in the &quot;kube-system&quot; Namespace</span><br><span class="line">[kubelet] Creating a ConfigMap &quot;kubelet-config-1.18&quot; in namespace kube-system with the configuration for the kubelets in the cluster</span><br><span class="line">[upload-certs] Skipping phase. Please see --upload-certs</span><br><span class="line">[mark-control-plane] Marking the node master as control-plane by adding the label &quot;node-role.kubernetes.io/master=&#x27;&#x27;&quot;</span><br><span class="line">[mark-control-plane] Marking the node master as control-plane by adding the taints [node-role.kubernetes.io/master:NoSchedule]</span><br><span class="line">[bootstrap-token] Using token: qkrll1.aajjr3v4zcps0a94</span><br><span class="line">[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles</span><br><span class="line">[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to get nodes</span><br><span class="line">[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials</span><br><span class="line">[bootstrap-token] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token</span><br><span class="line">[bootstrap-token] configured RBAC rules to allow certificate rotation for all node client certificates in the cluster</span><br><span class="line">[bootstrap-token] Creating the &quot;cluster-info&quot; ConfigMap in the &quot;kube-public&quot; namespace</span><br><span class="line">[kubelet-finalize] Updating &quot;/etc/kubernetes/kubelet.conf&quot; to point to a rotatable kubelet client certificate and key</span><br><span class="line">[addons] Applied essential addon: CoreDNS</span><br><span class="line">[addons] Applied essential addon: kube-proxy</span><br><span class="line"></span><br><span class="line">Your Kubernetes control-plane has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p $HOME/.kube</span><br><span class="line">  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">  sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:</span><br><span class="line">  https://kubernetes.io/docs/concepts/cluster-administration/addons/</span><br><span class="line"></span><br><span class="line">Then you can join any number of worker nodes by running the following on each as root:</span><br><span class="line"></span><br><span class="line">kubeadm join 192.168.20.119:6443 --token qkrll1.aajjr3v4zcps0a94 \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:eca13ad31879f9f8cca8c719b685f239a06d2e1450e49380f8f3eec5121db792 </span><br><span class="line">[root@master opt]# mkdir -p /root/.kube</span><br><span class="line">[root@master opt]# sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">[root@master opt]# sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line">[root@master opt]# kubectl get pod -n kube-system -owide</span><br><span class="line">NAME                             READY   STATUS    RESTARTS   AGE   IP               NODE     NOMINATED NODE   READINESS GATES</span><br><span class="line">coredns-6fcfc67db4-6tdxr         0/1     Pending   0          76s   &lt;none&gt;           &lt;none&gt;   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">coredns-6fcfc67db4-b6m9j         0/1     Pending   0          76s   &lt;none&gt;           &lt;none&gt;   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">etcd-master                      1/1     Running   0          89s   192.168.20.119   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-apiserver-master            1/1     Running   0          89s   192.168.20.119   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-controller-manager-master   1/1     Running   0          89s   192.168.20.119   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-proxy-d7vxn                 1/1     Running   0          76s   192.168.20.119   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">kube-scheduler-master            1/1     Running   0          89s   192.168.20.119   master   &lt;none&gt;           &lt;none&gt;</span><br><span class="line">[root@master opt]# sed -i &quot;s/quay.io\/coreos/$IP\/library/g&quot; /opt/yaml/flannel/kube-flannel.yaml</span><br><span class="line">[root@master opt]# kubectl apply -f /opt/yaml/flannel/kube-flannel.yaml </span><br><span class="line">podsecuritypolicy.policy/psp.flannel.unprivileged created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/flannel created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/flannel created</span><br><span class="line">serviceaccount/flannel created</span><br><span class="line">configmap/kube-flannel-cfg created</span><br><span class="line">daemonset.apps/kube-flannel-ds created</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-4-dashboard部署"><a href="#2-3-4-dashboard部署" class="headerlink" title="2.3.4 dashboard部署"></a>2.3.4 dashboard部署</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# mkdir dashboard-certs</span><br><span class="line">[root@master ~]# cd dashboard-certs/</span><br><span class="line">[root@master dashboard-certs]# kubectl create namespace kubernetes-dashboard</span><br><span class="line">namespace/kubernetes-dashboard created</span><br><span class="line">[root@master dashboard-certs]# openssl genrsa -out dashboard.key 2048</span><br><span class="line">Generating RSA private key, 2048 bit long modulus</span><br><span class="line">..........+++</span><br><span class="line">.......................+++</span><br><span class="line">e is 65537 (0x10001)</span><br><span class="line">[root@master dashboard-certs]# openssl req -days 36000 -new -out dashboard.csr -key dashboard.key -subj &#x27;/CN=dashboard-cert&#x27;</span><br><span class="line">[root@master dashboard-certs]# openssl x509 -req -in dashboard.csr -signkey dashboard.key -out dashboard.crt</span><br><span class="line">Signature ok</span><br><span class="line">subject=/CN=dashboard-cert</span><br><span class="line">Getting Private key</span><br><span class="line">[root@master dashboard-certs]# kubectl create secret generic kubernetes-dashboard-certs --from-file=dashboard.key --from-file=dashboard.crt -n kubernetes-dashboard</span><br><span class="line">secret/kubernetes-dashboard-certs created</span><br><span class="line">[root@master dashboard-certs]# sed -i &quot;s/kubernetesui/$IP\/library/g&quot; /opt/yaml/dashboard/recommended.yaml</span><br><span class="line">[root@master dashboard-certs]# kubectl apply -f /opt/yaml/dashboard/recommended.yaml</span><br><span class="line">Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply</span><br><span class="line">namespace/kubernetes-dashboard configured</span><br><span class="line">serviceaccount/kubernetes-dashboard created</span><br><span class="line">service/kubernetes-dashboard created</span><br><span class="line">Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply</span><br><span class="line">secret/kubernetes-dashboard-certs configured</span><br><span class="line">secret/kubernetes-dashboard-csrf created</span><br><span class="line">secret/kubernetes-dashboard-key-holder created</span><br><span class="line">configmap/kubernetes-dashboard-settings created</span><br><span class="line">role.rbac.authorization.k8s.io/kubernetes-dashboard created</span><br><span class="line">clusterrole.rbac.authorization.k8s.io/kubernetes-dashboard created</span><br><span class="line">rolebinding.rbac.authorization.k8s.io/kubernetes-dashboard created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/kubernetes-dashboard created</span><br><span class="line">deployment.apps/kubernetes-dashboard created</span><br><span class="line">service/dashboard-metrics-scraper created</span><br><span class="line">deployment.apps/dashboard-metrics-scraper created</span><br><span class="line">[root@master dashboard-certs]# kubectl apply -f /opt/yaml/dashboard/dashboard-adminuser.yaml</span><br><span class="line">serviceaccount/dashboard-admin created</span><br><span class="line">clusterrolebinding.rbac.authorization.k8s.io/dashboard-admin-bind-cluster-role created</span><br><span class="line">[root@master dashboard-certs]# token=`kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep dashboard-admin | awk &#x27;&#123;print $1&#125;&#x27;)`</span><br><span class="line">&#x27;[root@master dashboard-certs]# &#x27;</span><br><span class="line"></span><br><span class="line">&gt; ^C</span><br><span class="line">&gt; [root@master dashboard-certs]# echo &quot;登录令牌：$token&quot;</span><br><span class="line">&gt; 登录令牌：Name:         dashboard-admin-token-lppbw</span><br><span class="line">&gt; Namespace:    kubernetes-dashboard</span><br><span class="line">&gt; Labels:       &lt;none&gt;</span><br><span class="line">&gt; Annotations:  kubernetes.io/service-account.name: dashboard-admin</span><br><span class="line">&gt;          kubernetes.io/service-account.uid: f808d3d3-ffc2-4fbf-bb1d-d6da71c8b89e</span><br><span class="line"></span><br><span class="line">Type:  kubernetes.io/service-account-token</span><br><span class="line"></span><br><span class="line">Data</span><br><span class="line">====</span><br><span class="line"></span><br><span class="line">ca.crt:     1025 bytes</span><br><span class="line">namespace:  20 bytes</span><br><span class="line">token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IjFqbHJxNFptcmZoZXBibEs1NHFwWHRRZGxDck8tWDM4UWRwV3M2ZkoyT3MifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkYXNoYm9hcmQtYWRtaW4tdG9rZW4tbHBwYnciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGFzaGJvYXJkLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZjgwOGQzZDMtZmZjMi00ZmJmLWJiMWQtZDZkYTcxYzhiODllIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmVybmV0ZXMtZGFzaGJvYXJkOmRhc2hib2FyZC1hZG1pbiJ9.O7GUtnsJxUBP0m-iDKpYx9Bn7XHd02lUiFXaVRv8LtM2M6pB5Snd9smY5Hj3voT--b8AEuizywnRYZtX6mIDxAiRSQhfea4uU5dlG0wuG0_JDnj1w5431RPedZVFwE3xO5YyecwzwMwmCE7XWx9uFFRvTj17ant3BkZN7TMPWOrab4VUU905RWYCzb33WpzCa8nYOiweNzfttopJVYmTpSlVSEQAZH3cx2vl7eW2dmny3Glqz0-OoK5eVk1gpWiAZhRFpMD0540wXBtmGcXnDVcijFxYlo-TzfiJLnh7Q8k9ydPbDok3wViVqqAdsbfGDpa_TjkTpNJJOqVmDPqY8Q</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-5node节点部署"><a href="#2-3-5node节点部署" class="headerlink" title="2.3.5node节点部署"></a>2.3.5node节点部署</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 opt]# docker login -u admin -p Harbor12345 192.168.20.119</span><br><span class="line">WARNING! Using --password via the CLI is insecure. Use --password-stdin.</span><br><span class="line">WARNING! Your password will be stored unencrypted in /root/.docker/config.json.</span><br><span class="line">Configure a credential helper to remove this warning. See</span><br><span class="line">https://docs.docker.com/engine/reference/commandline/login/#credentials-store</span><br><span class="line">Login Succeeded</span><br><span class="line">[root@node1 opt]# ssh master &quot;kubeadm token create --print-join-command&quot; &gt;token.sh</span><br><span class="line">The authenticity of host &#x27;master (192.168.20.119)&#x27; can&#x27;t be established.</span><br><span class="line">ECDSA key fingerprint is SHA256:FqTDtd28812m1IAFRjAbURuwoPQQRbq7gqGrEYh77C4.</span><br><span class="line">ECDSA key fingerprint is MD5:1a:d0:c6:aa:89:3a:1c:ed:c6:21:1d:dc:4d:63:e8:33.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added &#x27;master,192.168.20.119&#x27; (ECDSA) to the list of known hosts.</span><br><span class="line">W0518 05:47:05.650872   30628 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]</span><br><span class="line">[root@node1 opt]# chmod +x token.sh &amp;&amp; source token.sh &amp;&amp; rm -rf token.sh</span><br><span class="line">W0518 05:47:14.165256   24770 join.go:346] [preflight] WARNING: JoinControlPane.controlPlane settings will be ignored when control-plane flag is not set.</span><br><span class="line">[preflight] Running pre-flight checks</span><br><span class="line">        [WARNING Service-Kubelet]: kubelet service is not enabled, please run &#x27;systemctl enable kubelet.service&#x27;</span><br><span class="line">[preflight] Reading configuration from the cluster...</span><br><span class="line">[preflight] FYI: You can look at this config file with &#x27;kubectl -n kube-system get cm kubeadm-config -oyaml&#x27;</span><br><span class="line">[kubelet-start] Downloading configuration for the kubelet from the &quot;kubelet-config-1.18&quot; ConfigMap in the kube-system namespace</span><br><span class="line">[kubelet-start] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;</span><br><span class="line">[kubelet-start] Writing kubelet environment file with flags to file &quot;/var/lib/kubelet/kubeadm-flags.env&quot;</span><br><span class="line">[kubelet-start] Starting the kubelet</span><br><span class="line">[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...</span><br><span class="line"></span><br><span class="line">This node has joined the cluster:</span><br><span class="line">* Certificate signing request was sent to apiserver and a response was received.</span><br><span class="line">* The Kubelet was informed of the new secure connection details.</span><br><span class="line"></span><br><span class="line">Run &#x27;kubectl get nodes&#x27; on the control-plane to see this node join the cluster.</span><br><span class="line">[root@node1 opt]# ssh master &quot;kubectl get nodes&quot;</span><br><span class="line">NAME     STATUS   ROLES    AGE   VERSION</span><br><span class="line">master   Ready    master   29m   v1.18.1</span><br><span class="line">node1    Ready    &lt;none&gt;   16s   v1.18.1</span><br><span class="line"></span><br><span class="line">[root@node2 opt]# docker login -u admin -p 123456 192.168.20.119</span><br><span class="line">WARNING! Using --password via the CLI is insecure. Use --password-stdin.</span><br><span class="line">WARNING! Your password will be stored unencrypted in /root/.docker/config.json.</span><br><span class="line">Configure a credential helper to remove this warning. See</span><br><span class="line">https://docs.docker.com/engine/reference/commandline/login/#credentials-store</span><br><span class="line"></span><br><span class="line">Login Succeeded</span><br><span class="line">[root@node2 opt]# ssh master &quot;kubeadm token create --print-join-command&quot; &gt;token.sh</span><br><span class="line">The authenticity of host &#x27;master (192.168.20.119)&#x27; can&#x27;t be established.</span><br><span class="line">ECDSA key fingerprint is SHA256:FqTDtd28812m1IAFRjAbURuwoPQQRbq7gqGrEYh77C4.</span><br><span class="line">ECDSA key fingerprint is MD5:1a:d0:c6:aa:89:3a:1c:ed:c6:21:1d:dc:4d:63:e8:33.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added &#x27;master,192.168.20.119&#x27; (ECDSA) to the list of known hosts.</span><br><span class="line">W0518 05:50:32.342935    5574 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]</span><br><span class="line">[root@node2 opt]# chmod +x token.sh &amp;&amp; source token.sh &amp;&amp; rm -rf token.sh</span><br><span class="line">W0518 05:50:47.130633   27919 join.go:346] [preflight] WARNING: JoinControlPane.controlPlane settings will be ignored when control-plane flag is not set.</span><br><span class="line">[preflight] Running pre-flight checks</span><br><span class="line">        [WARNING Service-Kubelet]: kubelet service is not enabled, please run &#x27;systemctl enable kubelet.service&#x27;</span><br><span class="line">[preflight] Reading configuration from the cluster...</span><br><span class="line">[preflight] FYI: You can look at this config file with &#x27;kubectl -n kube-system get cm kubeadm-config -oyaml&#x27;</span><br><span class="line">[kubelet-start] Downloading configuration for the kubelet from the &quot;kubelet-config-1.18&quot; ConfigMap in the kube-system namespace</span><br><span class="line">[kubelet-start] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;</span><br><span class="line">[kubelet-start] Writing kubelet environment file with flags to file &quot;/var/lib/kubelet/kubeadm-flags.env&quot;</span><br><span class="line">[kubelet-start] Starting the kubelet</span><br><span class="line">[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...</span><br><span class="line"></span><br><span class="line">This node has joined the cluster:</span><br><span class="line">* Certificate signing request was sent to apiserver and a response was received.</span><br><span class="line">* The Kubelet was informed of the new secure connection details.</span><br><span class="line"></span><br><span class="line">Run &#x27;kubectl get nodes&#x27; on the control-plane to see this node join the cluster.</span><br><span class="line">[root@node2 opt]# ssh master &quot;kubectl get nodes&quot;</span><br><span class="line">NAME     STATUS   ROLES    AGE     VERSION</span><br><span class="line">master   Ready    master   33m     v1.18.1</span><br><span class="line">node1    Ready    &lt;none&gt;   3m54s   v1.18.1</span><br><span class="line">node2    Ready    &lt;none&gt;   20s     v1.18.1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/19/k8s%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0day2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          k8s学习日记day2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/25/%E4%BA%91%E8%AE%A1%E7%AE%97-2022%E6%A0%B7%E9%A2%98-%E7%A7%81%E6%9C%89%E4%BA%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">云计算-2022样题-私有云</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2023 Miss
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/preccrep/hexo-theme-jelly" target="_blank">Jelly</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
